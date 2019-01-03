@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	    <meta charset="utf-8">
+	    <link rel="icon" type="image/png" href="../../img/favicon.png">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
+	    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+	    <meta name="viewport" content="width=device-width">
+	    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	    <link href="../../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
+		<link href='../../css/roboto.css' rel='stylesheet' type='text/css'>
+		<script src="js/operacionesCandidata.js"></script>
+		<script src="js/operacionesJurado.js"></script>
+		<script src="js/operacionesDocente.js"></script>
+		<script src="js/cerrarSesion.js"></script>
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="sidebar" data-color="red" data-image="../../img/panel.jpg">
+				<div class="logo">
+					<img src="../../img/logo.png" width="220" height="230" align="center">
+				</div>
+				<div class="sidebar-wrapper">
+					<ul class="nav">
+						<li>
+							<a href="home.html">
+								<i class="material-icons">home</i>
+								<p><b>Inicio</b></p>
+							</a>
+						</li>
+
+						<li>
+							<a href="registro.html">
+								<i class="material-icons">person_add</i>
+								<p><b>Registrar</b></p>
+							</a>
+						</li>
+
+						<li class="active">
+							<a>
+								<i class="material-icons">content_paste</i>
+								<p><b>Consultar</b></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="main-panel">
+				<nav class="navbar navbar-transparent navbar-absolute">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand"><i>Inicio > Consultar</i></a>
+						</div>
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav navbar-right">
+	                            <li>
+	                                <a onclick="cerrarSesionNivel2()">
+	                                    <i class="material-icons">exit_to_app</i>
+	                                    <p class="hidden-lg hidden-md">Cerrar Sesión</p>
+	                                </a>
+	                            </li>
+							</ul>
+							<form class="navbar-form navbar-right" role="search">
+	                            <div class="form-group is-empty">
+	                                <h4>Búsqueda</h4>
+	                            </div>
+	                            <a type="submit" class="btn btn-white btn-round btn-just-icon" href="buscador.html">
+	                                <i class="material-icons">search</i>
+	                                <div class="ripple-container"></div>
+								</a>
+                        	</form>
+						</div>
+					</div>
+				</nav>
+			
+	            <div class="content">
+                    <div class="card card-nav-tabs">
+                        <div class="card-header card-header-danger">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+										<li class="dropdown nav-item">
+	                                		<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+												<i class="material-icons">face</i> Candidatas
+												<b class="caret"></b>
+											</a>
+	                                    	<ul class="dropdown-menu">
+	                                        	<li onclick="consultarCandidataC1()" href="#Candidatas" data-toggle="tab">
+	                                        		<a data-background-color="red">Petite</a>
+	                                        	</li>
+		                                        <li onclick="consultarCandidataC2()" href="#Candidatas" data-toggle="tab">
+		                                        	<a data-background-color="red">Miss</a>
+		                                        </li>
+		                                    </ul>
+	                                	</li>
+                                        <li class="nav-item" onclick="consultarJurado()">
+                                            <a class="nav-link" href="#Jurados" data-toggle="tab">
+                                                <i class="material-icons">gavel</i> Jurados
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" onclick="consultarDocente()">
+                                            <a class="nav-link" href="#Docentes" data-toggle="tab">
+                                                <i class="material-icons">mode_edit</i> Docentes
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body"  align="center">
+                            <div class="tab-content text-center">
+                                <div class="tab-pane active" id="Candidatas">
+			                        <div class="col-md-12">
+		                                <div class="card-content table-responsive">
+		                                    <table class="table table-hover">
+		                                        <thead class="text-danger">
+		                                            <td><b>ID</b></td>
+		                                            <td><b>Cédula</b></td>
+		                                            <td><b>Nombres</b></td>
+		                                            <td><b>Apellidos</b></td>
+		                                            <td><b>Edad</b></td>
+		                                            <td><b>Categoria</b></td>
+		                                        </thead>
+		                                        <tbody id="tcandidata">
+												</tbody>
+		                                    </table>
+		                                </div>
+			                        </div>
+                                </div>
+                                <div class="tab-pane" id="Jurados">
+                                    <div class="col-md-12">
+		                                <div class="card-content table-responsive">
+		                                    <table class="table table-hover">
+		                                        <thead class="text-danger">
+		                                            <td><b>ID</b></td>
+		                                            <td><b>Cédula</b></td>
+		                                            <td><b>Nombres</b></td>
+		                                            <td><b>Apellidos</b></td>
+		                                            <td><b>Categoria</b></td>
+		                                            <td><b>Teléfono</b></td>
+		                                        </thead>
+		                                        <tbody id="tjurado">
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+			                        </div>
+                                </div>
+                                <div class="tab-pane" id="Docentes">
+                                    <div class="col-md-12">
+		                                <div class="card-content table-responsive">
+		                                    <table class="table table-hover">
+		                                        <thead class="text-danger">
+		                                            <td><b>ID</b></td>
+		                                            <td><b>Cédula</b></td>
+		                                            <td><b>Nombres</b></td>
+		                                            <td><b>Apellidos</b></td>
+		                                            <td><b>Categoria</b></td>
+		                                            <td><b>Teléfono</b></td>
+		                                            <td><b>Clase</b></td>
+		                                        </thead>
+		                                        <tbody id="tdocente">
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+			                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	        	</div>
+	        </div>
+		</div>
+
+	</body>
+
+	<!-- Scripts -->
+
+	<script src="../../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+	<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../js/material.min.js" type="text/javascript"></script>
+	<script src="../../js/arrive.min.js"></script>
+	<script src="../../js/perfect-scrollbar.jquery.min.js"></script>
+	<script src="../../js/material-dashboard.js?v=1.2.0"></script>
+
+</html>

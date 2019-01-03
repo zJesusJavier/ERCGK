@@ -1,0 +1,146 @@
+img 
+{
+	width: 30%;
+	height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2%;
+}
+
+body 
+{
+	margin: 0;
+	
+}
+
+.loader 
+{
+	position: absolute;
+	top: 89%;
+	left: 40%;
+	margin-left: 10%;
+	transform: translate3d(-50%, -50%, 0);
+}
+
+.dot 
+{
+	width: 24px;
+	height: 24px;
+	background: #3ac;
+	border-radius: 100%;
+	display: inline-block;
+	animation: slide 1s infinite;
+}
+
+.dot:nth-child(1) 
+{
+	animation-delay: 0.1s;
+	background: #3e65e8;
+}
+
+.dot:nth-child(2) 
+{
+	animation-delay: 0.2s;
+	background: #57cbe2;
+}
+
+.dot:nth-child(3) 
+{
+	animation-delay: 0.3s;
+	background: #94add0;
+}
+
+.dot:nth-child(4) 
+{
+	animation-delay: 0.4s;
+	background: #c1a7ca;
+}
+
+.dot:nth-child(5) 
+{
+	animation-delay: 0.5s;
+	background: #dab8d3;
+	d524c1
+}
+
+.dot:nth-child(6) 
+{
+	animation-delay: 0.6s;
+	background: #d62316;
+	
+}
+
+.dot:nth-child(7) 
+{
+	animation-delay: 0.7s;
+	background: #b5231c;
+}
+
+@-moz-keyframes slide 
+{
+	0% 
+	{
+		transform: scale(1);
+	}
+	50% 
+	{
+			opacity: 0.3;
+	transform: scale(2);
+	}
+	100% 
+	{
+		transform: scale(1);
+	}
+}
+
+@-webkit-keyframes slide 
+{
+	0% 
+	{
+		transform: scale(1);
+	}
+	50% 
+	{
+		opacity: 0.3;
+		transform: scale(2);
+	}
+	100% 
+	{
+		transform: scale(1);
+	}
+}
+
+@-o-keyframes slide 
+{
+	0% 
+	{
+		transform: scale(1);
+	}
+	50% 
+	{
+		opacity: 0.3;
+		transform: scale(2);
+	}
+	100% 
+	{
+		transform: scale(1);
+	}
+}
+
+@keyframes slide 
+{
+	0% 
+	{
+		transform: scale(1);
+	}
+	50% 
+	{
+		opacity: 0.3;
+		transform: scale(2);
+	}
+	100% 
+	{
+		transform: scale(1);
+	}
+}

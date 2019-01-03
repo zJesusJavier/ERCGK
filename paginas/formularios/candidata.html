@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	    <meta charset="utf-8">
+	    <link rel="icon" type="image/png" href="../../img/favicon.png">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
+	    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	    <meta name="viewport" content="width=device-width">
+	    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	    <link href="../../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
+	    <link href="../../css/roboto.css" rel="stylesheet" type="text/css">
+        <script src="js/cerrarSesion.js"></script>
+        <script src="js/validarNumeros.js"></script>
+        <script src="js/operacionesCandidata.js"></script>
+        <script src="js/selects.js"></script>
+	</head>
+
+	<body onload="selectCategoria(); selectMunicipio(); selectEstadoCivil(); selectCertamen();">
+
+	<!-- Panel -->
+
+		<div class="wrapper">
+			<div class="sidebar" data-color="red" data-image="../../img/panel.jpg">
+				<div class="logo">
+					<img src="../../img/logo.png" width="220" height="230" align="center">
+				</div>
+				<div class="sidebar-wrapper">
+					<ul class="nav">
+						<li>
+							<a href="../../home.html">
+								<i class="material-icons">home</i>
+								<p><b>Inicio</b></p>
+							</a>
+						</li>
+
+						<li class="active">
+							<a>
+								<i class="material-icons">person_add</i>
+								<p><b>Registrar</b></p>
+							</a>
+						</li>
+
+						<li>
+							<a href="../consultar.html">
+								<i class="material-icons">content_paste</i>
+								<p><b>Consultar</b></p>
+							</a>
+						</li>
+
+						<li>
+							<a href="../reportes.html">
+								<i class="material-icons">library_books</i>
+								<p><b>Reportes</b></p>
+							</a>
+						</li>
+						<li>
+							<a data-toggle="modal" data-target="#panelAdministrador">
+								<i class="material-icons">settings</i>
+								<p><b>Panel de Administración</b></p>
+							</a>
+						</li>
+                        <li>
+                            <a href="../panel_auditoria.html">
+                                <i class="material-icons">security</i>
+                                <p><b>Panel de Auditoría</b></p>
+                            </a>
+                        </li>
+					</ul>
+				</div>
+			</div>
+			
+	<!-- Contenido -->
+
+			<div class="main-panel">
+
+		<!-- Boton de hamburguesa -->
+
+				<nav class="navbar navbar-transparent navbar-absolute">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand"><i>Inicio > Registrar > Candidata</i></a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a onclick="cerrarSesionFormularios()">
+                                        <i class="material-icons">exit_to_app</i>
+                                        <p class="hidden-lg hidden-md">Cerrar Sesión</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group is-empty">
+                                    <h4>Búsqueda</h4>
+                                </div>
+                                <a type="submit" class="btn btn-white btn-round btn-just-icon" href="../buscador.html">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+
+            	<div class="content">
+					<div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header" data-background-color="red">
+                                <h4 class="title">Nuevo registro de Candidata</h4>
+                                <p class="category">Ingrese los datos</p>
+                            </div>
+                            <div class="card-content">
+                                <form autocomplete="off" method="POST">
+                                	<input type="hidden" id="cod_can" value="">
+                                	<input type="hidden" id="est_can" value="A">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputCedula">
+                                                <label class="control-label">Cédula</label>
+                                                <input type="text" class="form-control" id="ci_can" maxlength="8" onkeypress="return validarNumero(event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating" id="inputNombre">
+                                                <label class="control-label">Nombres</label>
+                                                <input type="text" class="form-control" id="nom_can" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating" id="inputApellido">
+                                                <label class="control-label">Apellidos</label>
+                                                <input type="text" class="form-control" id="ape_can" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputEdad">
+                                                <label class="control-label">Edad</label>
+                                                <input type="text" class="form-control" id="edad_can" maxlength="2" onkeypress="return validarNumero(event)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputPeso">
+                                                <label class="control-label">Peso (kg)</label>
+                                                <input type="text" class="form-control" id="peso_can" maxlength="3" onkeypress="return validarNumero(event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputEstatura">
+                                                <label class="control-label">Estatura (cm)</label>
+                                                <input type="text" class="form-control" id="esta_can" maxlength="3" onkeypress="return validarNumero(event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating" id="inputOcupacion">
+                                                <label class="control-label">Ocupación</label>
+                                                <input type="text" class="form-control" id="ocu_can" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputEstadoCivil">
+                                                <label class="control-label">Estado Civil</label>
+                                                <select class="form-control" id="fky_civ">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputCategoria">
+                                                <label class="control-label">Categoria</label>
+                                                <select class="form-control" id="fky_cat">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group label-floating" id="inputDireccion">
+                                                <label class="control-label">Dirección</label>
+                                                <input type="text" class="form-control" id="dir_can" maxlength="50">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputCertamen">
+                                                <label class="control-label">Certamen</label>
+                                                <select class="form-control" id="fky_cer">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating" id="inputMunicipio">
+                                                <label class="control-label">Municipio</label>
+                                                <select class="form-control" id="fky_mun">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-floating" id="inputTelefono">
+                                                <label class="control-label">Teléfono</label>
+                                                <input type="text" class="form-control input-masked" id="tel_can" name="tel_can" maxlength="12" onkeypress="return validarTelefono(event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating" id="inputEmail">
+                                                <label class="control-label">Correo Electrónico</label>
+                                                <input type="text" class="form-control" id="email_can" maxlength="50">
+                                                <span id="error" style="display:none;color:red;"><b>Correo Electrónico Invalido</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group label-static" id="inputFecha">
+                                                <label class="control-label">Fecha de Inscripción</label>
+                                                <input type="date" class="form-control" id="fec_can" name="fec_can">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" class="btn btn-success pull-right" value="Guardar registro" href="javascript:;" onclick="guardarCandidata();">
+                                    <a href="../../paginas/registro.html" type="submit" class="btn btn-danger pull-right">Cancelar</a>
+                                    <a href="../../home.html" type="submit" class="btn btn-primary pull-left">Volver al Inicio</a>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        		</div>
+			</div>
+		</div>
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>La modificación indebida de los datos encontrados en el <strong>Panel de Administración</strong> puede afectar 
+                        el desempeño y/o funcionamiento del Sistema, no agregue, modifique o elimine datos sin saber
+                        lo que hace.</p> 
+
+                        <p>Si necesita ayuda contacte con el Administrador.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="../panel_administrador.html" type="button" class="btn btn-success">Continuar</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+	</body>
+
+	<!-- Scripts -->
+
+
+	<script src="../../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script>
+        $('#email_can').on('keypress', function() 
+        {
+            var validacionEmail = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+            if(!validacionEmail) 
+            {
+                $('#error').show();
+            } else {
+                $('#error').hide();
+            }
+        });
+    </script>
+	<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../js/material.min.js" type="text/javascript"></script>
+	<script src="../../js/arrive.min.js"></script>
+	<script src="../../js/perfect-scrollbar.jquery.min.js"></script>
+	<script src="../../js/material-dashboard.js?v=1.2.0"></script>
+
+</html>
