@@ -29,6 +29,7 @@ function consultarSesion()
                        
         var tam = result.length;
         var text;
+
         text = "<tr>";
 
         for (i = 0; i < tam; i++) 
@@ -46,11 +47,7 @@ function consultarSesion()
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].fec_ses.toLocaleDateString("en-GB");
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].hora_ses;
+            text += result[i].date_ses.toLocaleString();
             text += "</td>";
             text += "\t\t";
             text += "</tr>";

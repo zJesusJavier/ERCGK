@@ -14,6 +14,8 @@ con.connect(function(err)
 
 var swal = require('sweetalert');
 var user;
+var fecha = new Date();
+var est_ses = 'A';
 
 function verificar()
 {
@@ -33,10 +35,12 @@ function verificar()
             {
                 if(result[i].niv_usu == 1)
                 {
+                	nivel1=1
                     t=1;
                 }
                 else 
                 {
+                	nivel2=2
                     t=2;
                 }
             }
@@ -44,13 +48,61 @@ function verificar()
 
         if (t==1) 
         {
-            window.location.href= "home.html";
+        	sql = "SELECT * FROM sesion";
+		   	con.query(sql, function (err, result) 
+		    {
+		        if (err) console.log(err);
+		    });
+		                        
+		    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
+		    var values = [[nombre, nivel1, fecha, est_ses]];
+		                      
+		    con.query(sql, [values], function (err, result) 
+		    {
+		        if (err)
+		        { 
+		            console.log(err);
+		            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+		            {
+		                button:false,
+		                timer: 3000
+		            });
+		        }
+		        else 
+		        {
+            		window.location.href= "home.html";
+		        };
+		    });
         }
         else
         {
             if (t==2)
             {
-                window.location.href= "paginas/nivel2/home.html";
+	            sql = "SELECT * FROM sesion";
+			   	con.query(sql, function (err, result) 
+			    {
+			        if (err) console.log(err);
+			    });
+			                        
+			    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
+			    var values = [[nombre, nivel2, fecha, est_ses]];
+			                      
+			    con.query(sql, [values], function (err, result) 
+			    {
+			        if (err)
+			        { 
+			            console.log(err);
+			            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+			            {
+			                button:false,
+			                timer: 3000
+			            });
+			        }
+			        else 
+			        {
+	            		window.location.href= "paginas/nivel2/home.html";
+			        };
+			    });
             }
             else
             {
