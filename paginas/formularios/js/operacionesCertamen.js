@@ -77,9 +77,6 @@ function guardarCertamen()
         inputFechaFinal.className="form-group label-floating";
     }
 
-
-	// Guardado en la Base de Datos
-
 	sql = "SELECT * FROM certamen";
     con.query(sql, function (err, result) 
         {
@@ -109,7 +106,37 @@ function guardarCertamen()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
+                sql = "SELECT * FROM registro";
+                con.query(sql, function (err, result) 
+                {
+                    if (err) console.log(err);
+                });
+
+                var date_reg = new Date();
+                var usu_reg = 'admin';
+                var tab_reg = 'certamen';
+                var est_reg = 'A';
+                var new_reg = descri;
+                                    
+                sql = "INSERT INTO registro (usu_reg, tab_reg, new_reg, date_reg, est_reg) VALUES ?";
+                var values = [[usu_reg, tab_reg, new_reg, date_reg, est_reg]];
+                                  
+                con.query(sql, [values], function (err, result) 
+                {
+                    if (err)
+                    { 
+                        console.log(err);
+                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+                        {
+                            button:false,
+                            timer: 3000
+                        });
+                    }
+                    else 
+                    {
+                        window.location.reload();
+                    };
+                });
             });
         };
     });
@@ -223,7 +250,37 @@ function borrarCertamen()
 	            timer: 3000
 	        }).then(function() 
 	        {
-	            window.location.reload();
+                sql = "SELECT * FROM eliminacion";
+                con.query(sql, function (err, result) 
+                {
+                    if (err) console.log(err);
+                });
+
+                var date_eli = new Date();
+                var usu_eli = 'admin';
+                var tab_eli = 'certamen';
+                var est_eli = 'A';
+                var reg_eli = captionid;
+                                    
+                sql = "INSERT INTO eliminacion (usu_eli, tab_eli, reg_eli, date_eli, est_eli) VALUES ?";
+                var values = [[usu_eli, tab_eli, reg_eli, date_eli, est_eli]];
+                                  
+                con.query(sql, [values], function (err, result) 
+                {
+                    if (err)
+                    { 
+                        console.log(err);
+                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+                        {
+                            button:false,
+                            timer: 3000
+                        });
+                    }
+                    else 
+                    {
+                        window.location.reload();
+                    };
+                });
 	        });
 	    };
     });

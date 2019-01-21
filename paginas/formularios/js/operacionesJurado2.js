@@ -180,7 +180,37 @@ function editarJurado()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
+                sql = "SELECT * FROM edicion";
+                con.query(sql, function (err, result) 
+                {
+                    if (err) console.log(err);
+                });
+
+                var date_edi = new Date();
+                var usu_edi = 'admin';
+                var tab_edi = 'jurado';
+                var est_edi = 'A';
+                var reg_edi = id;
+                                    
+                sql = "INSERT INTO edicion (usu_edi, tab_edi, reg_edi, date_edi, est_edi) VALUES ?";
+                var values = [[usu_edi, tab_edi, reg_edi, date_edi, est_edi]];
+                                  
+                con.query(sql, [values], function (err, result) 
+                {
+                    if (err)
+                    { 
+                        console.log(err);
+                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+                        {
+                            button:false,
+                            timer: 3000
+                        });
+                    }
+                    else 
+                    {
+                        window.location.reload();
+                    };
+                });
             });
         };
     });

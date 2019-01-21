@@ -12,7 +12,6 @@ var sql;
 
 function carga()
 {
-
 	// Aqui se cargan las variables con los datos del Formulario
 
 	var estado = document.getElementById("est_cal").value;
@@ -139,75 +138,91 @@ function carga()
 
 	con.connect(function(err) 
     {
-
 		if (err) console.log(err);
-
 
 		val = "SELECT * FROM candidata WHERE cod_can='"+candidatafk+"'";
 		con.query(val, function (err, result1) 
-		 {
+		{
 			if (err) console.log(err);
-				for(var i=0; i<result1.length; i++)
+			for(var i=0; i<result1.length; i++)
+			{
+				if(result1[i].fec_can.getFullYear() == fech)
 				{
-							
-							if(result1[i].fec_can.getFullYear() == fech){
-
-										sql = "SELECT * FROM calificacion";
-										con.query(sql, function (err, result) 
-										{
-											if (err) console.log(err);
-										});
-														
-									sql = "INSERT INTO calificacion (fky_can, fky_cla, fky_pro, sem_cal, fec_cal, cal_cal, obs_cal, est_cal) VALUES ?";
-											var values = [
-												[candidatafk, claseafk, docentefk, semana, fecha, calificacion, observacion, estado]];
+					sql = "SELECT * FROM calificacion";
+					con.query(sql, function (err, result) 
+					{
+						if (err) console.log(err);
+					});
 													
-									con.query(sql, [values], function (err, result) 
-									{
-										if (err)
-										{ 
-											console.log(err);
-											swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-											{
-												button:false,
-												timer: 3000
-											});
-										}
-										else 
-										{
-											swal("", "Calificación registrada correctamente.", "success",
-											{
-												button:false,
-												timer: 3000
-											}).then(function() 
-											{
-												window.location.reload();
-											});
-										};
-									});
-
+					sql = "INSERT INTO calificacion (fky_can, fky_cla, fky_pro, sem_cal, fec_cal, cal_cal, obs_cal, est_cal) VALUES ?";
+					var values = [[candidatafk, claseafk, docentefk, semana, fecha, calificacion, observacion, estado]];
+												
+					con.query(sql, [values], function (err, result) 
+					{
+						if (err)
+						{ 
+							console.log(err);
+							swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+							{
+								button:false,
+								timer: 3000
+							});
 						}
-						else{
-							swal("", "Debe seleccionar una fecha correcta.", "error", 
-								{
-									button:false,
-									timer: 1500
-								});
-								document.getElementById("fec_cal").focus();
-								inputCandidata.className="form-group label-floating has-error";
-								return
+						else 
+						{
+							swal("", "Calificación registrada correctamente.", "success",
+							{
+								button:false,
+								timer: 3000
+							}).then(function() 
+							{
+				            	sql = "SELECT * FROM registro";
+							   	con.query(sql, function (err, result) 
+							    {
+							        if (err) console.log(err);
+							    });
 
-						}
+							    var date_reg = new Date();
+							    var usu_reg = 'admin';
+							    var tab_reg = 'calificacion';
+								var est_reg = 'A';
+								var new_reg = candidatafk;
+							                        
+							    sql = "INSERT INTO registro (usu_reg, tab_reg, new_reg, date_reg, est_reg) VALUES ?";
+							    var values = [[usu_reg, tab_reg, new_reg, date_reg, est_reg]];
+							                      
+							    con.query(sql, [values], function (err, result) 
+							    {
+							        if (err)
+							        { 
+							            console.log(err);
+							            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+							            {
+							                button:false,
+							                timer: 3000
+							            });
+							        }
+							        else 
+							        {
+					            		window.location.reload();
+							        };
+							    });
+							});
+						};
+					});
 				}
-			 
-		 });
-
-
-
-
-
-
-
-       
+				else
+				{
+					swal("", "Debe seleccionar una fecha correcta.", "error", 
+					{
+						button:false,
+						timer: 1500
+					});
+					document.getElementById("fec_cal").focus();
+					inputCandidata.className="form-group label-floating has-error";
+					return
+				}
+			}
+		});
     });
 }
