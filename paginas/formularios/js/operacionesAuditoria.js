@@ -60,7 +60,7 @@ function consultarSesion()
 
 function consultarRegistro()
 {
-    con.query("SELECT * FROM registro", function (err, result, fields) 
+    con.query("SELECT * FROM log WHERE acc_log='Registro'", function (err, result, fields) 
     {
         if (err) console.log(err);
                        
@@ -71,23 +71,27 @@ function consultarRegistro()
         for (i = 0; i < tam; i++) 
         {
             text += "<td>";
-            text += result[i].cod_reg;
+            text += result[i].cod_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].usu_reg;
+            text += result[i].usu_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].tab_reg;
+            text += result[i].acc_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].new_reg;
+            text += result[i].tab_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].date_reg.toLocaleString();
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
             text += "</td>";
             text += "\t\t";
             text += "</tr>";
@@ -100,7 +104,7 @@ function consultarRegistro()
 
 function consultarEdiciones()
 {
-    con.query("SELECT * FROM edicion", function (err, result, fields) 
+    con.query("SELECT * FROM log WHERE acc_log='Edicion'", function (err, result, fields) 
     {
         if (err) console.log(err);
                        
@@ -111,23 +115,27 @@ function consultarEdiciones()
         for (i = 0; i < tam; i++) 
         {
             text += "<td>";
-            text += result[i].cod_edi;
+            text += result[i].cod_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].usu_edi;
+            text += result[i].usu_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].tab_edi;
+            text += result[i].acc_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].reg_edi;
+            text += result[i].tab_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].date_edi.toLocaleString();
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
             text += "</td>";
             text += "\t\t";
             text += "</tr>";
@@ -140,7 +148,7 @@ function consultarEdiciones()
 
 function consultarEliminacion()
 {
-    con.query("SELECT * FROM eliminacion", function (err, result, fields) 
+    con.query("SELECT * FROM log WHERE acc_log='Borrado'", function (err, result, fields) 
     {
         if (err) console.log(err);
                        
@@ -151,23 +159,27 @@ function consultarEliminacion()
         for (i = 0; i < tam; i++) 
         {
             text += "<td>";
-            text += result[i].cod_eli;
+            text += result[i].cod_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].usu_eli;
+            text += result[i].usu_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].tab_eli;
+            text += result[i].acc_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].reg_eli;
+            text += result[i].tab_log;
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].date_eli.toLocaleString();
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
             text += "</td>";
             text += "\t\t";
             text += "</tr>";

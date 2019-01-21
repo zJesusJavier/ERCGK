@@ -114,20 +114,21 @@ function editarClase()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM edicion";
+                sql = "SELECT * FROM log";
                 con.query(sql, function (err, result) 
                 {
                     if (err) console.log(err);
                 });
 
-                var date_edi = new Date();
-                var usu_edi = 'admin';
-                var tab_edi = 'clase';
-                var est_edi = 'A';
-                var reg_edi = id;
+                var date_log = new Date();
+                var usu_log = 'admin';
+                var tab_log = 'Clase';
+                var est_log = 'A';
+                var reg_log = id;
+                var acc_log = 'Edicion';
                                     
-                sql = "INSERT INTO edicion (usu_edi, tab_edi, reg_edi, date_edi, est_edi) VALUES ?";
-                var values = [[usu_edi, tab_edi, reg_edi, date_edi, est_edi]];
+                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
                                   
                 con.query(sql, [values], function (err, result) 
                 {

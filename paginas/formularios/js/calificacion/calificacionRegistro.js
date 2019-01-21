@@ -176,37 +176,38 @@ function carga()
 								timer: 3000
 							}).then(function() 
 							{
-				            	sql = "SELECT * FROM registro";
-							   	con.query(sql, function (err, result) 
-							    {
-							        if (err) console.log(err);
-							    });
+				                sql = "SELECT * FROM log";
+				                con.query(sql, function (err, result) 
+				                {
+				                    if (err) console.log(err);
+				                });
 
-							    var date_reg = new Date();
-							    var usu_reg = 'admin';
-							    var tab_reg = 'calificacion';
-								var est_reg = 'A';
-								var new_reg = candidatafk;
-							                        
-							    sql = "INSERT INTO registro (usu_reg, tab_reg, new_reg, date_reg, est_reg) VALUES ?";
-							    var values = [[usu_reg, tab_reg, new_reg, date_reg, est_reg]];
-							                      
-							    con.query(sql, [values], function (err, result) 
-							    {
-							        if (err)
-							        { 
-							            console.log(err);
-							            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-							            {
-							                button:false,
-							                timer: 3000
-							            });
-							        }
-							        else 
-							        {
-					            		window.location.reload();
-							        };
-							    });
+				                var date_log = new Date();
+				                var usu_log = 'admin';
+				                var tab_log = 'Calificacion';
+				                var est_log = 'A';
+				                var reg_log = fecha;
+				                var acc_log = 'Registro';
+				                                    
+				                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
+				                                  
+				                con.query(sql, [values], function (err, result) 
+				                {
+				                    if (err)
+				                    { 
+				                        console.log(err);
+				                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+				                        {
+				                            button:false,
+				                            timer: 3000
+				                        });
+				                    }
+				                    else 
+				                    {
+				                        window.location.reload();
+				                    };
+				                });
 							});
 						};
 					});

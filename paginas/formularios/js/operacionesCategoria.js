@@ -81,20 +81,21 @@ function guardarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM registro";
+                sql = "SELECT * FROM log";
                 con.query(sql, function (err, result) 
                 {
                     if (err) console.log(err);
                 });
 
-                var date_reg = new Date();
-                var usu_reg = 'admin';
-                var tab_reg = 'categoria';
-                var est_reg = 'A';
-                var new_reg = nombre;
+                var date_log = new Date();
+                var usu_log = 'admin';
+                var tab_log = 'Categoria';
+                var est_log = 'A';
+                var reg_log = nombre;
+                var acc_log = 'Registro';
                                     
-                sql = "INSERT INTO registro (usu_reg, tab_reg, new_reg, date_reg, est_reg) VALUES ?";
-                var values = [[usu_reg, tab_reg, new_reg, date_reg, est_reg]];
+                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
                                   
                 con.query(sql, [values], function (err, result) 
                 {
@@ -192,20 +193,21 @@ function borrarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM eliminacion";
+                sql = "SELECT * FROM log";
                 con.query(sql, function (err, result) 
                 {
                     if (err) console.log(err);
                 });
 
-                var date_eli = new Date();
-                var usu_eli = 'admin';
-                var tab_eli = 'categoria';
-                var est_eli = 'A';
-                var reg_eli = captionid;
+                var date_log = new Date();
+                var usu_log = 'admin';
+                var tab_log = 'Categoria';
+                var est_log = 'A';
+                var reg_log = captionid;
+                var acc_log = 'Borrado';
                                     
-                sql = "INSERT INTO eliminacion (usu_eli, tab_eli, reg_eli, date_eli, est_eli) VALUES ?";
-                var values = [[usu_eli, tab_eli, reg_eli, date_eli, est_eli]];
+                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
                                   
                 con.query(sql, [values], function (err, result) 
                 {
