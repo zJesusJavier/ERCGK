@@ -1,17 +1,5 @@
-var mysql = require('mysql');
-var con = mysql.createConnection(
-{
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "academia"
-});
-
-con.connect(function(err) 
-{
-    if (err) console.log(err);
-});
-
+require('module-alias/register');
+var con = require('@models/db');
 var swal = require('sweetalert');
 var captioncand, ultsem, porc_des, capcand;
 

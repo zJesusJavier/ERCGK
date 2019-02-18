@@ -1,20 +1,9 @@
-var mysql = require('mysql');
-var con = mysql.createConnection(
-{
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "academia"
-});
-
-con.connect(function(err) 
-{
-    if (err) console.log(err);
-});
+require('module-alias/register');
+var con = require('@models/db');
 
 function selectCandidata()
 {
-    con.query("SELECT * FROM candidata WHERE est_can='A'  ORDER BY fec_can DESC", function (err, result, fields) 
+    con.query("SELECT * FROM candidata WHERE est_can='A' ORDER BY fec_can DESC", function (err, result, fields) 
     {
         if (err) console.log(err);
 

@@ -35,4 +35,3 @@ function cerrarSesionFormularios()
         window.location.assign("../../index.html")
     });
 }
-
