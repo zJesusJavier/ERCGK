@@ -26,11 +26,12 @@
 		<script src="formularios/js/operacionesDocente2.js"></script>
 		<script src="formularios/js/operacionesCertamen.js"></script>
 		<script src="formularios/js/operacionesCertamen2.js"></script>
+		<script src="formularios/js/operacionesUsuario.js"></script>
 		<script src="formularios/js/selects.js"></script>
 		<script src="formularios/js/buscador.js"></script>
 	</head>
 
-	<body>
+	<body onload="selectPregunta1(); selectPregunta2();">
 
 	<!-- Panel -->
 
@@ -156,6 +157,11 @@
                                         <li class="nav-item" onclick="consultarCertamenPanel()">
                                             <a class="nav-link" href="#Certamen" data-toggle="tab">
                                                 <i class="material-icons">event</i> Certamen
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" onclick="consultarUsuarioPanel()">
+                                            <a class="nav-link" href="#Usuarios" data-toggle="tab">
+                                                <i class="material-icons">group</i> Usuarios
                                             </a>
                                         </li>
                                     </ul>
@@ -310,6 +316,23 @@
 		                                </div>
 			                        </div>
                                 </div>
+                                <div class="tab-pane" id="Usuarios">
+                                    <div class="col-md-12">
+		                                <div class="card-content table-responsive">
+		                                    <table class="table table-hover">
+		                                        <thead class="text-oscuro">
+		                                            <td><b>ID</b></td>
+		                                            <td><b>Nombre</b></td>
+		                                            <td><b>Rol</b></td>
+		                                            <td><b>Estado</b></td>
+		                                        </thead>
+		                                        <tbody id="tusuario">
+		                                        </tbody>
+		                                    </table>
+		                                  	<a href="#" type="button" class="btn btn-xs" data-background-color="red" data-toggle="modal" data-target="#Usuario"><h4>Agregar</h4></a>
+		                                </div>
+			                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -320,6 +343,73 @@
 	<!-- Modales de Agregar, Editar y Eliminar -->
 
 		<!-- Categoria -->
+
+			<!-- Agregar nuevo Usuario -->
+
+			<div class="modal fade" id="Usuario" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="card">
+	                        <div class="card-header" data-background-color="red">
+	                            <h4 class="title">Nuevo registro de Usuario</h4>
+	                            <p class="category">Ingrese los datos</p>
+	                        </div>
+	                        <div class="card-content">
+	                            <form autocomplete="off">
+	                            	<input type="hidden" id="cod_usu" value="">
+	                                <input type="hidden" id="est_usu" value="A">
+	                                <div class="row">
+	                                    <div class="col-md-12">
+	                                        <div class="form-group label-floating col-md-6" id="inputNombre" style="float:left;">
+	                                            <label class="control-label">Nombre</label>
+	                                            <input type="text" class="form-control" id="nom_usu">
+	                                        </div>
+	                                        <div class="form-group label-floating col-md-6" id="inputClave" style="float:left; padding-left:15px;">
+	                                            <label class="control-label">Contraseña</label>
+	                                            <input type="password" class="form-control" id="cla_usu">
+	                                        </div>
+	                                        <div class="form-group label-floating col-md-12" id="inputRol">
+	                                            <label class="control-label">Rol</label>
+	                                            <select class="form-control" id="niv_usu">
+	                                            	<option value="" selected=""></option>
+													<option value="Administrador">Administrador</option>
+													<option value="Usuario">Usuario</option>
+												</select>
+	                                        </div>
+	                                        <div class="form-group label-floating col-md-12" id="inputEmail">
+	                                            <label class="control-label">Email</label>
+	                                            <input type="text" class="form-control" id="email_usu">
+	                                        </div>
+	                                        <div class="form-group label-floating" id="inputFkyPre1" style="float:left;">
+	                                            <label class="control-label">Pregunta de Seguridad 1</label>
+	                                            <select class="form-control" id="fky_pre_1">
+												</select>
+	                                        </div>
+	                                        <div class="form-group label-floating" id="inputResPre1" style="float:left; padding-left:15px;">
+	                                        	<label class="control-label">Respuesta</label>
+												<input type="text" class="form-control" id="res_pre_1">
+											</div>
+	                                        <div class="form-group label-floating" id="inputFkyPre2" style="float:left;">
+	                                            <label class="control-label">Pregunta de Seguridad 2</label>
+	                                            <select class="form-control" id="fky_pre_2">
+												</select>
+	                                        </div>
+	                                        <div class="form-group label-floating" id="inputResPre2" style="float:left; padding-left:15px;">
+	                                        	<label class="control-label">Respuesta</label>
+												<input type="text" class="form-control" id="res_pre_2">
+											</div>
+	                                    </div>
+	                                </div>
+	                                <input type="button" class="btn btn-success pull-right" value="Guardar registro" href="javascript:;" onclick="guardarUsuario();">
+	                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+	                                <div class="clearfix"></div>
+	                            </form>
+	                        </div>
+	                    </div>
+			    	</div>
+				</div>
+			</div>
+
 
 			<!-- Agregar nueva Categoria -->
 

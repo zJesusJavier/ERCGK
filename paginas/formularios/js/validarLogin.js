@@ -21,14 +21,12 @@ function verificar()
         {   
             if((nombre == result[i].nom_usu) && (clave == result[i].cla_usu))
             {
-                if(result[i].niv_usu == 1)
+                if(result[i].niv_usu == 'Administrador')
                 {
-                	nivel1=1
                     t=1;
                 }
                 else 
                 {
-                	nivel2=2
                     t=2;
                 }
             }
@@ -41,9 +39,10 @@ function verificar()
 		    {
 		        if (err) console.log(err);
 		    });
-		                        
+
+		    rol='Administrador';
 		    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
-		    var values = [[nombre, nivel1, fecha, est_ses]];
+		    var values = [[nombre, rol, fecha, est_ses]];
 		                      
 		    con.query(sql, [values], function (err, result) 
 		    {
@@ -71,9 +70,10 @@ function verificar()
 			    {
 			        if (err) console.log(err);
 			    });
-			                        
+			    
+                rol='Usuario';     
 			    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
-			    var values = [[nombre, nivel2, fecha, est_ses]];
+			    var values = [[nombre, rol, fecha, est_ses]];
 			                      
 			    con.query(sql, [values], function (err, result) 
 			    {
