@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 21, 2019 at 06:20 PM
--- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- Generation Time: Feb 20, 2019 at 01:47 AM
+-- Server version: 8.0.15
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `calificacion` (
   `cod_cal` int(11) NOT NULL AUTO_INCREMENT,
   `sem_cal` int(11) NOT NULL,
   `fec_cal` date NOT NULL,
-  `cal_cal` char(2) COLLATE utf8_spanish_ci NOT NULL,
-  `obs_cal` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `est_cal` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `cal_cal` char(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `obs_cal` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `est_cal` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_can` int(11) NOT NULL,
   `fky_cla` int(11) NOT NULL,
   `fky_pro` int(11) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `calificacion` (
   KEY `fky_can` (`fky_can`),
   KEY `fky_pro` (`fky_pro`),
   KEY `fky_cla` (`fky_cla`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -54,18 +54,18 @@ CREATE TABLE IF NOT EXISTS `calificacion` (
 DROP TABLE IF EXISTS `candidata`;
 CREATE TABLE IF NOT EXISTS `candidata` (
   `cod_can` int(11) NOT NULL AUTO_INCREMENT,
-  `ci_can` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
-  `nom_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `ape_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `ci_can` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `nom_can` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ape_can` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `peso_can` int(3) NOT NULL,
   `esta_can` int(3) NOT NULL,
-  `ocu_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `ocu_can` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `edad_can` int(2) NOT NULL,
-  `dir_can` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `tel_can` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
-  `email_can` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `dir_can` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tel_can` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email_can` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fec_can` date NOT NULL,
-  `est_can` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `est_can` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_cat` int(11) NOT NULL,
   `fky_mun` int(11) NOT NULL,
   `fky_civ` int(11) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `candidata` (
   KEY `fky_mun` (`fky_mun`),
   KEY `fky_civ` (`fky_civ`),
   KEY `fky_cer` (`fky_cer`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `candidata` (
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `cod_cat` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_cat` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cat` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_cat` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_cat` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_cat`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -109,10 +109,10 @@ INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
 DROP TABLE IF EXISTS `certamen`;
 CREATE TABLE IF NOT EXISTS `certamen` (
   `cod_cer` int(11) NOT NULL AUTO_INCREMENT,
-  `des_cer` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `des_cer` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `feci_cer` date NOT NULL,
   `fecf_cer` date NOT NULL,
-  `est_cer` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `est_cer` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_cer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -132,8 +132,8 @@ INSERT INTO `certamen` (`cod_cer`, `des_cer`, `feci_cer`, `fecf_cer`, `est_cer`)
 DROP TABLE IF EXISTS `civil`;
 CREATE TABLE IF NOT EXISTS `civil` (
   `cod_civ` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_civ` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `est_civ` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_civ` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_civ` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_civ`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -157,8 +157,8 @@ INSERT INTO `civil` (`cod_civ`, `nom_civ`, `est_civ`) VALUES
 DROP TABLE IF EXISTS `clase`;
 CREATE TABLE IF NOT EXISTS `clase` (
   `cod_cla` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_cla` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cla` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_cla` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_cla` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_cla`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -191,18 +191,18 @@ INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
 DROP TABLE IF EXISTS `jurado`;
 CREATE TABLE IF NOT EXISTS `jurado` (
   `cod_jur` int(11) NOT NULL AUTO_INCREMENT,
-  `ci_jur` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
-  `nom_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `ape_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `dir_jur` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `tel_jur` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
-  `email_jur` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `est_jur` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `ci_jur` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `nom_jur` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ape_jur` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `dir_jur` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tel_jur` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email_jur` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_jur` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_cat` int(11) NOT NULL,
   PRIMARY KEY (`cod_jur`),
   UNIQUE KEY `ci_jur` (`ci_jur`),
   KEY `fky_cat` (`fky_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -213,14 +213,21 @@ CREATE TABLE IF NOT EXISTS `jurado` (
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE IF NOT EXISTS `log` (
   `cod_log` int(11) NOT NULL AUTO_INCREMENT,
-  `usu_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `tab_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `acc_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `reg_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_log` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tab_log` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `acc_log` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `reg_log` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `date_log` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `est_log` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`cod_log`, `usu_log`, `tab_log`, `acc_log`, `reg_log`, `est_log`) VALUES
+(1, 'admin', 'Usuario', 'Registro', 'mayel', 'A');
 
 -- --------------------------------------------------------
 
@@ -231,8 +238,8 @@ CREATE TABLE IF NOT EXISTS `log` (
 DROP TABLE IF EXISTS `municipio`;
 CREATE TABLE IF NOT EXISTS `municipio` (
   `cod_mun` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_mun` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_mun` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_mun` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_mun` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_mun`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -280,8 +287,8 @@ INSERT INTO `municipio` (`cod_mun`, `nom_mun`, `est_mun`) VALUES
 DROP TABLE IF EXISTS `pregunta`;
 CREATE TABLE IF NOT EXISTS `pregunta` (
   `cod_pre` int(11) NOT NULL AUTO_INCREMENT,
-  `pre_pre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `est_pre` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `pre_pre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_pre` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_pre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -308,20 +315,20 @@ INSERT INTO `pregunta` (`cod_pre`, `pre_pre`, `est_pre`) VALUES
 DROP TABLE IF EXISTS `profesor`;
 CREATE TABLE IF NOT EXISTS `profesor` (
   `cod_pro` int(11) NOT NULL AUTO_INCREMENT,
-  `ci_pro` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
-  `nom_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `ape_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `dir_pro` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `tel_pro` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
-  `email_pro` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `est_pro` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `ci_pro` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `nom_pro` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ape_pro` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `dir_pro` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tel_pro` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email_pro` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_pro` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_cla` int(11) NOT NULL,
   `fky_cat` int(11) NOT NULL,
   PRIMARY KEY (`cod_pro`),
   UNIQUE KEY `ci_pro` (`ci_pro`),
   KEY `fky_cat` (`fky_cat`),
   KEY `fky_cla` (`fky_cla`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -332,8 +339,8 @@ CREATE TABLE IF NOT EXISTS `profesor` (
 DROP TABLE IF EXISTS `semana`;
 CREATE TABLE IF NOT EXISTS `semana` (
   `cod_sem` int(11) NOT NULL AUTO_INCREMENT,
-  `num_sem` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
-  `est_sem` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `num_sem` varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `est_sem` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_sem`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -375,12 +382,23 @@ INSERT INTO `semana` (`cod_sem`, `num_sem`, `est_sem`) VALUES
 DROP TABLE IF EXISTS `sesion`;
 CREATE TABLE IF NOT EXISTS `sesion` (
   `cod_ses` int(11) NOT NULL AUTO_INCREMENT,
-  `usu_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `niv_ses` int(1) NOT NULL,
+  `usu_ses` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `niv_ses` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `date_ses` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `est_ses` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_ses`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `sesion`
+--
+
+INSERT INTO `sesion` (`cod_ses`, `usu_ses`, `niv_ses`, `est_ses`) VALUES
+(1, 'admin', 'Administrador', 'A'),
+(2, 'admin', 'Administrador', 'A'),
+(3, 'mayel', 'Administrador', 'A'),
+(4, 'admin', 'Administrador', 'A'),
+(5, 'admin', 'Administrador', 'A');
 
 -- --------------------------------------------------------
 
@@ -391,28 +409,29 @@ CREATE TABLE IF NOT EXISTS `sesion` (
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usu` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `cla_usu` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
-  `email_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_usu` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `cla_usu` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email_usu` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_pre_1` int(11) NOT NULL,
-  `res_pre_1` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `res_pre_1` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fky_pre_2` int(11) NOT NULL,
-  `res_pre_2` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `niv_usu` int(1) NOT NULL,
-  `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  `res_pre_2` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `niv_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `est_usu` char(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_usu`),
   UNIQUE KEY `nom_usu` (`nom_usu`),
   KEY `fky_pre_1` (`fky_pre_1`),
   KEY `fky_pre_2` (`fky_pre_2`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`, `res_pre_1`, `fky_pre_2`, `res_pre_2`, `niv_usu`, `est_usu`) VALUES
-(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 1, 'A'),
-(2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 2, 'A');
+(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', 'A'),
+(2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 'Usuario', 'A'),
+(3, 'mayel', 'mayel', 'mayel@gmail.com', 1, '1', 2, '2', 'Administrador', 'A');
 
 --
 -- Constraints for dumped tables
