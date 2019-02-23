@@ -11,7 +11,7 @@ const url = require('url')
 
 let mainWindow
 
-function createWindow() 
+function createWindow()
 {
     mainWindow = new BrowserWindow(
 	{
@@ -30,17 +30,17 @@ function createWindow()
 
 app.on('ready', createWindow)
 
-app.on('window-all-closed', function() 
+app.on('window-all-closed', function()
 {
-	if (process.platform !== 'darwin') 
+	if (process.platform !== 'darwin')
 	{
         app.quit()
     }
 })
 
-app.on('activate', function() 
+app.on('activate', function()
 {
-	if (mainWindow === null) 
+	if (mainWindow === null)
 	{
         createWindow()
     }
