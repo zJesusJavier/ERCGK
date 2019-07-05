@@ -11,11 +11,12 @@
 	    <link href="../css/bootstrap.min.css" rel="stylesheet">
 	    <link href="../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
 	    <link href='../css/roboto.css' rel='stylesheet' type='text/css'>
-	    <script src="formularios/js/cerrarSesion.js"></script>
+		<script src="formularios/js/cerrarSesion.js"></script>
+		<script src="formularios/js/audit.js"></script>
 	    <script src='../js/Chart.min.js'></script>
 	</head>
 
-	<body>
+	<body onload="audit();">
 
 	<!-- Panel -->
 
@@ -26,40 +27,40 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home">
 							<a href="../home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="registrar">
 							<a href="registro.html">
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="consultar">
 							<a href="consultar.html">
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>
 							</a>
 						</li>
 
-						<li class="active">
+						<li id="reportes" class="active">
 							<a>
 								<i class="material-icons">library_books</i>
 								<p><b>Reportes</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="panelAdmin">
 							<a data-toggle="modal" data-target="#panelAdministrador">
 								<i class="material-icons">settings</i>
 								<p><b>Panel de Administración</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="panelAudit">
 							<a href="panel_auditoria.html">
 								<i class="material-icons">security</i>
 								<p><b>Panel de Auditoría</b></p>
@@ -106,24 +107,8 @@
 				</nav>
 			
 	<!-- Contenido -->
-
-	            <div class="content">
+				<div class="content">
 					<div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header card-chart" data-background-color="purple">
-									<canvas id="reportes" width="817" height="450" style="position: absolute; z-index: 100;"></canvas>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title">Reportes Gráficos</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <a href="reportesgraficos.html" type="button" class="btn btn-xs" data-background-color="red" style="z-index: 100;"><h4>Continuar</h4></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card">
                                 <div class="card-header carda-stats card-chart" data-background-color="purple">
@@ -138,7 +123,22 @@
                                     </div>
                                 </div>
                             </div>
-	                    </div>
+						</div>
+						<div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="purple">
+									<canvas id="reportes" width="817" height="450" style="position: absolute; z-index: 100;"></canvas>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Reportes Gráficos</h4>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <a href="reportesgraficos.html" type="button" class="btn btn-xs" data-background-color="red" style="z-index: 100;"><h4>Continuar</h4></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 	        	</div>
 	        </div>
