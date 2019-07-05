@@ -2,6 +2,7 @@ var swal = require('sweetalert');
 
 function cerrarSesionHome()
 {
+    localStorage.clear();
     swal("", "Sesión finalizada.", "info",
     {
         button:false,
