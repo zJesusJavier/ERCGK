@@ -1,17 +1,5 @@
-var mysql = require('mysql');
-var con = mysql.createConnection(
-{
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "academia"
-});
-
-con.connect(function(err) 
-{
-    if (err) console.log(err);
-});
-
+require('module-alias/register');
+var con = require('@models/db');
 var swal = require('sweetalert');
 var user;
 var fecha = new Date();
@@ -33,14 +21,12 @@ function verificar()
         {   
             if((nombre == result[i].nom_usu) && (clave == result[i].cla_usu))
             {
-                if(result[i].niv_usu == 1)
+                if(result[i].niv_usu == 'Administrador')
                 {
-                	nivel1=1
                     t=1;
                 }
                 else 
                 {
-                	nivel2=2
                     t=2;
                 }
             }
@@ -53,10 +39,12 @@ function verificar()
 		    {
 		        if (err) console.log(err);
 		    });
-		                        
+
+		    rol='Administrador';
 		    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
-		    var values = [[nombre, nivel1, fecha, est_ses]];
-		                      
+		    var values = [[nombre, rol, fecha, est_ses]];
+           localStorage.setItem('name', nombre);                  
+                  
 		    con.query(sql, [values], function (err, result) 
 		    {
 		        if (err)
@@ -70,6 +58,7 @@ function verificar()
 		        }
 		        else 
 		        {
+                    audit();
             		window.location.href= "home.html";
 		        };
 		    });
@@ -83,10 +72,12 @@ function verificar()
 			    {
 			        if (err) console.log(err);
 			    });
-			                        
+			    
+                rol='Usuario';     
 			    sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
-			    var values = [[nombre, nivel2, fecha, est_ses]];
-			                      
+			    var values = [[nombre, rol, fecha, est_ses]];
+                localStorage.setItem('name', nombre);                  
+
 			    con.query(sql, [values], function (err, result) 
 			    {
 			        if (err)
@@ -99,7 +90,8 @@ function verificar()
 			            });
 			        }
 			        else 
-			        {
+			        {   
+                        audit();
 	            		window.location.href= "paginas/nivel2/home.html";
 			        };
 			    });
@@ -208,4 +200,35 @@ function cambioClave()
             };
         });
     });
+}
+
+function audit(){
+    nameUser = localStorage.getItem('name');
+    
+    con.query("SELECT id_usu FROM usuario WHERE nom_usu ='"+nameUser+"'", function (err, result, fields) 
+    {
+        con.query("SELECT elem_audit,elem_cons,elem_panelAd, elem_reg, elemento_rep FROM elementos WHERE fky_usuario ='"+result[0].id_usu+"'", function (err, result1, fields1) 
+        {
+            let arrLocal = result1[0];
+            for (let elem in arrLocal) {  
+                localStorage.setItem(elem,arrLocal[elem]);
+            }
+        });
+    });
+   
+    if(localStorage.getItem('elem_cons') == '0'){
+        $('#consultar').hide();
+    }
+    if(localStorage.getItem('elem_audit') == '0'){
+        $('#panelAudit').hide();
+    }
+    if(localStorage.getItem('elem_panelAd') == '0'){
+        $('#panelAdmin').hide();
+    }
+    if(localStorage.getItem('elem_reg') == '0'){
+        $('#registrar').hide();
+    }
+    if(localStorage.getItem('elemento_rep') == '0'){
+        $('#reportes').hide();
+    }
 }

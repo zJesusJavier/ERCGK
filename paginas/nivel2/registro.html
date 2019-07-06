@@ -11,10 +11,12 @@
 	    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	    <link href="../../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
 	    <link href='../../css/roboto.css' rel='stylesheet' type='text/css'>
-	    <script src="js/cerrarSesion.js"></script>
+		<script src="js/cerrarSesion.js"></script>
+		<script src="js/audit.js"></script>
+
 	</head>
 
-	<body>
+	<body onload="audit();">
 
 	<!-- Panel -->
 
@@ -25,21 +27,21 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home">
 							<a href="home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li class="active">
+						<li id="registrar" class="active">
 							<a>
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="consultar">
 							<a href="consultar.html">
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>
