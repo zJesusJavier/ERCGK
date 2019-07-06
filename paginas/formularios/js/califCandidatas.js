@@ -157,7 +157,7 @@ function detalleCalif(cand){
                     var tam = result.length;
                     var j=0, porc;
                     var cant_not=0, cont_cal=0;
-                    var text;
+                    var text, porc_des;
 
                     ultsem=-999;
 
