@@ -34,6 +34,7 @@ function formularioEditarUsuario(capb)
                 text+=            '<option value='+result[i].niv_usu+' selected>'+result[i].niv_usu+'</option>'
                 text+=            '<option value="Administrador">Administrador</option>'
                 text+=            '<option value="Usuario">Usuario</option>'
+                text+=            '<option value="Auditor">Auditor</option>'
                 text+=        '</select>'
                 text+=    '</div>'
                 text+=    '<div class="form-group label-floating col-md-12" id="inputEmail">'

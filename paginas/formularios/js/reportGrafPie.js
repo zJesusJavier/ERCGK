@@ -1,5 +1,6 @@
 require('module-alias/register');
 var con = require('@models/db');
+var Highcharts = require ('highcharts');
 var swal = require('sweetalert');
 var cand, per, cat;
 
@@ -140,9 +141,10 @@ function selectGraf()
 function graficoPie(c)
 {
     cand= c;
-   
     document.getElementById("espacio").innerHTML= "";
-
+    
+    
+    // Crear el gráfico
     con.query("SELECT * FROM calificacion WHERE fky_can='" + cand + "'", function (err, result1, fields1)
     {
 
@@ -218,13 +220,13 @@ function graficoPie(c)
         }
 
         text = '<h4><b>Gráfico del Desempeño de Clases</b></h4>'
-        document.getElementById("titulo").innerHTML = text;
+       document.getElementById("titulo").innerHTML = text;
 
         for (i = 0; i < result1.length; i++) 
         {
-            var pieCanvas = document.getElementById("grafico");
+            //var pieCanvas = document.getElementById("grafico");
 
-            Chart.defaults.global.defaultFontFamily = "Lato";
+         /*   Chart.defaults.global.defaultFontFamily = "Lato";
             Chart.defaults.global.defaultFontSize = 12;
             Chart.defaults.global.tooltips = false;
             Chart.defaults.global.animation.easing = 'linear';
@@ -295,8 +297,72 @@ function graficoPie(c)
             {
                 type: 'pie',
                 data: oilData
-            });
+            });*/
         }
+        Highcharts.chart('grafico', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            categories: ['Actuación','Animación','Baile','Comunicación', 'Estética', 'Etiqueta', 'Expresión Corporal',
+            'Fotografía', 'Maquillaje', 'Moda', 'Oratoria', 'Pasarela', 'Patronaje','Protocolo'],
+            title: {
+                text: 'Browser market shares in January, 2018'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Baile',
+                    y: 61.41,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Baile',
+                    y: 11.84
+                }, {
+                    name: 'Actuación',
+                    y: 10.85
+                }, {
+                    name: 'Baile',
+                    y: 4.67
+                }, {
+                    name: 'Actuación',
+                    y: 4.18
+                }, {
+                    name: 'Baile',
+                    y: 1.64
+                }, {
+                    name: 'Baile',
+                    y: 1.6
+                }, {
+                    name: 'Baile',
+                    y: 1.2
+                }, {
+                    name: 'Baile',
+                    y: 2.61
+                }]
+            }]
+        });
+       
     }
     else{
         swal("", "La candidata aún no ha sido evaluada", "info",
@@ -397,4 +463,5 @@ function graficoPie(c)
         }
 
     });
+    
 }

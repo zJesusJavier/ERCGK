@@ -173,3 +173,168 @@ function consultarEliminacion()
         }
     });
 }
+function consultarEdiciones()
+{
+    con.query("SELECT * FROM log WHERE acc_log='Edicion'", function (err, result, fields) 
+    {
+        if (err) console.log(err);
+                       
+        var tam = result.length;
+        var text;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) 
+        {
+            text += "<td>";
+            text += result[i].cod_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].usu_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].acc_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].tab_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
+            text += "</td>";
+            text += "\t\t";
+            text += "</tr>";
+            document.getElementById("tedicion").innerHTML= text;
+        }
+    });
+}
+function consultarEdiciones()
+{
+    con.query("SELECT * FROM log WHERE acc_log='Edicion'", function (err, result, fields) 
+    {
+        if (err) console.log(err);
+                       
+        var tam = result.length;
+        var text;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) 
+        {
+            text += "<td>";
+            text += result[i].cod_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].usu_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].acc_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].tab_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
+            text += "</td>";
+            text += "\t\t";
+            text += "</tr>";
+            document.getElementById("tedicion").innerHTML= text;
+        }
+    });
+}
+
+// Consulta del Panel de Auditoria | Cambio de Clave
+
+function consultarClaves()
+{
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Cambio%'", function (err, result, fields) 
+    {
+        if (err) console.log(err);
+                       
+        var tam = result.length;
+        var text;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) 
+        {
+            text += "<td>";
+            text += result[i].cod_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].usu_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].acc_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].tab_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
+            text += "</td>";
+            text += "\t\t";
+            text += "</tr>";
+            document.getElementById("tclaves").innerHTML= text;
+        }
+    });
+}
+// Consulta del Panel de Auditoria | Busqueda
+
+function consultarBusq()
+{
+    con.query("SELECT * FROM log WHERE acc_log='Busqueda'", function (err, result, fields) 
+    {
+        if (err) console.log(err);
+                       
+        var tam = result.length;
+        var text;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) 
+        {
+            text += "<td>";
+            text += result[i].cod_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].usu_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].acc_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].tab_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].reg_log;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].date_log.toLocaleString();
+            text += "</td>";
+            text += "\t\t";
+            text += "</tr>";
+            document.getElementById("tbusqueda").innerHTML= text;
+        }
+    });
+}

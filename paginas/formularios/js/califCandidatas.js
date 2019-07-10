@@ -5,7 +5,7 @@ var captioncand, ultsem, porc_des, capcand;
 
 function buscadorCalif()
 {
-    con.query("SELECT * FROM candidata WHERE est_can='A' ORDER BY fec_can DESC" ,function (err, result, fields)
+    con.query("SELECT YEAR(fec_can) AS year FROM candidata WHERE est_can='A' GROUP BY year ORDER BY year DESC" ,function (err, result, fields)
     {
         var aux = [];
         var fin = [];
@@ -16,31 +16,8 @@ function buscadorCalif()
        
 
             for (i=0;i<result.length;i++) {
-                c=0;
-                num=result[i].fec_can.getFullYear();
-                aux[j]=num;
-                j++;
-                for (k=0;k<result.length;k++)
-               
-
-                        if ( aux[k] == num ){
-
-                                c= c+1;
-                        }
-                   
-                if ( c == 1 ) {
-                        fin[z]=num;
-                        z=z+1;
-                }
-        }
-    
-       
-
-            for(j=0; j<z; j++){
-               ano = fin[j];
+                ano = result[i].year;
                 text += '<option value="'+ ano +'" selected>‌'+ ano+'</option>'
-               
-                
             }
         
         text += '</select>'

@@ -1,3 +1,23 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 07-07-2019 a las 23:58:54
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 7.0.27
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `academia`
 --
@@ -19,6 +39,14 @@ CREATE TABLE `calificacion` (
   `fky_cla` int(11) NOT NULL,
   `fky_pro` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`cod_cal`, `sem_cal`, `fec_cal`, `cal_cal`, `obs_cal`, `est_cal`, `fky_can`, `fky_cla`, `fky_pro`) VALUES
+(1, 1, '2019-07-05', '20', '', 'A', 1, 1, 1),
+(2, 3, '2019-07-07', '20', '', 'A', 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -52,7 +80,8 @@ CREATE TABLE `candidata` (
 
 INSERT INTO `candidata` (`cod_can`, `ci_can`, `nom_can`, `ape_can`, `peso_can`, `esta_can`, `ocu_can`, `edad_can`, `dir_can`, `tel_can`, `email_can`, `fec_can`, `est_can`, `fky_cat`, `fky_mun`, `fky_civ`, `fky_cer`) VALUES
 (1, '24743016', 'Johara', 'Pabon', 55, 156, 'TSU', 23, 'Tariba', '02763958784', 'joharap_22@hotmail.com', '2019-03-04', 'A', 1, 5, 1, 1),
-(2, '24780688', 'Laura', 'Mora', 57, 169, 'Lic', 25, 'Tariba', '04268971235', 'laura@gmail.com', '2019-03-12', 'A', 2, 1, 1, 1);
+(2, '24780688', 'Laura', 'Mora', 57, 169, 'Lic', 25, 'Tariba', '04268971235', 'laura@gmail.com', '2019-03-12', 'A', 2, 1, 1, 1),
+(5, '25879116', 'Johana', 'Padron', 55, 158, 'Ing', 20, 'Cordero', '027698564545', 'joh@hotmail.com', '2019-07-07', 'A', 1, 16, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +124,8 @@ CREATE TABLE `certamen` (
 INSERT INTO `certamen` (`cod_cer`, `des_cer`, `feci_cer`, `fecf_cer`, `est_cer`) VALUES
 (1, 'Chica Gipsy', '2018-01-16', '2018-04-11', 'A'),
 (2, 'Sra Bella', '2019-02-01', '2019-02-02', 'I'),
-(3, 'Srita Hermosa', '2019-02-01', '2019-02-04', 'A');
+(3, 'Srita Hermosa', '2019-02-01', '2019-02-04', 'A'),
+(4, 'Sra bella', '2019-07-12', '2020-01-12', 'A');
 
 -- --------------------------------------------------------
 
@@ -176,7 +206,7 @@ CREATE TABLE `elementos` (
 INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, `elem_reg`, `elem_audit`, `elem_panelAd`, `status`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 'A'),
 (2, 2, 0, 0, 1, 0, 0, 'A'),
-(3, 4, 1, 1, 1, 1, 1, 'A'),
+(3, 4, 1, 0, 0, 1, 1, 'A'),
 (4, 5, 0, 1, 0, 1, 1, 'A'),
 (5, 6, 1, 1, 1, 1, 1, 'A');
 
@@ -198,6 +228,13 @@ CREATE TABLE `jurado` (
   `fky_cat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `jurado`
+--
+
+INSERT INTO `jurado` (`cod_jur`, `ci_jur`, `nom_jur`, `ape_jur`, `dir_jur`, `tel_jur`, `email_jur`, `est_jur`, `fky_cat`) VALUES
+(1, '24746048', 'Maria', 'Mejia', 'Cordero', '027697853103', 'kla@hgmail.com', 'A', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -209,7 +246,7 @@ CREATE TABLE `log` (
   `usu_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `tab_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `acc_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `reg_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `reg_log` blob NOT NULL,
   `date_log` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -219,20 +256,7 @@ CREATE TABLE `log` (
 --
 
 INSERT INTO `log` (`cod_log`, `usu_log`, `tab_log`, `acc_log`, `reg_log`, `date_log`, `est_log`) VALUES
-(1, 'admin', 'Usuario', 'Registro', 'mayel', '2019-02-21 00:04:36', 'A'),
-(2, 'admin', 'Usuario', 'Registro', 'Johara', '2019-02-20 22:50:17', 'A'),
-(3, 'admin', 'Usuario', 'Registro', 'test', '2019-02-23 17:21:37', 'A'),
-(4, 'admin', 'Usuario', 'Registro', 'mina', '2019-02-23 17:36:21', 'A'),
-(5, 'admin', 'Usuario', 'Registro', 'test2', '2019-02-23 18:01:35', 'A'),
-(6, 'admin', 'Usuario', 'Registro', 'test', '2019-02-24 15:27:31', 'A'),
-(7, 'admin', 'Usuario', 'Registro', 'testing', '2019-02-24 15:56:10', 'A'),
-(8, 'admin', 'Certamen', 'Registro', 'Srita Hermosa', '2019-02-24 16:12:40', 'A'),
-(9, 'admin', 'Usuario', 'Registro', 'test', '2019-02-26 22:00:22', 'A'),
-(10, 'admin', 'Usuario', 'Registro', 'dev', '2019-02-26 22:03:53', 'A'),
-(11, 'admin', 'Usuario', 'Registro', 'yes', '2019-02-27 01:53:57', 'A'),
-(12, 'admin', 'Candidata', 'Registro', '24743016', '2019-03-09 19:41:08', 'A'),
-(13, 'admin', 'Certamen', 'Borrado', '2', '2019-03-09 19:42:22', 'A'),
-(14, 'admin', 'Candidata', 'Registro', '24780688', '2019-03-09 19:45:55', 'A');
+(15, 'test', 'usuario', 'Cambio de Clave', 0x555044415445207573756172696f20534554206e6f6d5f7573753d277465, '2019-07-07 16:10:23', 'A');
 
 -- --------------------------------------------------------
 
@@ -326,6 +350,14 @@ CREATE TABLE `profesor` (
   `fky_cat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`cod_pro`, `ci_pro`, `nom_pro`, `ape_pro`, `dir_pro`, `tel_pro`, `email_pro`, `est_pro`, `fky_cla`, `fky_cat`) VALUES
+(1, '24743016', 'Paula', 'Mola', 'Cordero', '042618725464', 'johara@hotmail.com', 'A', 1, 1),
+(3, '58956216', 'Jonas', 'Joel', 'Cordero', '019874854148', 'jona@hotmail.com', 'A', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -386,64 +418,14 @@ CREATE TABLE `sesion` (
 --
 
 INSERT INTO `sesion` (`cod_ses`, `usu_ses`, `niv_ses`, `date_ses`, `est_ses`) VALUES
-(1, 'admin', 'Administrador', '2019-02-21 00:04:38', 'A'),
-(2, 'admin', 'Administrador', '2019-02-21 00:04:38', 'A'),
-(3, 'mayel', 'Administrador', '2019-02-21 00:04:38', 'A'),
-(4, 'admin', 'Administrador', '2019-02-21 00:04:38', 'A'),
-(5, 'admin', 'Administrador', '2019-02-21 00:04:38', 'A'),
-(6, 'admin', 'Administrador', '2019-02-20 20:54:07', 'A'),
-(7, 'admin', 'Administrador', '2019-02-23 10:08:06', 'A'),
-(8, 'admin', 'Administrador', '2019-02-23 11:47:31', 'A'),
-(9, 'admin', 'Administrador', '2019-02-23 13:45:04', 'A'),
-(10, 'admin', 'Administrador', '2019-02-23 19:18:21', 'A'),
-(11, 'admin', 'Administrador', '2019-02-24 12:21:27', 'A'),
-(12, 'admin', 'Administrador', '2019-02-24 12:45:52', 'A'),
-(13, 'admin', 'Administrador', '2019-02-24 12:50:32', 'A'),
-(14, 'admin', 'Administrador', '2019-02-24 12:55:05', 'A'),
-(15, 'admin', 'Administrador', '2019-02-24 14:08:05', 'A'),
-(16, 'admin', 'Administrador', '2019-02-24 14:20:05', 'A'),
-(17, 'admin', 'Administrador', '2019-02-24 14:23:05', 'A'),
-(18, 'admin', 'Administrador', '2019-02-24 15:18:50', 'A'),
-(19, 'admin', 'Administrador', '2019-02-24 15:32:16', 'A'),
-(20, 'admin', 'Administrador', '2019-02-24 15:48:30', 'A'),
-(21, 'admin', 'Administrador', '2019-02-24 15:52:01', 'A'),
-(22, 'admin', 'Administrador', '2019-02-24 20:58:06', 'A'),
-(23, 'admin', 'Administrador', '2019-02-24 23:11:05', 'A'),
-(24, 'admin', 'Administrador', '2019-02-24 23:14:09', 'A'),
-(25, 'admin', 'Administrador', '2019-02-24 23:19:42', 'A'),
-(26, 'admin', 'Administrador', '2019-02-24 23:21:25', 'A'),
-(27, 'admin', 'Administrador', '2019-02-24 23:24:41', 'A'),
-(28, 'admin', 'Administrador', '2019-02-24 23:28:26', 'A'),
-(29, 'admin', 'Administrador', '2019-02-24 23:30:56', 'A'),
-(30, 'admin', 'Administrador', '2019-02-25 00:10:40', 'A'),
-(31, 'user', 'Usuario', '2019-02-25 00:26:15', 'A'),
-(32, 'user', 'Usuario', '2019-02-25 00:32:08', 'A'),
-(33, 'user', 'Usuario', '2019-02-25 00:32:22', 'A'),
-(34, 'user', 'Usuario', '2019-02-25 00:34:29', 'A'),
-(35, 'user', 'Usuario', '2019-02-25 00:36:30', 'A'),
-(36, 'user', 'Usuario', '2019-02-25 00:48:34', 'A'),
-(37, 'user', 'Usuario', '2019-02-25 00:49:32', 'A'),
-(38, 'user', 'Usuario', '2019-02-25 00:51:40', 'A'),
-(39, 'user', 'Usuario', '2019-02-25 00:53:34', 'A'),
-(40, 'admin', 'Administrador', '2019-02-25 00:53:49', 'A'),
-(41, 'admin', 'Administrador', '2019-02-25 00:54:58', 'A'),
-(42, 'admin', 'Administrador', '2019-02-26 20:13:34', 'A'),
-(43, 'admin', 'Administrador', '2019-02-26 23:25:06', 'A'),
-(44, 'admin', 'Administrador', '2019-02-26 23:29:10', 'A'),
-(45, 'admin', 'Administrador', '2019-02-26 23:30:41', 'A'),
-(46, 'admin', 'Administrador', '2019-02-26 23:35:07', 'A'),
-(47, 'admin', 'Administrador', '2019-02-26 23:54:51', 'A'),
-(48, 'admin', 'Administrador', '2019-02-27 00:09:54', 'A'),
-(49, 'admin', 'Administrador', '2019-02-27 01:08:34', 'A'),
-(50, 'admin', 'Administrador', '2019-02-27 01:09:54', 'A'),
-(51, 'admin', 'Administrador', '2019-02-27 01:31:06', 'A'),
-(52, 'admin', 'Administrador', '2019-03-09 19:39:17', 'A'),
-(53, 'admin', 'Administrador', '2019-03-09 19:43:50', 'A'),
-(54, 'admin', 'Administrador', '2019-03-09 19:58:00', 'A'),
-(55, 'admin', 'Administrador', '2019-03-09 20:19:43', 'A'),
-(56, 'admin', 'Administrador', '2019-03-09 20:40:16', 'A'),
-(57, 'admin', 'Administrador', '2019-03-09 20:55:01', 'A'),
-(58, 'admin', 'Administrador', '2019-03-09 20:56:33', 'A');
+(74, 'test', 'Usuario', '2019-07-06 17:48:39', 'A'),
+(75, 'admin', 'Administrador', '2019-07-06 17:49:05', 'A'),
+(76, 'test', 'Usuario', '2019-07-06 17:49:57', 'A'),
+(77, 'admin', 'Administrador', '2019-07-06 18:11:28', 'A'),
+(78, 'test', 'Auditor', '2019-07-06 18:38:08', 'A'),
+(79, 'admin', 'Administrador', '2019-07-06 18:55:20', 'A'),
+(80, 'test', 'Auditor', '2019-07-07 16:05:41', 'A'),
+(81, 'admin', 'Administrador', '2019-07-07 16:11:16', 'A');
 
 -- --------------------------------------------------------
 
@@ -472,7 +454,7 @@ INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`,
 (1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', 'A'),
 (2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 'Usuario', 'A'),
 (3, 'mayel', 'mayel', 'mayel@gmail.com', 1, '1', 2, '2', 'Administrador', 'A'),
-(4, 'test', 'test', 'test@gmail.com', 1, 'test', 2, 'test', 'Administrador', 'A'),
+(4, 'test', 'test', 'test@gmail.com', 1, 'test', 2, 'test', 'Auditor', 'A'),
 (5, 'johana', 'fev', 'test2', 2, 'dev', 3, 'dev', 'Administrador', 'A'),
 (6, 'yes', 'yes', 'yes@hotmail.com', 1, 'yes', 2, 'yes', 'Administrador', 'A');
 
@@ -595,77 +577,92 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `candidata`
 --
 ALTER TABLE `candidata`
-  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `cod_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `certamen`
 --
 ALTER TABLE `certamen`
-  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `civil`
 --
 ALTER TABLE `civil`
   MODIFY `cod_civ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
   MODIFY `cod_cla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
   MODIFY `id_elem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `jurado`
 --
 ALTER TABLE `jurado`
-  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `log`
 --
 ALTER TABLE `log`
-  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT de la tabla `municipio`
 --
 ALTER TABLE `municipio`
   MODIFY `cod_mun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
   MODIFY `cod_pre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `semana`
 --
 ALTER TABLE `semana`
   MODIFY `cod_sem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
 --
 -- AUTO_INCREMENT de la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -712,6 +709,7 @@ ALTER TABLE `profesor`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`fky_pre_1`) REFERENCES `pregunta` (`cod_pre`),
   ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`fky_pre_2`) REFERENCES `pregunta` (`cod_pre`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
