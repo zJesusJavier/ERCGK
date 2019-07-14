@@ -1,8 +1,7 @@
 // Conexion con la Base de Datos y declaracion de variables Globales
 var con = require('@models/db');
 var swal = require('sweetalert');
-var sql;
-var captionid;
+var sql, captionid;
 
 // Funcion de Agregar Candidatas
 
@@ -345,8 +344,19 @@ function guardarCandidata()
                 button:false,
                 timer: 3000
             }).then(function() 
-            {
-                window.location.reload();
+            {   
+                date_log = new Date();
+                nameUser = localStorage.getItem('name');
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values2 = [[nameUser, 'candidata', 'Registro', sql+"("+values+")", date_log, 'A']];
+
+				con.query(sql2, [values2], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});
             });
         };
     });
@@ -622,8 +632,19 @@ function borrarCandidata()
 	            button: false,
 	            timer: 3000
 	        }).then(function() 
-	        {
-	            window.location.reload();
+	        {   
+                date_log = new Date();
+	            nameUser = localStorage.getItem('name');
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values = [[nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']];
+
+				con.query(sql2, [values], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});
 	        });
 	    };
     });

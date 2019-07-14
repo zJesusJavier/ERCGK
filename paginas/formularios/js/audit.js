@@ -4,6 +4,10 @@ var con = require('@models/db');
 var swal = require('sweetalert');
 var sql, result, nameUser;
 
+$(document).ready({
+
+    
+});
 function main(){
     let main = "<ul class='nav'>"+
                 "<li id='home' class='active'><a href='home.html'>"+

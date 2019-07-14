@@ -1,6 +1,7 @@
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
+var os = require('os');
 var user;
 var fecha = new Date();
 var est_ses = 'A';
@@ -12,23 +13,53 @@ function verificar() {
     con.query("SELECT * FROM usuario WHERE nom_usu = '" + nombre + "' AND cla_usu = '" + clave + "'", function (err, result, fields) {
         if (err) console.log(err);
         var i, t = 0;
+        var ip = os.getNetworkInterfaces()["Wi-Fi"][1].address;
+        var mac = os.getNetworkInterfaces()["Wi-Fi"][1].mac;
+        
+        if(!ip || !mac){
+            ip = os.getNetworkInterfaces()['Loopback Pseudo-Interface 1'][1].address;
+            mac = os.getNetworkInterfaces()['Loopback Pseudo-Interface 1'][1].mac;
+        }
+
+        if (result[0].ip_usu != ip || result[0].mac_usu != mac) {
+            sqIP = "UPDATE usuario SET ip_usu='" + ip + "'," + "mac_usu='" + mac + "' WHERE id_usu = " + result[0].id_usu;
+            con.query(sqIP, function (err, result1) {
+                if (err) {
+                    console.log(err);
+                    swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
+                        {
+                            button: false,
+                            timer: 3000
+                        });
+                }
+                else {
+                    swal("", "Ha cambiado su IP, en su usuario", "info",
+                        {
+                            button: false,
+                            timer: 3000
+                        }).then(function () {
+                        });
+                }
+            });
+        }
+
         sql = "SELECT * FROM sesion";
         con.query(sql, function (err, result) {
             if (err) console.log(err);
         });
 
         rol = result[0].niv_usu;
-        if(rol == 'undefined'){
+        if (rol == 'undefined') {
             swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-            {
-                button: false,
-                timer: 3000
-            });
+                {
+                    button: false,
+                    timer: 3000
+                });
         }
-        sql = "INSERT INTO sesion (usu_ses, niv_ses, date_ses, est_ses) VALUES ?";
-        var values = [[nombre, rol, fecha, est_ses]];
-        localStorage.setItem('name', nombre);
+        sql = "INSERT INTO sesion (usu_ses, niv_ses, ip_ses, mac_ses, date_ses, est_ses) VALUES ?";
+        var values = [[nombre, rol, ip, mac, fecha, est_ses]];
 
+        localStorage.setItem('name', nombre);
         con.query(sql, [values], function (err, result) {
             if (err) {
                 console.log(err);
@@ -100,9 +131,9 @@ function cambioClave() {
                     });
             }
             else {
-                name = localStorage.getItem('name');              
+                name = localStorage.getItem('name');
                 sql2 = "INSERT INTO log (usu_log,tab_log,acc_log,reg_log,date_log,est_log) VALUES ?";
-                var values = [[name, 'usuario', 'Cambio de Clave',sql, fecha, est_ses]];
+                var values = [[name, 'usuario', 'Cambio de Clave', sql, fecha, est_ses]];
                 con.query(sql2, [values], function (err, result) {
                     swal("", "La clave fue cambiada correctamente.", "success",
                         {
@@ -111,7 +142,7 @@ function cambioClave() {
                         }).then(function () {
                             window.location.reload();
                         });
-                    });
+                });
             };
         });
     });

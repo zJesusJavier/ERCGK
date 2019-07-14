@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-07-2019 a las 23:58:54
+-- Tiempo de generación: 14-07-2019 a las 04:01:59
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.0.27
 
@@ -46,7 +46,22 @@ CREATE TABLE `calificacion` (
 
 INSERT INTO `calificacion` (`cod_cal`, `sem_cal`, `fec_cal`, `cal_cal`, `obs_cal`, `est_cal`, `fky_can`, `fky_cla`, `fky_pro`) VALUES
 (1, 1, '2019-07-05', '20', '', 'A', 1, 1, 1),
-(2, 3, '2019-07-07', '20', '', 'A', 5, 2, 1);
+(2, 3, '2019-07-07', '20', '', 'A', 5, 2, 1),
+(3, 3, '2019-07-11', '20', '', 'A', 13, 2, 1),
+(4, 2, '2019-07-11', '10', '', 'A', 13, 2, 1);
+
+--
+-- Disparadores `calificacion`
+--
+DELIMITER $$
+CREATE TRIGGER `update_calificacion` BEFORE UPDATE ON `calificacion` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'calificacion','Modificar - Data Anterior',NOW(),CONCAT('Codigo Calificacion: ',OLD.cod_Cal,' Semana Calificacion : ', OLD.sem_cal,' Fecha Calificacion : ', OLD.fec_cal,' Calificacion : ', OLD.cal_cal,' Observacion Calificacion : ', OLD.obs_cal,' Estado Calificacion : ', OLD.est_cal,' Candidata Calificacion : ', OLD.fky_can,' Clase Calificacion : ', OLD.fky_cla,' Profesor Calificacion : ', OLD.fky_pro),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -79,9 +94,30 @@ CREATE TABLE `candidata` (
 --
 
 INSERT INTO `candidata` (`cod_can`, `ci_can`, `nom_can`, `ape_can`, `peso_can`, `esta_can`, `ocu_can`, `edad_can`, `dir_can`, `tel_can`, `email_can`, `fec_can`, `est_can`, `fky_cat`, `fky_mun`, `fky_civ`, `fky_cer`) VALUES
-(1, '24743016', 'Johara', 'Pabon', 55, 156, 'TSU', 23, 'Tariba', '02763958784', 'joharap_22@hotmail.com', '2019-03-04', 'A', 1, 5, 1, 1),
-(2, '24780688', 'Laura', 'Mora', 57, 169, 'Lic', 25, 'Tariba', '04268971235', 'laura@gmail.com', '2019-03-12', 'A', 2, 1, 1, 1),
-(5, '25879116', 'Johana', 'Padron', 55, 158, 'Ing', 20, 'Cordero', '027698564545', 'joh@hotmail.com', '2019-07-07', 'A', 1, 16, 3, 1);
+(1, '24743016', 'Paoñaaaaassssaaa', 'Pabon', 55, 156, 'TSU', 23, 'Tariba', '02763958784', 'joharap_22@hotmail.com', '2019-03-04', 'A', 1, 5, 1, 1),
+(2, '24780688', 'Laurinha', 'Mora', 57, 169, 'Lic', 25, 'Tariba', '04268971235', 'laura@gmail.com', '2019-03-12', 'A', 2, 1, 1, 1),
+(5, '25879116', 'Johana', 'Padron', 55, 158, 'Ing', 20, 'Cordero', '027698564545', 'joh@hotmail.com', '2018-07-07', 'A', 1, 16, 3, 1),
+(6, '24743567', 'Paol', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
+(8, '5897455', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
+(9, '89825456', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
+(10, '58975894', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
+(11, '58969526', 'Pedrasss', 'Prere', 52, 189, 'TSSU', 26, 'Palmas', '042587695262', 'a@hotmail.com', '2017-12-15', 'A', 2, 1, 1, 1),
+(12, '8555555', 'Petronila', 'Puera', 58, 178, 'Linda', 25, 'Alla', '042587496856', 'j@hotmail.com', '2019-05-13', 'A', 2, 7, 1, 3),
+(13, '88562656', 'aaaaaaaaaa', 'Pol', 52, 148, 'TSU', 15, 'lA BONITRA', '042984129865', 'JOHARAP@hotmail.com', '2019-08-15', 'A', 1, 2, 1, 1),
+(14, '25459851', 'eeeeeeeeeee', 'aopkod', 12, 153, 'JSALKS', 12, 'COLA', '04265145', 'KLA@HOTMAIL.COM', '2019-12-15', 'A', 1, 1, 1, 1);
+
+--
+-- Disparadores `candidata`
+--
+DELIMITER $$
+CREATE TRIGGER `update_candidata` BEFORE UPDATE ON `candidata` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'candidata','Modificar - Data Anterior',NOW(),CONCAT('codigo: ',OLD.cod_can,' cedula: ', OLD.ci_can, " Nombre: ", OLD.nom_can, " Apellido: ",OLD.ape_can, " Peso: ",OLD.peso_can, " Estatura: ",OLD.esta_can, " Estado Civil: ", OLD.fky_civ, " Ocupacion: ",OLD.ocu_can, " Categoria: ", OLD.fky_cat, " Edad: ", OLD.edad_can, " Municipio: ", OLD.fky_mun, " Certamen: ",OLD.fky_cer, " Direccion: ",OLD.dir_can, " Telefono: ",OLD.tel_can, " Email: ",OLD.email_can," Estado: ", OLD.est_can),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -102,6 +138,19 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
 (1, 'Petite', 'A'),
 (2, 'Miss', 'A');
+
+--
+-- Disparadores `categoria`
+--
+DELIMITER $$
+CREATE TRIGGER `update_categoria` BEFORE UPDATE ON `categoria` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'categoria','Modificar - Data Anterior',NOW(),CONCAT('Nombre Categoria: ',OLD.nom_cat,' Estado Categoria: ', OLD.est_cat),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +174,21 @@ INSERT INTO `certamen` (`cod_cer`, `des_cer`, `feci_cer`, `fecf_cer`, `est_cer`)
 (1, 'Chica Gipsy', '2018-01-16', '2018-04-11', 'A'),
 (2, 'Sra Bella', '2019-02-01', '2019-02-02', 'I'),
 (3, 'Srita Hermosa', '2019-02-01', '2019-02-04', 'A'),
-(4, 'Sra bella', '2019-07-12', '2020-01-12', 'A');
+(4, 'Sra bella', '2019-07-12', '2020-01-12', 'A'),
+(5, 'Lo mas lindo', '2019-02-18', '2020-10-20', 'A');
+
+--
+-- Disparadores `certamen`
+--
+DELIMITER $$
+CREATE TRIGGER `update_certamen` BEFORE UPDATE ON `certamen` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'certamen','Modificar - Data Anterior',NOW(),CONCAT('codigo Certamen: ',OLD.cod_cer,' Descripcion Certamen: ', OLD.des_cer, " Fecha Inicio: ", OLD.feci_cer, " Fecha Fin: ",OLD.fecf_cer, " Estado Certamen: ",OLD.est_cer),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -182,6 +245,19 @@ INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
 (13, 'Patronaje', 'A'),
 (14, 'Protocolo', 'A');
 
+--
+-- Disparadores `clase`
+--
+DELIMITER $$
+CREATE TRIGGER `update_clase` BEFORE UPDATE ON `clase` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'clase','Modificar - Data Anterior',NOW(),CONCAT('Codigo Clase: ',OLD.cod_cla,' Nombre Clase: ', OLD.nom_cla, " Estado Clase: ", OLD.est_cla),'A');
+
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -205,8 +281,8 @@ CREATE TABLE `elementos` (
 
 INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, `elem_reg`, `elem_audit`, `elem_panelAd`, `status`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 'A'),
-(2, 2, 0, 0, 1, 0, 0, 'A'),
-(3, 4, 1, 0, 0, 1, 1, 'A'),
+(2, 2, 0, 1, 1, 0, 0, 'A'),
+(3, 4, 1, 1, 0, 1, 1, 'A'),
 (4, 5, 0, 1, 0, 1, 1, 'A'),
 (5, 6, 1, 1, 1, 1, 1, 'A');
 
@@ -233,7 +309,21 @@ CREATE TABLE `jurado` (
 --
 
 INSERT INTO `jurado` (`cod_jur`, `ci_jur`, `nom_jur`, `ape_jur`, `dir_jur`, `tel_jur`, `email_jur`, `est_jur`, `fky_cat`) VALUES
-(1, '24746048', 'Maria', 'Mejia', 'Cordero', '027697853103', 'kla@hgmail.com', 'A', 1);
+(1, '24746048', 'Maria', 'Mejia', 'Cordero', '027697853103', 'kla@hgmail.com', 'A', 1),
+(2, '87486954', 'Jula', 'Jaaa', 'kmdkalsmdls', '32204394', 'mfñds@hotmail.com', 'A', 1);
+
+--
+-- Disparadores `jurado`
+--
+DELIMITER $$
+CREATE TRIGGER `update_jurado` BEFORE UPDATE ON `jurado` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'jurado','Modificar - Data Anterior',NOW(),CONCAT('Codigo Jurado: ',OLD.cod_jur,' Cedula Jurado: ', OLD.ci_jur, " Nombre Jurado: ", OLD.nom_jur, " Apellido Jurado: ",OLD.ape_jur, " Direccion: ",OLD.dir_jur," Telefono Jurado: ",OLD.tel_jur, " Email Jurado: ", OLD.email_jur, " Ocupacion: ",OLD.est_jur, " Categoria Jurado: ", OLD.fky_cat),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -256,7 +346,8 @@ CREATE TABLE `log` (
 --
 
 INSERT INTO `log` (`cod_log`, `usu_log`, `tab_log`, `acc_log`, `reg_log`, `date_log`, `est_log`) VALUES
-(15, 'test', 'usuario', 'Cambio de Clave', 0x555044415445207573756172696f20534554206e6f6d5f7573753d277465, '2019-07-07 16:10:23', 'A');
+(48, 'admin', 'categoria', 'Modificar - Data Anterior', 0x4e6f6d6272652043617465676f7269613a204d69737361612045737461646f2043617465676f7269613a2041, '2019-07-13 17:06:16', 'A'),
+(49, 'admin', 'categoria', 'Modificar - Data Nueva', 0x5550444154452063617465676f72696120534554206e6f6d5f6361743d274d697373272c206573745f6361743d27412720574845524520636f645f636174203d2032, '2019-07-13 17:06:20', 'A');
 
 -- --------------------------------------------------------
 
@@ -356,7 +447,21 @@ CREATE TABLE `profesor` (
 
 INSERT INTO `profesor` (`cod_pro`, `ci_pro`, `nom_pro`, `ape_pro`, `dir_pro`, `tel_pro`, `email_pro`, `est_pro`, `fky_cla`, `fky_cat`) VALUES
 (1, '24743016', 'Paula', 'Mola', 'Cordero', '042618725464', 'johara@hotmail.com', 'A', 1, 1),
-(3, '58956216', 'Jonas', 'Joel', 'Cordero', '019874854148', 'jona@hotmail.com', 'A', 1, 1);
+(3, '58956216', 'Jonas', 'Joel', 'Cordero', '019874854148', 'jona@hotmail.com', 'A', 1, 1),
+(4, '37493284', 'KMSLKAMD', 'LMSALKDMASÑ', 'DKM,ÑSFKMSA', '3203103610', 'JSM@hotmail.com', 'A', 7, 2);
+
+--
+-- Disparadores `profesor`
+--
+DELIMITER $$
+CREATE TRIGGER `update_profesor` BEFORE UPDATE ON `profesor` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'profesor','Modificar - Data Anterior',NOW(),CONCAT('Codigo Profesor: ',OLD.cod_pro,' Cedula Profesor: ', OLD.ci_pro, " Nombre Profesor: ", OLD.nom_pro, " Apellido Profesor: ",OLD.ape_pro, " Direccion Profesor: ",OLD.dir_pro, " Telefono Profesor: ",OLD.tel_pro, " Email Profesor: ", OLD.email_pro, " Estado Profesor: ",OLD.est_pro, " Clase Profesor: ", OLD.fky_cla, " Categoria Profesor: ", OLD.fky_cat),'A');
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -409,6 +514,8 @@ CREATE TABLE `sesion` (
   `cod_ses` int(11) NOT NULL,
   `usu_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `niv_ses` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `ip_ses` int(20) NOT NULL,
+  `mac_ses` int(18) NOT NULL,
   `date_ses` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -417,15 +524,15 @@ CREATE TABLE `sesion` (
 -- Volcado de datos para la tabla `sesion`
 --
 
-INSERT INTO `sesion` (`cod_ses`, `usu_ses`, `niv_ses`, `date_ses`, `est_ses`) VALUES
-(74, 'test', 'Usuario', '2019-07-06 17:48:39', 'A'),
-(75, 'admin', 'Administrador', '2019-07-06 17:49:05', 'A'),
-(76, 'test', 'Usuario', '2019-07-06 17:49:57', 'A'),
-(77, 'admin', 'Administrador', '2019-07-06 18:11:28', 'A'),
-(78, 'test', 'Auditor', '2019-07-06 18:38:08', 'A'),
-(79, 'admin', 'Administrador', '2019-07-06 18:55:20', 'A'),
-(80, 'test', 'Auditor', '2019-07-07 16:05:41', 'A'),
-(81, 'admin', 'Administrador', '2019-07-07 16:11:16', 'A');
+INSERT INTO `sesion` (`cod_ses`, `usu_ses`, `niv_ses`, `ip_ses`, `mac_ses`, `date_ses`, `est_ses`) VALUES
+(83, 'admin', 'Administrador', 0, 0, '2019-07-11 10:00:06', 'A'),
+(84, 'admin', 'Administrador', 0, 0, '2019-07-11 19:54:56', 'A'),
+(85, 'admin', 'Administrador', 0, 0, '2019-07-13 15:36:09', 'A'),
+(86, 'admin', 'Administrador', 192168, 70, '2019-07-13 20:52:28', 'A'),
+(87, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:19:19', 'A'),
+(88, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:19:41', 'A'),
+(89, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:21:17', 'A'),
+(90, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:23:24', 'A');
 
 -- --------------------------------------------------------
 
@@ -443,6 +550,8 @@ CREATE TABLE `usuario` (
   `fky_pre_2` int(11) NOT NULL,
   `res_pre_2` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `niv_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `ip_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `mac_usu` varchar(18) COLLATE utf8_spanish_ci NOT NULL,
   `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -450,13 +559,26 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`, `res_pre_1`, `fky_pre_2`, `res_pre_2`, `niv_usu`, `est_usu`) VALUES
-(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', 'A'),
-(2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 'Usuario', 'A'),
-(3, 'mayel', 'mayel', 'mayel@gmail.com', 1, '1', 2, '2', 'Administrador', 'A'),
-(4, 'test', 'test', 'test@gmail.com', 1, 'test', 2, 'test', 'Auditor', 'A'),
-(5, 'johana', 'fev', 'test2', 2, 'dev', 3, 'dev', 'Administrador', 'A'),
-(6, 'yes', 'yes', 'yes@hotmail.com', 1, 'yes', 2, 'yes', 'Administrador', 'A');
+INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`, `res_pre_1`, `fky_pre_2`, `res_pre_2`, `niv_usu`, `ip_usu`, `mac_usu`, `est_usu`) VALUES
+(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', '192.168.1.104', '70:f1:a1:87:75:50', 'A'),
+(2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 'Usuario', '', '', 'A'),
+(3, 'mayel', 'mayel', 'mayel@gmail.com', 1, '1', 2, '2', 'Administrador', '', '', 'A'),
+(4, 'test', 'test', 'test@gmail.com', 1, 'test', 2, 'test', 'Auditor', '', '', 'A'),
+(5, 'johana', 'fev', 'test2', 2, 'dev', 3, 'dev', 'Administrador', '', '', 'A'),
+(6, 'yes', 'yes', 'yes@hotmail.com', 1, 'yes', 2, 'yes', 'Administrador', '', '', 'A');
+
+--
+-- Disparadores `usuario`
+--
+DELIMITER $$
+CREATE TRIGGER `update_usuario` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN
+
+ INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
+ VALUES (CURRENT_USER,'usuario','Modificar - Data Anterior',NOW(),CONCAT('Cosido Usuario: ',OLD.id_usu," Nombre Usuario: ", OLD.nom_usu, " Clave Usuario: ",OLD.cla_usu, " Email Usuario: ",OLD.email_usu, " Pregunta 1: ",OLD.fky_pre_1, " Respuesta 1: ", OLD.res_pre_1, " Pregunta 2 : ",OLD.fky_pre_2, " Respuesta 2: ", OLD.res_pre_2, " Nivel Usuario: ", OLD.niv_usu, " Ip Usuario: ", OLD.ip_usu, " Mac Usuario: ",OLD.mac_usu, " Estado Usuario: ",OLD.est_usu),'A');
+
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tablas volcadas
@@ -577,13 +699,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `candidata`
 --
 ALTER TABLE `candidata`
-  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -595,7 +717,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `certamen`
 --
 ALTER TABLE `certamen`
-  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `civil`
@@ -619,13 +741,13 @@ ALTER TABLE `elementos`
 -- AUTO_INCREMENT de la tabla `jurado`
 --
 ALTER TABLE `jurado`
-  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `log`
 --
 ALTER TABLE `log`
-  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `municipio`
@@ -643,7 +765,7 @@ ALTER TABLE `pregunta`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `semana`
@@ -655,7 +777,7 @@ ALTER TABLE `semana`
 -- AUTO_INCREMENT de la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

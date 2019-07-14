@@ -1,8 +1,9 @@
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
+var os = require('os');
 
-
+console.log(os);
 function enter(e)
 {
     var tecla = (document.all) ? e.keyCode : e.which;

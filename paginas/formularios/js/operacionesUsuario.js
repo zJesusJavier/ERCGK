@@ -203,9 +203,9 @@ function guardarUsuario()
                     if (err) console.log(err);
                 });
 
-                sql = "INSERT INTO elementos (fky_usuario, elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, status) VALUES ?";
-                var values = [[result['insertId'], elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, estado]];
-                con.query(sql, [values], function (err, result) 
+                sql1 = "INSERT INTO elementos (fky_usuario, elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, status) VALUES ?";
+                var values1 = [[result['insertId'], elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, estado]];
+                con.query(sql1, [values1], function (err, result) 
 			    {
 			        if (err)
 			        { 
@@ -221,15 +221,11 @@ function guardarUsuario()
 
                 var date_log = new Date();
                 var usu_log = 'admin';
-                var tab_log = 'Usuario';
-                var est_log = 'A';
-                var reg_log = nombre;
-                var acc_log = 'Registro';
                                     
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [[usu_log, 'usuario', 'Registro', sql+"("+values+")", date_log, 'A']];
                                   
-                con.query(sql, [values], function (err, result) 
+                con.query(sql2, [values2], function (err, result) 
                 {
                     if (err)
                     { 

@@ -4,6 +4,7 @@ require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
 var sql;
+var date_log = new Date();
 
 // Modal con el Formulario para editar datos de la Categoria
 
@@ -102,8 +103,43 @@ function editarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
+                nameUser = localStorage.getItem('name');
+				date_log = new Date();
+
+				con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1,fields) 
+				{
+					if (err) console.log(err);
+					else  idMax = result1[0].id;
+				
+                    updateUser = "UPDATE log SET usu_log='"+ nameUser + "' WHERE cod_log='"+idMax+"'";
+                    con.query(updateUser, function (err, result)
+                    {
+                        if (err)
+                        { 
+                            console.log(err);
+                            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+                            {
+                                button: false,
+                                timer: 3000
+                            });
+                        }
+                        else 
+                        {
+                            sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                            var values = [[nameUser, 'categoria', 'Modificar - Data Nueva', sql, date_log, 'A']];
+
+                            con.query(sql2, [values], function (err, result) {
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                    });     
+                });
             });
-        };
+        }
     });
+
 }

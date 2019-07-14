@@ -33,15 +33,11 @@ function busquedaCalif()
 {
     var busqueda = document.getElementById("busqueda").value;
   
-    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat WHERE est_can='A'" ,function (err, result, fields)
+    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat LEFT JOIN calificacion ON est_cal='A' WHERE est_can='A' AND YEAR(fec_cal)='"+busqueda+"'",function (err, result, fields)
     {
-        con.query("SELECT * FROM calificacion WHERE est_cal='A'", function (err, result1, fields)
-        {
-
             if (err) console.log(err);
-
-                var tam = result.length;
-                var text;
+            var tam = result.length;
+            var text;
                         
                 text = '<thead class="text-oscuro">';
                 text += '<td><b>';
@@ -70,18 +66,9 @@ function busquedaCalif()
                 text += '</thead>';
 
                 var i, j=0, cont= 0, porc_cal=0, acum=0, nota=0;
-
-                
-
-            for (i = 0; i < tam; i++)
-            {
-                var year = result[i].fec_can.getUTCFullYear();
-                var ultsem = -99999;
-            
-        
-                if(year == busqueda )
+                for (i = 0; i < tam; i++)
                 {
-                  
+                    var ultsem = -99999;
                     text += '<tbody>';
                     text += '<tr>';
                     text += '<td>';
@@ -112,9 +99,7 @@ function busquedaCalif()
                     text += '</tr>';
                     text += '</tbody>';
                 }
-                document.getElementById("califcan").innerHTML= text;
-            }  
-        });
+            document.getElementById("califcan").innerHTML= text;
     });
 }
 

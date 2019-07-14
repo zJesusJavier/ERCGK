@@ -2,9 +2,7 @@
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
-var sql;
-var consulta;
-var captionid;
+var sql, consulta, captionid;
 
 // Funcion de Agregar Categoria
 
@@ -68,8 +66,19 @@ function guardarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
-            });
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
+
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values2 = [[nameUser, 'categoria', 'Registro', sql+"("+values+")", date_log, 'A']];
+
+				con.query(sql2, [values2], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});            });
         };
     });
 }
@@ -149,8 +158,19 @@ function borrarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
-            });
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
+
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values = [[nameUser, 'categoria', 'Borrado Logico', sql, date_log, 'A']];
+
+				con.query(sql2, [values], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});            });
         };
     });
 }

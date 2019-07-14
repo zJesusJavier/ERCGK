@@ -3,6 +3,8 @@ require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
 var sql;
+var date_log = new Date();
+
 
 // Modal con el Formulario para editar datos de la Candidata
 
@@ -167,7 +169,19 @@ function editarJurado()
                 timer: 3000
             }).then(function() 
             {
-                window.location.reload();
+				nameUser = localStorage.getItem('name');
+				date_log = new Date();
+
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values = [[nameUser, 'jurado', 'Modificar', sql, date_log, 'A']];
+
+				con.query(sql2, [values], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});
             });
         };
     });
