@@ -15,7 +15,11 @@ function createWindow()
 {
     mainWindow = new BrowserWindow(
 	{
-        icon: path.join(__dirname, 'img/favicon.png')
+        icon: path.join(__dirname, 'img/favicon.png'),
+        webPreferences: 
+        {
+            nodeIntegration: true
+        }
 	})
 
     mainWindow.maximize()
