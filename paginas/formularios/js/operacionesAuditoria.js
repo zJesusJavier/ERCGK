@@ -33,6 +33,14 @@ function consultarSesion()
             text += "</td>";
             text += "\t\t";
             text += "<td>";
+            text += result[i].ip_ses;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].mac_ses;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
             text += result[i].date_ses.toLocaleString();
             text += "</td>";
             text += "\t\t";
