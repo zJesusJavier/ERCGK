@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js"
   },
-  "author": "Pabón Klaifer & Ramírez Jesús | IUT - SID3A | 2018",
+  "author": "Pabón Klaifer & Ramírez Jesús | IUT - SID4A | 2019",
   "license": "ISC",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
