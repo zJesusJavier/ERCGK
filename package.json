@@ -4,7 +4,9 @@
   "description": "Escuela de Reinas Celebrity Gipsy's Kingdom",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package-win32": "electron-packager . ERCGK --overwrite --asar=true --platform=win32 --arch=ia32 --icon=img/icon.ico",
+    "package-win64": "electron-packager . ERCGK --overwrite --asar=true --platform=win32 --arch=x64 --icon=img/icon.ico"
   },
   "author": "Pabón Klaifer & Ramírez Jesús | IUT - SID4A | 2019",
   "license": "ISC",
