@@ -6,6 +6,7 @@ var settings =
     outputDirectory: './ERCGK_Installers',
     authors: 'ERCGK',
     exe: './ERCGK.exe',
+    noMsi: true,
     setupExe: 'ercgk-installer-x32.exe',
     loadingGif: './img/load.gif',
     setupIcon: './img/icon.ico'

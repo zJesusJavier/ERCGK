@@ -6,9 +6,10 @@ var settings =
     outputDirectory: './ERCGK_Installers',
     authors: 'ERCGK',
     exe: './ERCGK.exe',
+    noMsi: true,
     setupExe: 'ercgk-installer-x64.exe',
-    loadingGif: './ERCGK-win32-x64/resources/app/img/load.gif',
-    setupIcon: './ERCGK-win32-x64/resources/app/img/icon.ico'
+    loadingGif: './img/load.gif',
+    setupIcon: './img/icon.ico'
 };
 
 resultPromise = electronInstaller.createWindowsInstaller(settings);
