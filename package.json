@@ -20,8 +20,9 @@
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {
-    "underscore.string": ">=3.3.5",
-    "electron": "^5.0.6"
+    "electron": "^5.0.6",
+    "electron-winstaller": "^3.0.4",
+    "underscore.string": ">=3.3.5"
   },
   "_moduleAliases": {
     "@lib": "lib",
