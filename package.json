@@ -17,12 +17,13 @@
     "module-alias": "^2.2.0",
     "mysql": "^2.17.1",
     "pdfkit": "^0.10.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "underscore.string": "^3.3.5"
   },
   "devDependencies": {
     "electron": "^5.0.6",
-    "electron-winstaller": "^3.0.4",
-    "underscore.string": ">=3.3.5"
+    "electron-packager": "^14.0.1",
+    "electron-winstaller": "^3.0.4"
   },
   "_moduleAliases": {
     "@lib": "lib",
