@@ -27,11 +27,14 @@
 		<script src="formularios/js/operacionesCertamen.js"></script>
 		<script src="formularios/js/operacionesCertamen2.js"></script>
 		<script src="formularios/js/operacionesUsuario.js"></script>
+		<script src="formularios/js/operacionesUsuario2.js"></script>
 		<script src="formularios/js/selects.js"></script>
 		<script src="formularios/js/buscador.js"></script>
+		<script src="formularios/js/audit.js"></script>
+
 	</head>
 
-	<body onload="selectPregunta1(); selectPregunta2();">
+	<body onload="selectPregunta1(); selectPregunta2(); audit();">
 
 	<!-- Panel -->
 
@@ -42,40 +45,40 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home" >
 							<a href="../home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="registrar" >
 							<a href="registro.html">
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="consultar" >
 							<a href="consultar.html">
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="reportes" >
 							<a href="reportes.html">
 								<i class="material-icons">library_books</i>
 								<p><b>Reportes</b></p>
 							</a>
 						</li>
-						<li class="active">
+						<li  id="panelAdmin" class="active">
 							<a>
 								<i class="material-icons">settings</i>
 								<p><b>Panel de Administración</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="panelAudit" >
 							<a href="panel_auditoria.html">
 								<i class="material-icons">security</i>
 								<p><b>Panel de Auditoría</b></p>
@@ -324,7 +327,8 @@
 		                                            <td><b>ID</b></td>
 		                                            <td><b>Nombre</b></td>
 		                                            <td><b>Rol</b></td>
-		                                            <td><b>Estado</b></td>
+													<td><b>Estado</b></td>
+													<td><b>Opciones</b></td>
 		                                        </thead>
 		                                        <tbody id="tusuario">
 		                                        </tbody>
@@ -374,6 +378,7 @@
 	                                            	<option value="" selected=""></option>
 													<option value="Administrador">Administrador</option>
 													<option value="Usuario">Usuario</option>
+													<option value="Auditor">Auditor</option>
 												</select>
 	                                        </div>
 	                                        <div class="form-group label-floating col-md-12" id="inputEmail">
@@ -398,12 +403,35 @@
 	                                        	<label class="control-label">Respuesta</label>
 												<input type="text" class="form-control" id="res_pre_2">
 											</div>
+											<div class="form-group label-floating" id="ListCheck" style="float:left; padding-left:15px;">
+												<label class="control-label">Permisos</label>
+												<input type="checkbox" name="registrar"  checked>Registrar<br>
+												<input type="checkbox" name="consultar"  checked>Consultar<br>
+												<input type="checkbox" name="reportes" checked>Reportes<br>
+												<input type="checkbox" name="panelAdmin" checked>Panel de Administración<br>
+												<input type="checkbox" name="panelAudit" checked>Panel de Auditoria<br>
+											</div>
 	                                    </div>
 	                                </div>
 	                                <input type="button" class="btn btn-success pull-right" value="Guardar registro" href="javascript:;" onclick="guardarUsuario();">
 	                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 	                                <div class="clearfix"></div>
 	                            </form>
+	                        </div>
+	                    </div>
+			    	</div>
+				</div>
+			</div>
+
+			<!-- Editar  Usuario -->
+			<div class="modal fade" id="editarUsuario" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+						<div class="card">
+	                        <div class="card-header" data-background-color="red">
+	                            <h4 class="title">Editar registro de Usuario</h4>
+	                        </div>
+	                        <div class="card-content" id="editUsuario">
 	                        </div>
 	                    </div>
 			    	</div>

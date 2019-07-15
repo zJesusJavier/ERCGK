@@ -1,9 +1,8 @@
+// Conexion con la Base de Datos y declaracion de variables Globales
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
-var sql;
-var consulta;
-var captionid;
+var sql, consulta, captionid;
 
 // Funcion de Agregar Categoria
 
@@ -67,39 +66,19 @@ function guardarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM log";
-                con.query(sql, function (err, result) 
-                {
-                    if (err) console.log(err);
-                });
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                var date_log = new Date();
-                var usu_log = 'admin';
-                var tab_log = 'Categoria';
-                var est_log = 'A';
-                var reg_log = nombre;
-                var acc_log = 'Registro';
-                                    
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-                                  
-                con.query(sql, [values], function (err, result) 
-                {
-                    if (err)
-                    { 
-                        console.log(err);
-                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-                        {
-                            button:false,
-                            timer: 3000
-                        });
-                    }
-                    else 
-                    {
-                        window.location.reload();
-                    };
-                });
-            });
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values2 = [[nameUser, 'categoria', 'Registro', sql+"("+values+")", date_log, 'A']];
+
+				con.query(sql2, [values2], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});            });
         };
     });
 }
@@ -179,39 +158,19 @@ function borrarCategoria()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM log";
-                con.query(sql, function (err, result) 
-                {
-                    if (err) console.log(err);
-                });
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                var date_log = new Date();
-                var usu_log = 'admin';
-                var tab_log = 'Categoria';
-                var est_log = 'A';
-                var reg_log = captionid;
-                var acc_log = 'Borrado';
-                                    
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-                                  
-                con.query(sql, [values], function (err, result) 
-                {
-                    if (err)
-                    { 
-                        console.log(err);
-                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-                        {
-                            button:false,
-                            timer: 3000
-                        });
-                    }
-                    else 
-                    {
-                        window.location.reload();
-                    };
-                });
-            });
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values = [[nameUser, 'categoria', 'Borrado Logico', sql, date_log, 'A']];
+
+				con.query(sql2, [values], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});            });
         };
     });
 }

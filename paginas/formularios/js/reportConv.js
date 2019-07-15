@@ -1,6 +1,8 @@
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
+var pdfkit = require('pdfkit');
+
 
 var text, i;
 var fechai, fechaf;

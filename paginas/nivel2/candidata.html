@@ -15,9 +15,11 @@
         <script src="js/validarNumeros.js"></script>
         <script src="js/operacionesCandidata.js"></script>
         <script src="js/selects.js"></script>
+		<script src="js/audit.js"></script>
+
 	</head>
 
-	<body onload="selectCategoria(); selectMunicipio(); selectEstadoCivil();">
+	<body onload="selectCategoria(); selectMunicipio(); selectEstadoCivil(); audit();">
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../../img/panel.jpg">
@@ -26,21 +28,21 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home">
 							<a href="home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li class="active">
+						<li id="registrar" class="active">
 							<a>
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="consultar">
 							<a href="consultar.html">
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>

@@ -16,9 +16,11 @@
 		<script src="formularios/js/operacionesDocente.js"></script>
 		<script src="formularios/js/operacionesCertamen.js"></script>
 		<script src="formularios/js/cerrarSesion.js"></script>
+		<script src="formularios/js/audit.js"></script>
+
 	</head>
 
-	<body>
+	<body onload="audit();">
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../img/panel.jpg">
@@ -27,45 +29,45 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home">
 							<a href="../home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="registrar">
 							<a href="registro.html">
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li class="active">
+						<li id="consultar" class="active">
 							<a>
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="calif">
 							<a href="calificacion.html">
 								<i class="material-icons">done</i>
 								<p></b>Calificaciones</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="reportes">
 							<a href="reportes.html">
 								<i class="material-icons">library_books</i>
 								<p><b>Reportes</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="panelAdmin">
 							<a data-toggle="modal" data-target="#panelAdministrador">
 								<i class="material-icons">settings</i>
 								<p><b>Panel de Administración</b></p>
 							</a>
 						</li>
-						<li>
+						<li id="panelAudit">
 							<a href="panel_auditoria.html">
 								<i class="material-icons">security</i>
 								<p><b>Panel de Auditoría</b></p>

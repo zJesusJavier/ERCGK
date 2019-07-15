@@ -5,6 +5,7 @@ var sql;
 
 function carga()
 {
+
 	// Aqui se cargan las variables con los datos del Formulario
 
 	var estado = document.getElementById("est_cal").value;
@@ -131,92 +132,86 @@ function carga()
 
 	con.connect(function(err) 
     {
+
 		if (err) console.log(err);
+
 
 		val = "SELECT * FROM candidata WHERE cod_can='"+candidatafk+"'";
 		con.query(val, function (err, result1) 
-		{
+		 {
 			if (err) console.log(err);
-			for(var i=0; i<result1.length; i++)
-			{
-				if(result1[i].fec_can.getFullYear() == fech)
+				for(var i=0; i<result1.length; i++)
 				{
-					sql = "SELECT * FROM calificacion";
-					con.query(sql, function (err, result) 
-					{
-						if (err) console.log(err);
-					});
-													
-					sql = "INSERT INTO calificacion (fky_can, fky_cla, fky_pro, sem_cal, fec_cal, cal_cal, obs_cal, est_cal) VALUES ?";
-					var values = [[candidatafk, claseafk, docentefk, semana, fecha, calificacion, observacion, estado]];
-												
-					con.query(sql, [values], function (err, result) 
-					{
-						if (err)
-						{ 
-							console.log(err);
-							swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-							{
-								button:false,
-								timer: 3000
-							});
-						}
-						else 
-						{
-							swal("", "Calificación registrada correctamente.", "success",
-							{
-								button:false,
-								timer: 3000
-							}).then(function() 
-							{
-				                sql = "SELECT * FROM log";
-				                con.query(sql, function (err, result) 
-				                {
-				                    if (err) console.log(err);
-				                });
+							
+							if(result1[i].fec_can.getFullYear() == fech){
 
-				                var date_log = new Date();
-				                var usu_log = 'admin';
-				                var tab_log = 'Calificacion';
-				                var est_log = 'A';
-				                var reg_log = fecha;
-				                var acc_log = 'Registro';
-				                                    
-				                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-				                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-				                                  
-				                con.query(sql, [values], function (err, result) 
-				                {
-				                    if (err)
-				                    { 
-				                        console.log(err);
-				                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-				                        {
-				                            button:false,
-				                            timer: 3000
-				                        });
-				                    }
-				                    else 
-				                    {
-				                        window.location.reload();
-				                    };
-				                });
-							});
-						};
-					});
+										sql = "SELECT * FROM calificacion";
+										con.query(sql, function (err, result) 
+										{
+											if (err) console.log(err);
+										});
+														
+									sql = "INSERT INTO calificacion (fky_can, fky_cla, fky_pro, sem_cal, fec_cal, cal_cal, obs_cal, est_cal) VALUES ?";
+											var values = [
+												[candidatafk, claseafk, docentefk, semana, fecha, calificacion, observacion, estado]];
+													
+									con.query(sql, [values], function (err, result) 
+									{
+										if (err)
+										{ 
+											console.log(err);
+											swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+											{
+												button:false,
+												timer: 3000
+											});
+										}
+										else 
+										{
+											swal("", "Calificación registrada correctamente.", "success",
+											{
+												button:false,
+												timer: 3000
+											}).then(function() 
+											{
+												nameUser = localStorage.getItem('name');
+												date_log = new Date();
+								
+												sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+												var values2 = [[nameUser, 'calificacion', 'Registro', sql+"("+values+")", date_log, 'A']];
+								
+												con.query(sql2, [values2], function (err, result) {
+													if(err){
+														console.log(err);
+													}else{
+														window.location.reload();
+													}
+												});											});
+										};
+									});
+
+						}
+						else{
+							swal("", "Debe seleccionar una fecha correcta.", "error", 
+								{
+									button:false,
+									timer: 1500
+								});
+								document.getElementById("fec_cal").focus();
+								inputCandidata.className="form-group label-floating has-error";
+								return
+
+						}
 				}
-				else
-				{
-					swal("", "Debe seleccionar una fecha correcta.", "error", 
-					{
-						button:false,
-						timer: 1500
-					});
-					document.getElementById("fec_cal").focus();
-					inputCandidata.className="form-group label-floating has-error";
-					return
-				}
-			}
-		});
+			 
+		 });
+
+
+
+
+
+
+
+       
     });
 }

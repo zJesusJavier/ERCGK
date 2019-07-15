@@ -3,7 +3,7 @@ var con = require('@models/db');
 
 function selectCandidata()
 {
-    con.query("SELECT * FROM candidata WHERE est_can='A' ORDER BY fec_can DESC", function (err, result, fields) 
+    con.query("SELECT * FROM candidata WHERE est_can='A'  ORDER BY fec_can DESC", function (err, result, fields) 
     {
         if (err) console.log(err);
 

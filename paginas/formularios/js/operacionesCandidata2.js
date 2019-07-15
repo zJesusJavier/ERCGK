@@ -1,3 +1,4 @@
+// Conexion con la Base de Datos y declaracion de variables Globales
 require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
@@ -269,39 +270,42 @@ function editarCandidata()
                 timer: 3000
             }).then(function() 
             {
-                sql = "SELECT * FROM log";
-                con.query(sql, function (err, result) 
-                {
-                    if (err) console.log(err);
-                });
+				nameUser = localStorage.getItem('name');
+				date_log = new Date();
 
-                var date_log = new Date();
-                var usu_log = 'admin';
-                var tab_log = 'Candidata';
-                var est_log = 'A';
-                var reg_log = id;
-                var acc_log = 'Edicion';
-                                    
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-                                  
-                con.query(sql, [values], function (err, result) 
-                {
-                    if (err)
-                    { 
-                        console.log(err);
-                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-                        {
-                            button:false,
-                            timer: 3000
-                        });
-                    }
-                    else 
-                    {
-                        window.location.reload();
-                    };
-                });
-            });
-        };
+				con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1,fields) 
+				{
+					if (err) console.log(err);
+					else  idMax = result1[0].id;
+				
+				updateUser = "UPDATE log SET usu_log='"+ nameUser + "' WHERE cod_log='"+idMax+"'";
+				con.query(updateUser, function (err, result)
+				{
+					if (err)
+					{ 
+						console.log(err);
+						swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
+						{
+							button: false,
+							timer: 3000
+						});
+					}
+					else 
+					{
+						sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+						var values = [[nameUser, 'candidata', 'Modificar - Data Nueva', sql, date_log, 'A']];
+
+						con.query(sql2, [values], function (err, result) {
+							if(err){
+								console.log(err);
+							}else{
+								window.location.reload();
+							}
+						});
+					}
+				});
+			});
+			});
+		}
     });
 }

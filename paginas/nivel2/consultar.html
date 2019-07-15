@@ -15,9 +15,11 @@
 		<script src="js/operacionesJurado.js"></script>
 		<script src="js/operacionesDocente.js"></script>
 		<script src="js/cerrarSesion.js"></script>
+		<script src="js/audit.js"></script>
+
 	</head>
 
-	<body>
+	<body onload="audit();">
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../../img/panel.jpg">
@@ -26,21 +28,21 @@
 				</div>
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li>
+						<li id="home">
 							<a href="home.html">
 								<i class="material-icons">home</i>
 								<p><b>Inicio</b></p>
 							</a>
 						</li>
 
-						<li>
+						<li id="registrar">
 							<a href="registro.html">
 								<i class="material-icons">person_add</i>
 								<p><b>Registrar</b></p>
 							</a>
 						</li>
 
-						<li class="active">
+						<li id="consultar" class="active">
 							<a>
 								<i class="material-icons">content_paste</i>
 								<p><b>Consultar</b></p>

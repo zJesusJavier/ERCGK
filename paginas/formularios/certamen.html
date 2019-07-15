@@ -13,9 +13,11 @@
         <link href="../../css/roboto.css" rel="stylesheet" type="text/css">
         <script src="js/operacionesCertamen.js"></script>
         <script src="js/cerrarSesion.js"></script>
+        <script src="js/audit.js"></script>
+
     </head>
 
-    <body>
+    <body onload="audit();">
 
 	<!-- Panel -->
 
@@ -25,49 +27,49 @@
 					<img src="../../img/logo.png" width="220" height="230" align="center">
 				</div>
 				<div class="sidebar-wrapper">
-					<ul class="nav">
-						<li>
-							<a href="../../home.html">
-								<i class="material-icons">home</i>
-								<p><b>Inicio</b></p>
-							</a>
-						</li>
-
-						<li class="active">
-							<a>
-								<i class="material-icons">person_add</i>
-								<p><b>Registrar</b></p>
-							</a>
-						</li>
-
-						<li>
-							<a href="../consultar.html">
-								<i class="material-icons">content_paste</i>
-								<p><b>Consultar</b></p>
-							</a>
-						</li>
-
-						<li>
-							<a href="../reportes.html">
-								<i class="material-icons">library_books</i>
-								<p><b>Reportes</b></p>
-							</a>
-						</li>
-                        <li>
-                            <a data-toggle="modal" data-target="#panelAdministrador">
-                                <i class="material-icons">settings</i>
-                                <p><b>Panel de Administración</b></p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="../panel_auditoria.html">
-                                <i class="material-icons">security</i>
-                                <p><b>Panel de Auditoría</b></p>
-                            </a>
-                        </li>
-					</ul>
-				</div>
-			</div>
+                    <ul class="nav">
+                            <li id="home">
+                                <a href="../../home.html">
+                                    <i class="material-icons">home</i>
+                                    <p><b>Inicio</b></p>
+                                </a>
+                            </li>
+    
+                            <li class="active" id="registrar">
+                                <a>
+                                    <i class="material-icons">person_add</i>
+                                    <p><b>Registrar</b></p>
+                                </a>
+                            </li>
+    
+                            <li id="consultar">
+                                <a href="../consultar.html">
+                                    <i class="material-icons">content_paste</i>
+                                    <p><b>Consultar</b></p>
+                                </a>
+                            </li>
+    
+                            <li id="reportes">
+                                <a href="../reportes.html">
+                                    <i class="material-icons">library_books</i>
+                                    <p><b>Reportes</b></p>
+                                </a>
+                            </li>
+                            <li id="panelAdmin">
+                                <a data-toggle="modal" data-target="#panelAdministrador">
+                                    <i class="material-icons">settings</i>
+                                    <p><b>Panel de Administración</b></p>
+                                </a>
+                            </li>
+                            <li id="panelAudit">
+                                <a href="../panel_auditoria.html">
+                                    <i class="material-icons">security</i>
+                                    <p><b>Panel de Auditoría</b></p>
+                                </a>
+                            </li>
+                        </ul>
+				    </div>
+			    </div>
 			
 	<!-- Contenido -->
 

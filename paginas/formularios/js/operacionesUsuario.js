@@ -1,10 +1,10 @@
 require('module-alias/register');
+var $ = require("jquery") 
 var con = require('@models/db');
 var swal = require('sweetalert');
 var sql;
 var consulta;
 var captionid;
-
 
 function guardarUsuario()
 {
@@ -30,6 +30,7 @@ function guardarUsuario()
     var inputResPre1 = document.getElementById("inputResPre1");
     var inputFkyPre2 = document.getElementById("inputFkyPre2");
     var inputResPre2 = document.getElementById("inputResPre2");
+    var Checkbox = document.getElementById("ListCheck");
 
     // Validación de que los Inputs no estan vacios
 
@@ -161,7 +162,12 @@ function guardarUsuario()
         inputResPre2.className="form-group label-floating";
     }
 
-    // Guardado en la Base de Datos
+    elemento_rep = Checkbox.children[1].checked;
+    elem_cons = Checkbox.children[3].checked;
+    elem_reg = Checkbox.children[5].checked;
+    elem_audit = Checkbox.children[7].checked;
+    elem_panelAd = Checkbox.children[9].checked;
+     // Guardado en la Base de Datos
 
     sql = "SELECT * FROM usuario";
     con.query(sql, function (err, result) 
@@ -171,7 +177,7 @@ function guardarUsuario()
                         
     sql = "INSERT INTO usuario (nom_usu, cla_usu, email_usu, fky_pre_1, res_pre_1, fky_pre_2, res_pre_2, niv_usu, est_usu) VALUES ?";
             var values = [[nombre, clave, email, pregunta1, respuesta1, pregunta2, respuesta2, rol, estado]];
-                      
+    
     con.query(sql, [values], function (err, result) 
     {
         if (err)
@@ -185,12 +191,28 @@ function guardarUsuario()
         }
         else 
         {
-            swal("", "Categoria registrada correctamente.", "success",
+            swal("", "Usuario registrado correctamente.", "success",
             {
                 button:false,
                 timer: 3000
             }).then(function() 
             {
+                user = "SELECT MAX(id_usu) FROM usuario";
+                con.query(user, function (err, result) 
+                {
+                    if (err) console.log(err);
+                });
+
+                sql1 = "INSERT INTO elementos (fky_usuario, elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, status) VALUES ?";
+                var values1 = [[result['insertId'], elemento_rep, elem_cons, elem_reg, elem_audit, elem_panelAd, estado]];
+                con.query(sql1, [values1], function (err, result) 
+			    {
+			        if (err)
+			        { 
+			            console.log(err);
+                    }		       
+			    });
+
                 sql = "SELECT * FROM log";
                 con.query(sql, function (err, result) 
                 {
@@ -199,15 +221,11 @@ function guardarUsuario()
 
                 var date_log = new Date();
                 var usu_log = 'admin';
-                var tab_log = 'Usuario';
-                var est_log = 'A';
-                var reg_log = nombre;
-                var acc_log = 'Registro';
                                     
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [[usu_log, 'usuario', 'Registro', sql+"("+values+")", date_log, 'A']];
                                   
-                con.query(sql, [values], function (err, result) 
+                con.query(sql2, [values2], function (err, result) 
                 {
                     if (err)
                     { 
@@ -302,8 +320,8 @@ function guardarUsuario()
             });
         };
     });
+    
 }
-
 
 function consultarUsuarioPanel()
 {
@@ -333,8 +351,12 @@ function consultarUsuarioPanel()
             text += result[i].est_usu;
             text += "</td>";
             text += "\t\t";
+            text += "<td>";
+            text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarUsuario('+result[i].id_usu+')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
+            text += "</td>";
             text += "</tr>";
             document.getElementById("tusuario").innerHTML= text;
         }
     });
 }
+

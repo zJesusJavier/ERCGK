@@ -1,8 +1,7 @@
-require('module-alias/register');
+// Conexion con la Base de Datos y declaracion de variables Globales
 var con = require('@models/db');
 var swal = require('sweetalert');
-var sql;
-var captionid;
+var sql, captionid;
 
 // Funcion de Agregar Candidatas
 
@@ -345,39 +344,19 @@ function guardarCandidata()
                 button:false,
                 timer: 3000
             }).then(function() 
-            {
-            	sql = "SELECT * FROM log";
-			   	con.query(sql, function (err, result) 
-			    {
-			        if (err) console.log(err);
-			    });
+            {   
+                date_log = new Date();
+                nameUser = localStorage.getItem('name');
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values2 = [[nameUser, 'candidata', 'Registro', sql+"("+values+")", date_log, 'A']];
 
-			    var date_log = new Date();
-			    var usu_log = 'admin';
-			    var tab_log = 'Candidata';
-				var est_log = 'A';
-				var reg_log = cedula;
-                var acc_log = 'Registro';
-			                        
-			    sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-			    var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-			                      
-			    con.query(sql, [values], function (err, result) 
-			    {
-			        if (err)
-			        { 
-			            console.log(err);
-			            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-			            {
-			                button:false,
-			                timer: 3000
-			            });
-			        }
-			        else 
-			        {
-	            		window.location.reload();
-			        };
-			    });
+				con.query(sql2, [values2], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});
             });
         };
     });
@@ -653,39 +632,19 @@ function borrarCandidata()
 	            button: false,
 	            timer: 3000
 	        }).then(function() 
-	        {
-                sql = "SELECT * FROM log";
-                con.query(sql, function (err, result) 
-                {
-                    if (err) console.log(err);
-                });
+	        {   
+                date_log = new Date();
+	            nameUser = localStorage.getItem('name');
+				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+				var values = [[nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']];
 
-                var date_log = new Date();
-                var usu_log = 'admin';
-                var tab_log = 'Candidata';
-                var est_log = 'A';
-                var reg_log = captionid;
-                var acc_log = 'Borrado';
-                                    
-                sql = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var values = [[usu_log, tab_log, acc_log, reg_log, date_log, est_log]];
-                                  
-                con.query(sql, [values], function (err, result) 
-                {
-                    if (err)
-                    { 
-                        console.log(err);
-                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-                        {
-                            button:false,
-                            timer: 3000
-                        });
-                    }
-                    else 
-                    {
-                        window.location.reload();
-                    };
-                });
+				con.query(sql2, [values], function (err, result) {
+					if(err){
+						console.log(err);
+					}else{
+						window.location.reload();
+					}
+				});
 	        });
 	    };
     });
