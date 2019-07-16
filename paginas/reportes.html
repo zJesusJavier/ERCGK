@@ -13,12 +13,13 @@
 	    <link href='../css/roboto.css' rel='stylesheet' type='text/css'>
 		<script src="formularios/js/cerrarSesion.js"></script>
 		<script src="formularios/js/audit.js"></script>
-	    <script src='../js/Chart.min.js'></script>
+		<script src='../js/Chart.min.js'></script>
+		<script src='../js/graficos.js'></script>
 	</head>
 
 	<body onload="audit();">
 
-	<!-- Panel -->
+		<!-- Panel -->
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../img/panel.jpg">
@@ -72,7 +73,7 @@
 
 			<div class="main-panel">
 
-	<!-- Boton de hamburguesa para versión movil -->
+				<!-- Boton de hamburguesa para versión movil -->
 
 				<nav class="navbar navbar-transparent navbar-absolute">
 					<div class="container-fluid">
@@ -106,10 +107,10 @@
 					</div>
 				</nav>
 			
-	<!-- Contenido -->
-				<div class="content">
-					<div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+				<!-- Contenido -->
+				<div class="content" style="overflow-y: hidden; overflow-x:hidden;">
+					<div>
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-header carda-stats card-chart" data-background-color="purple">
                                     <i class="material-icons icono" style="font-size:88px;">picture_as_pdf</i>
@@ -124,10 +125,10 @@
                                 </div>
                             </div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
                             <div class="card">
                                 <div class="card-header card-chart" data-background-color="purple">
-									<canvas id="reportes" width="817" height="450" style="position: absolute; z-index: 100;"></canvas>
+									<canvas id="pie" width="817" height="580" style="position: absolute; z-index: 100;"></canvas>
                                 </div>
                                 <div class="card-content">
                                     <h4 class="title">Reportes Gráficos</h4>
@@ -139,7 +140,7 @@
                                 </div>
                             </div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
+						<div class="col-md-3">
                             <div class="card">
                                 <div class="card-header carda-stats card-chart" data-background-color="purple">
                                     <i class="material-icons icono" style="font-size:88px;">picture_as_pdf</i>
@@ -185,10 +186,9 @@
 	</body>
 
 	<!-- Scripts -->
-
 	
 	<script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-	<script src="../js/graficos2.js"></script>
+	<script src="../js/graficos.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/material.min.js"></script>
 	<script src="../js/arrive.min.js"></script>
