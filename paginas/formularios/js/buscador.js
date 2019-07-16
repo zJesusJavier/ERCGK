@@ -73,16 +73,116 @@ function buscar()
                 text += result[i].est_can;
                 text += '</td>';
                 text += '\t\t';
-                text += '<td>';
-                text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarCandidata('+result[i].cod_can+')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
-                text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCandidata('+result[i].cod_can+')"><i class="material-icons text-danger">delete_forever</i></a>';
-                text += '</td>';
                 text += '</tr>';
             }
         text += '</tbody>';
         document.getElementById("tcandidata").innerHTML= text;
 
     });
+}
+
+function filtroSesion() 
+{
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaSesion");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaSesion");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) 
+    {
+    td = tr[i].getElementsByTagName("td")[1];
+        if (td) 
+        {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+            tr[i].style.display = "";
+            } 
+            else 
+            {
+            tr[i].style.display = "none";
+            }
+        } 
+    }
+}
+
+function filtroRegistro() 
+{
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaRegistro");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaRegistro");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) 
+    {
+    td = tr[i].getElementsByTagName("td")[1];
+        if (td) 
+        {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+            tr[i].style.display = "";
+            } 
+            else 
+            {
+            tr[i].style.display = "none";
+            }
+        } 
+    }
+}
+
+function filtroEdicion() 
+{
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaEdicion");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaEdicion");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) 
+    {
+    td = tr[i].getElementsByTagName("td")[1];
+        if (td) 
+        {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+            tr[i].style.display = "";
+            } 
+            else 
+            {
+            tr[i].style.display = "none";
+            }
+        } 
+    }
+}
+
+function filtroEliminacion() 
+{
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaEliminacion");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaEliminacion");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) 
+    {
+    td = tr[i].getElementsByTagName("td")[1];
+        if (td) 
+        {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+            tr[i].style.display = "";
+            } 
+            else 
+            {
+            tr[i].style.display = "none";
+            }
+        } 
+    }
 }
 
 function buscarC()
