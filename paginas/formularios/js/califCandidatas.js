@@ -5,7 +5,7 @@ var captioncand, ultsem, porc_des, capcand;
 
 function buscadorCalif()
 {
-    con.query("SELECT YEAR(fec_can) AS year FROM candidata WHERE est_can='A' GROUP BY year ORDER BY year DESC" ,function (err, result, fields)
+    con.query("SELECT YEAR(fec_can) AS year FROM candidata WHERE est_can='A' GROUP BY year ORDER BY year ASC" ,function (err, result, fields)
     {
         var aux = [];
         var fin = [];
@@ -21,7 +21,7 @@ function buscadorCalif()
             }
         
         text += '</select>'
-        text += '<a type="submit" class="btn btn-white btn-just-icon btn-lg" onclick="busquedaCalif('+ano+');"><i class="material-icons">search</i></a>'
+        text += '<a type="submit" class="btn btn-white btn-round btn-just-icon" onclick="busquedaCalif('+ano+');"><i class="material-icons">search</i></a>'
         text += '</div>'
         text += '</form>'
         document.getElementById("buscadorCalif").innerHTML= text;
