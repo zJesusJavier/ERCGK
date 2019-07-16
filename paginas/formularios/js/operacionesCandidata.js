@@ -1,4 +1,5 @@
 // Conexion con la Base de Datos y declaracion de variables Globales
+require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
 var sql, captionid;
@@ -439,6 +440,52 @@ function buscarC()
             document.getElementById("tcandidata").innerHTML = text;
             }   
         }
+    });
+}
+
+// Consulta de Candidatas
+
+function consultarCandidata()
+{
+    var text;
+
+    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat", function (err, result, fields) 
+    {
+        if (err) console.log(err);
+
+        var tam = result.length;
+       
+        var a, b;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) 
+        {
+            text += "<td>";
+            text += result[i].cod_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].ci_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].nom_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].ape_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].edad_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].nom_cat;
+            text += "</td>";
+            text += "</tr>";
+            document.getElementById("tcandidata").innerHTML= text;
+        }       
     });
 }
 
