@@ -78,7 +78,7 @@
 
 			<div class="main-panel">
 
-	<!-- Boton de hamburguesa -->
+				<!-- Boton de hamburguesa -->
 
 				<nav class="navbar navbar-transparent navbar-absolute">
 					<div class="container-fluid">
@@ -140,24 +140,32 @@
 										</li>
 										<li class="nav-item" onclick="consultarClaves()">
                                             <a class="nav-link" href="#cambioClaves" data-toggle="tab">
-                                                <i class="material-icons">clear</i> Cambio de Clave
+                                                <i class="material-icons">vpn_key</i> Cambio de Clave
                                             </a>
 										</li>
 										<li class="nav-item" onclick="consultarBusq()">
                                             <a class="nav-link" href="#Busquedas" data-toggle="tab">
-                                                <i class="material-icons">clear</i> Busquedas
+                                                <i class="material-icons">find_in_page</i> Busquedas
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+						</div>
                         <div class="card-body"  align="center">
                             <div class="tab-content text-center">
                                 <div class="tab-pane" id="Sesion">
 			                        <div class="col-md-12">
 		                                <div class="card-content table-responsive">
-		                                	<table class="table table-hover">
+											<div align="center">
+												<form role="search" class="form-inline">
+													<input type="text" class="form-control" placeholder="Filtrar" id="busquedaSesion" onkeyup="filtroSesion()" onkeypress="return enter(event)">
+													<a type="submit" class="btn btn-white btn-round btn-just-icon">
+														<i class="material-icons">search</i>
+													</a>
+												</form>
+											</div>
+		                                	<table class="table table-hover" id="tablaSesion">
 		                                        <thead class="text-oscuro">
 		                                        	<td><b>ID</b></td>
 		                                            <td><b>Usuario</b></td>
@@ -175,7 +183,15 @@
                                 <div class="tab-pane" id="Registro">
                                     <div class="col-md-12">
 		                                <div class="card-content table-responsive">
-		                                    <table class="table table-hover">
+											<div align="center">
+												<form role="search" class="form-inline">
+													<input type="text" class="form-control" placeholder="Filtrar" id="busquedaRegistro" onkeyup="filtroRegistro()" onkeypress="return enter(event)">
+													<a type="submit" class="btn btn-white btn-round btn-just-icon">
+														<i class="material-icons">search</i>
+													</a>
+												</form>
+											</div>
+		                                    <table class="table table-hover" id="tablaRegistro">
 		                                        <thead class="text-oscuro">
 		                                            <td><b>ID</b></td>
 		                                            <td><b>Usuario</b></td>
@@ -193,7 +209,15 @@
                                 <div class="tab-pane" id="Edicion">
                                     <div class="col-md-12">
 		                                <div class="card-content table-responsive">
-		                                    <table class="table table-hover">
+											<div align="center">
+													<form role="search" class="form-inline">
+														<input type="text" class="form-control" placeholder="Filtrar" id="busquedaEdicion" onkeyup="filtroEdicion()" onkeypress="return enter(event)">
+														<a type="submit" class="btn btn-white btn-round btn-just-icon">
+															<i class="material-icons">search</i>
+														</a>
+													</form>
+												</div>
+		                                    <table class="table table-hover" id="tablaEdicion">
 		                                        <thead class="text-oscuro">
 		                                            <td><b>ID</b></td>
 		                                            <td><b>Usuario</b></td>
@@ -211,7 +235,15 @@
                                 <div class="tab-pane" id="Eliminacion">
                                     <div class="col-md-12">
 		                                <div class="card-content table-responsive">
-		                                    <table class="table table-hover">
+											<div align="center">
+													<form role="search" class="form-inline">
+														<input type="text" class="form-control" placeholder="Filtrar" id="busquedaEliminacion" onkeyup="filtroEliminacion()" onkeypress="return enter(event)">
+														<a type="submit" class="btn btn-white btn-round btn-just-icon">
+															<i class="material-icons">search</i>
+														</a>
+													</form>
+												</div>
+		                                    <table class="table table-hover" id="tablaEliminacion">
 		                                        <thead class="text-oscuro">
 		                                            <td><b>ID</b></td>
 		                                            <td><b>Usuario</b></td>
@@ -243,7 +275,7 @@
 		                                </div>
 			                        </div>
 								</div>
-								<div class="tab-pane" id="Busqueda">
+								<div class="tab-pane" id="Busquedas">
                                     <div class="col-md-12">
 		                                <div class="card-content table-responsive">
 		                                    <table class="table table-hover">
