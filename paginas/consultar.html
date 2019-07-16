@@ -17,10 +17,11 @@
 		<script src="formularios/js/operacionesCertamen.js"></script>
 		<script src="formularios/js/cerrarSesion.js"></script>
 		<script src="formularios/js/audit.js"></script>
+		<script src="formularios/js/buscador.js"></script>
 
 	</head>
 
-	<body onload="audit();">
+	<body onload="audit(); consultarCandidata();">
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../img/panel.jpg">
@@ -116,19 +117,10 @@
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
-										<li class="dropdown nav-item">
-	                                		<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+										<li class="nav-item" onclick="consultarCandidata()">
+	                                		<a class="nav-link" href="#Candidatas" data-toggle="tab">
 												<i class="material-icons">face</i> Candidatas
-												<b class="caret"></b>
 											</a>
-	                                    	<ul class="dropdown-menu">
-	                                        	<li onclick="consultarCandidataC1()" href="#Candidatas" data-toggle="tab">
-	                                        		<a>Petite</a>
-	                                        	</li>
-		                                        <li onclick="consultarCandidataC2()" href="#Candidatas" data-toggle="tab">
-		                                        	<a>Miss</a>
-		                                        </li>
-		                                    </ul>
 	                                	</li>
                                         <li class="nav-item" onclick="consultarJurado()">
                                             <a class="nav-link" href="#Jurados" data-toggle="tab">
@@ -154,7 +146,15 @@
                                 <div class="tab-pane active" id="Candidatas">
 			                        <div class="col-md-12">
 		                                <div class="card-content table-responsive">
-		                                    <table class="table table-hover">
+												<div align="center">
+													<form role="search" class="form-inline">
+														<input type="text" class="form-control" placeholder="Filtrar" id="busquedaCandidata" onkeyup="filtroCategoriaCandidata()" onkeypress="return enter(event)">
+														<a type="submit" class="btn btn-white btn-round btn-just-icon">
+															<i class="material-icons">search</i>
+														</a>
+													</form>
+												</div>
+		                                    <table class="table table-hover" id="tablaCandidata">
 		                                        <thead class="text-oscuro">
 		                                            <td><b>ID</b></td>
 		                                            <td><b>Cédula</b></td>
