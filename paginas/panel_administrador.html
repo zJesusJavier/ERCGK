@@ -34,9 +34,7 @@
 
 	</head>
 
-	<body onload="selectPregunta1(); selectPregunta2(); audit();">
-
-	<!-- Panel -->
+	<body onload="selectPregunta1(); selectPregunta2(); audit(); consultarCategoriaPanel();">
 
 		<div class="wrapper">
 			<div class="sidebar" data-color="red" data-image="../img/panel.jpg">
@@ -91,9 +89,6 @@
 	<!-- Contenido -->
 
 			<div class="main-panel">
-
-	<!-- Boton de hamburguesa -->
-
 				<nav class="navbar navbar-transparent navbar-absolute">
 					<div class="container-fluid">
 						<div class="navbar-header">
@@ -133,7 +128,7 @@
                                 <div class="nav-tabs-wrapper">
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item" onclick="consultarCategoriaPanel()">
-                                            <a class="nav-link active" href="#Categorias" data-toggle="tab">
+                                            <a class="nav-link" href="#Categorias" data-toggle="tab">
                                                 <i class="material-icons">accessibility</i> Categorias
                                             </a>
                                         </li>
@@ -143,7 +138,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item" onclick="consultarCandidataPanel()">
-                                            <a class="nav-link active" href="#Candidatas" data-toggle="tab">
+                                            <a class="nav-link" href="#Candidatas" data-toggle="tab">
                                                 <i class="material-icons">face</i> Candidatas
                                             </a>
                                         </li>
@@ -173,7 +168,7 @@
                         </div>
                         <div class="card-body"  align="center">
                             <div class="tab-content text-center">
-                                <div class="tab-pane" id="Categorias">
+                                <div class="tab-pane active" id="Categorias">
 			                        <div class="col-md-12">
 		                                <div class="card-content table-responsive">
 		                                	<table class="table table-hover">
