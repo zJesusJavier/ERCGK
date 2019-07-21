@@ -20,7 +20,8 @@
     "mysql": "^2.17.1",
     "pdfkit": "^0.10.0",
     "sweetalert": "^2.1.2",
-    "underscore.string": "^3.3.5"
+    "underscore.string": "^3.3.5",
+    "voilab-pdf-table": "^0.4.1"
   },
   "devDependencies": {
     "electron": "^5.0.6",

@@ -2,20 +2,30 @@ require('module-alias/register');
 var con = require('@models/db');
 var swal = require('sweetalert');
 var pdfkit = require('pdfkit');
-
+var PdfTable = require('voilab-pdf-table'),
+    PdfDocument = require('pdfkit');
 
 var text, i;
 var fechai, fechaf;
 
-function SelectReportC(){
+function SelectReportC()
+{
     text = 	'<a type="button" class="btn btn-primary btn-sm" onclick="AdicReportC();">Reporte de Registro</a>'
     text += '<a type="button" class="btn btn-primary btn-sm" onclick="selectCat();">Reporte del Desempeño Conductual</a>'
     document.getElementById("SelectC").innerHTML= text;
-
 }
 
-function selectCat(){
- var text;
+function SelectReportAudit()
+{
+    text = 	'<a type="button" class="btn btn-primary btn-sm" onclick="reporteRegistro();">Registros</a>'
+    text += '<a type="button" class="btn btn-primary btn-sm" onclick="reporteModificar();">Ediciones</a>'
+    text += '<a type="button" class="btn btn-primary btn-sm" onclick="reporteEliminar();">Borrados</a>'
+    document.getElementById("SelectC").innerHTML= text;
+}
+
+function selectCat()
+{
+    var text;
     text = '<div class="col-md-12" align="center">'
     text += '<h5>Seleccione la categoria:</h5>'
     text += '</div>'
@@ -41,14 +51,10 @@ function selectCat(){
         text += '</form>'
         document.getElementById("filtroD").innerHTML= text;
     });
-    
 }
 
-
-
-
-function selectCand(){
-
+function selectCand()
+{
     var text;
     var cat = document.getElementById("categoria").value;
 
@@ -80,15 +86,7 @@ function selectCand(){
         text += '</form>';
         document.getElementById("filtroD").innerHTML= text;
     });
-
-
 }
-
-
-
-
-
-
 
 function AdicReportC()
 {
@@ -249,7 +247,6 @@ function reportC()
     });
 }
 
-
 function reportJ()
 {
     con.query("SELECT * FROM jurado WHERE est_jur='A' ORDER BY ci_jur DESC" ,function (err, result, fields)
@@ -295,6 +292,245 @@ function reportJ()
             text += blanco4;
         
             myDoc.pipe(fs.createWriteStream('reportes/ReporteJurados.pdf'));
+            myDoc.moveDown()
+            myDoc.font('Times-Roman').fontSize(12).text(''+ text);
+        }
+
+        myDoc.end();
+        swal("", "Reporte Generado", "success",
+        {
+            button:false,
+            timer: 3000
+        })
+    });
+}
+
+function reportSesiones()
+{
+    con.query("SELECT * FROM sesion WHERE est_ses='A' ORDER BY cod_ses DESC" ,function (err, result, fields)
+    {
+        var pdf = require('pdfkit');
+        var fs = require('fs');
+        var myDoc = new pdf();
+
+        myDoc.image('./img/head.png');
+
+        myDoc.fontSize(18)
+            .text('Reporte de Sesiones', 100, 230)
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(12)
+            .text('   Usuario        |      Nivel      |            IP            |           MAC            |      Fecha     ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        var blanco = '                 ';
+        var blanco2 = '      ';
+        var blanco3 = '          ';
+        var blanco4 = '      ';
+        var blanco5 = '     ';
+        var blanco6 = '       ';
+
+        for (i = 0; i < result.length; i++)
+        {
+            text = blanco2;
+            text += result[i].usu_ses;
+            text += blanco3;
+            text += result[i].niv_ses;
+            text += blanco5;
+            text += result[i].ip_ses;
+            text += blanco6;       
+            text += result[i].mac_ses;
+            text += blanco4;
+            text += result[i].date_ses.toLocaleDateString("en-GB");
+            text += blanco4;
+        
+            myDoc.pipe(fs.createWriteStream('reportes/ReporteSesiones.pdf'));
+            myDoc.moveDown()
+            myDoc.font('Times-Roman').fontSize(12).text(''+ text);
+        }
+
+        myDoc.end();
+        swal("", "Reporte Generado", "success",
+        {
+            button:false,
+            timer: 3000
+        })
+    });
+}
+
+function reporteRegistro()
+{
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Registro%'" ,function (err, result, fields)
+    {
+        var pdf = require('pdfkit');
+        var fs = require('fs');
+        var myDoc = new pdf();
+
+        myDoc.image('./img/head.png');
+
+        myDoc.fontSize(18)
+            .text('Reporte de Registros', 100, 230)
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(12)
+            .text('   Codigo        |      Usuario      |          Tabla          |       Accion        |       Fecha     ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        var blanco = '                 ';
+        var blanco2 = '        ';
+        var blanco3 = '                      ';
+        var blanco4 = '              ';
+        var blanco5 = '                    ';
+        var blanco6 = '                ';
+
+        for (i = 0; i < result.length; i++)
+        {
+            text = blanco2;
+            text += result[i].cod_log;
+            text += blanco3;
+            text += result[i].usu_log;
+            text += blanco5;
+            text += result[i].tab_log;
+            text += blanco6;       
+            text += result[i].acc_log;
+            text += blanco4;
+            text += result[i].date_log.toLocaleDateString("en-GB");
+        
+            myDoc.pipe(fs.createWriteStream('reportes/ReporteRegistros.pdf'));
+            myDoc.moveDown()
+            myDoc.font('Times-Roman').fontSize(12).text(''+ text);
+        }
+
+        myDoc.end();
+        swal("", "Reporte Generado", "success",
+        {
+            button:false,
+            timer: 3000
+        })
+    });
+}
+
+function reporteModificar()
+{
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Modificar%'" ,function (err, result, fields)
+    {
+        var pdf = require('pdfkit');
+        var fs = require('fs');
+        var myDoc = new pdf();
+
+        myDoc.image('./img/head.png');
+
+        myDoc.fontSize(18)
+            .text('Reporte de Ediciones', 100, 230)
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(12)
+            .text('Codigo   |       Fecha        |     Usuario     |      Tabla      |            Accion')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        var blanco = '                 ';
+        var blanco2 = '    ';
+        var blanco3 = '              ';
+        var blanco4 = '             ';
+        var blanco5 = '             ';
+        var blanco6 = '       ';
+
+        for (i = 0; i < result.length; i++)
+        {
+            text = blanco2;
+            text += result[i].cod_log;
+            text += blanco4;
+            text += result[i].date_log.toLocaleDateString("en-GB");
+            text += blanco3;
+            text += result[i].usu_log;
+            text += blanco5;
+            text += result[i].tab_log;
+            text += blanco6;       
+            text += result[i].acc_log;
+
+        
+            myDoc.pipe(fs.createWriteStream('reportes/ReporteEdiciones.pdf'));
+            myDoc.moveDown()
+            myDoc.font('Times-Roman').fontSize(12).text(''+ text);
+        }
+
+        myDoc.end();
+        swal("", "Reporte Generado", "success",
+        {
+            button:false,
+            timer: 3000
+        })
+    });
+}
+
+function reporteEliminar()
+{
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Borrado%'" ,function (err, result, fields)
+    {
+        var pdf = require('pdfkit');
+        var fs = require('fs');
+        var myDoc = new pdf();
+
+        myDoc.image('./img/head.png');
+
+        myDoc.fontSize(18)
+            .text('Reporte de Borrado', 100, 230)
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        myDoc.fontSize(12)
+            .text('Codigo   |       Fecha        |     Usuario     |      Tabla      |          Accion')
+
+        myDoc.fontSize(20)
+            .text(' ')
+
+        var blanco = '                 ';
+        var blanco2 = '    ';
+        var blanco3 = '              ';
+        var blanco4 = '             ';
+        var blanco5 = '             ';
+        var blanco6 = '           ';
+
+        for (i = 0; i < result.length; i++)
+        {
+            text = blanco2;
+            text += result[i].cod_log;
+            text += blanco4;
+            text += result[i].date_log.toLocaleDateString("en-GB");
+            text += blanco3;
+            text += result[i].usu_log;
+            text += blanco5;
+            text += result[i].tab_log;
+            text += blanco6;       
+            text += result[i].acc_log;
+
+        
+            myDoc.pipe(fs.createWriteStream('reportes/ReporteBorrados.pdf'));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text(''+ text);
         }
@@ -490,7 +726,8 @@ if (cand>0){
         })
     });
 }
-else{
+else
+{
     swal("", "Problemas para generar el reporte", "error",
         {
             button:false,
