@@ -7,10 +7,19 @@ var captionid;
 
 // Consulta del Panel de Auditoria | Sesiones
 
-function consultarSesion()
+function consultarSesion(ini, fin)
 {
-    con.query("SELECT * FROM sesion", function (err, result, fields) 
+    var init = ini, paginas="";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM sesion", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+
+        con.query("SELECT * FROM sesion LIMIT "+init+","+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
                        
         var tam = result.length;
@@ -47,14 +56,32 @@ function consultarSesion()
             text += "</tr>";
             document.getElementById("tsesion").innerHTML= text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorAudit(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagSes").innerHTML = paginas;   
+        });
     });
 }
 
 // Consulta del Panel de Auditoria | Registros
 
-function consultarRegistro()
+function consultarRegistro(ini,fin)
 {
-    con.query("SELECT * FROM log WHERE acc_log='Registro'", function (err, result, fields) 
+    var init = ini, paginas = "";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM log WHERE acc_log='Registro'", function (err, result1, fields) 
+    {
+        var pag = Math.ceil(result1.length / 15);
+
+        con.query("SELECT * FROM log WHERE acc_log='Registro' LIMIT "+init+","+fin, function (err, result, fields) 
     {
         if (err) console.log(err);
                        
@@ -91,14 +118,39 @@ function consultarRegistro()
             text += "</tr>";
             document.getElementById("tregistro").innerHTML= text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorAudit(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagReg").innerHTML = paginas;   
+        });
     });
+   
+}
+function paginadorAudit(ini, fin) {
+    this.consultarEdiciones(ini, fin);
+    this.consultarRegistro(ini, fin);
+    this.consultarEliminacion(ini, fin);
+    this.consultarSesion(ini, fin);
+    this.consultarClaves(ini, fin);
 }
 
 // Consulta del Panel de Auditoria | Ediciones
 
-function consultarEdiciones()
+function consultarEdiciones(ini, fin)
 {
-    con.query("SELECT * FROM log WHERE acc_log='Edicion'", function (err, result, fields) 
+    var init = ini, paginas = "";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM log WHERE acc_log='Modificar'", function (err, result1, fields) 
+    {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT * FROM log WHERE acc_log='Modificar' LIMIT "+init+","+fin, function (err, result, fields) 
     {
         if (err) console.log(err);
                        
@@ -135,15 +187,33 @@ function consultarEdiciones()
             text += "</tr>";
             document.getElementById("tedicion").innerHTML= text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorAudit(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagEdi").innerHTML = paginas; 
+        });
     });
 }
 
 // Consulta del Panel de Auditoria | Eliminaciones
 
-function consultarEliminacion()
+function consultarEliminacion(ini,fin)
 {
-    con.query("SELECT * FROM log WHERE acc_log LIKE '%Borrado%'", function (err, result, fields) 
+    var init = ini, paginas = "";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Borrado%'", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+
+        con.query("SELECT * FROM log WHERE acc_log LIKE '%Borrado%' LIMIT "+init+","+fin, function (err, result, fields) 
+        {   
         if (err) console.log(err);
                        
         var tam = result.length;
@@ -179,56 +249,32 @@ function consultarEliminacion()
             text += "</tr>";
             document.getElementById("teliminacion").innerHTML= text;
         }
-    });
-}
-function consultarEdiciones()
-{
-    con.query("SELECT * FROM log WHERE acc_log LIKE '%Modificar%'", function (err, result, fields) 
-    {
-        if (err) console.log(err);
-                       
-        var tam = result.length;
-        var text;
-        text = "<tr>";
-
-        for (i = 0; i < tam; i++) 
-        {
-            text += "<td>";
-            text += result[i].cod_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].usu_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].acc_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].tab_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].reg_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].date_log.toLocaleString();
-            text += "</td>";
-            text += "\t\t";
-            text += "</tr>";
-            document.getElementById("tedicion").innerHTML= text;
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorAudit(' + init + ',' + fin + ')">' + i + '</button>';
         }
+        paginas += '</div">'
+        document.getElementById("pagElim").innerHTML = paginas; 
+        });
     });
 }
 
 // Consulta del Panel de Auditoria | Cambio de Clave
 
-function consultarClaves()
+function consultarClaves(ini, fin)
 {
-    con.query("SELECT * FROM log WHERE acc_log LIKE '%Cambio%'", function (err, result, fields) 
+    var init = ini, paginas="";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Cambio%'", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT * FROM log WHERE acc_log LIKE '%Cambio%' LIMIT "+init+","+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
                        
         var tam = result.length;
@@ -260,48 +306,14 @@ function consultarClaves()
             text += "</tr>";
             document.getElementById("tclaves").innerHTML= text;
         }
-    });
-}
-// Consulta del Panel de Auditoria | Busqueda
-
-function consultarBusq()
-{
-    con.query("SELECT * FROM log WHERE acc_log LIKE '%Busqueda%'", function (err, result, fields) 
-    {
-        if (err) console.log(err);
-                       
-        var tam = result.length;
-        var text;
-        text = "<tr>";
-
-        for (i = 0; i < tam; i++) 
-        {
-            text += "<td>";
-            text += result[i].cod_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].usu_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].acc_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].tab_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].reg_log;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].date_log.toLocaleString();
-            text += "</td>";
-            text += "\t\t";
-            text += "</tr>";
-            document.getElementById("tbusqueda").innerHTML= text;
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorAudit(' + init + ',' + fin + ')">' + i + '</button>';
         }
+        paginas += '</div">'
+        document.getElementById("pagCla").innerHTML = paginas;   
+        });
     });
 }
