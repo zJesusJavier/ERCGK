@@ -322,13 +322,23 @@ function guardarUsuario()
     });
     
 }
-
-function consultarUsuarioPanel()
+function paginadorUsu(ini, fin) {
+    this.consultarUsuarioPanel(ini, fin);
+}
+function consultarUsuarioPanel(ini, fin)
 {
-    con.query("SELECT * FROM usuario", function (err, result, fields) 
+    var init = ini;
+    var paginas = "";
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM usuario", function (err, result1, fields) 
+    {
+    con.query("SELECT * FROM usuario LIMIT "+init+","+fin, function (err, result, fields) 
     {
         if (err) console.log(err);
-
+        var pag = Math.ceil(result1.length / 15);
         var tam = result.length;
         var text;
         text = "<tr>";
@@ -357,6 +367,15 @@ function consultarUsuarioPanel()
             text += "</tr>";
             document.getElementById("tusuario").innerHTML= text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorUsu(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagUsu").innerHTML = paginas;  
     });
+});
 }
 

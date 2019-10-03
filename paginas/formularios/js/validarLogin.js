@@ -13,14 +13,9 @@ function verificar() {
     con.query("SELECT * FROM usuario WHERE nom_usu = '" + nombre + "' AND cla_usu = '" + clave + "'", function (err, result, fields) {
         if (err) console.log(err);
         var i, t = 0;
-        var ip = os.networkInterfaces()["Wi-Fi"][1].address;
-        var mac = os.networkInterfaces()["Wi-Fi"][1].mac;
+        var ip = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].address;
+        var mac = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].mac;
         
-        if(!ip || !mac){
-            ip = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].address;
-            mac = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].mac;
-        }
-
         if (result[0].ip_usu != ip || result[0].mac_usu != mac) {
             sqIP = "UPDATE usuario SET ip_usu='" + ip + "'," + "mac_usu='" + mac + "' WHERE id_usu = " + result[0].id_usu;
             con.query(sqIP, function (err, result1) {
@@ -60,6 +55,7 @@ function verificar() {
         var values = [[nombre, rol, ip, mac, fecha, est_ses]];
 
         localStorage.setItem('name', nombre);
+        localStorage.setItem('rol', rol);
         con.query(sql, [values], function (err, result) {
             if (err) {
                 console.log(err);
@@ -121,6 +117,7 @@ function cambioClave() {
                 " niv_usu= '" + result[i].niv_usu + "'," + " est_usu='" + result[i].est_usu + "' WHERE id_usu = " + user;
         }
         rol = result[0].niv_usu;
+        name = result[0].nom_usu;
         con.query(sql, function (err, result) {
             if (err) {
                 console.log(err);
@@ -131,7 +128,6 @@ function cambioClave() {
                 });
             }
             else {
-                name = localStorage.getItem('name');
                 sql2 = "INSERT INTO log (usu_log,tab_log,acc_log,reg_log,date_log,est_log) VALUES ?";
                 var values = [[name, 'usuario', 'Cambio de Clave', sql, fecha, est_ses]];
                 con.query(sql2, [values], function (err, result) {

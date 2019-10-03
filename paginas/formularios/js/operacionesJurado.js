@@ -195,14 +195,22 @@ function guardarJurado()
 
 // Funcion de Consulta de la pagina Consultar
 
-function consultarJurado()
+function consultarJurado(ini, fin)
 {
-    con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat WHERE est_jur='A'", function (err, result, fields) 
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat WHERE est_jur='A'", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat WHERE est_jur='A' LIMIT "+init+","+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
                    
         var tam = result.length;
-        var text;
+        var text, paginas="";
         text = "<tr>"; 
         for (i = 0; i < tam; i++) 
         {
@@ -234,20 +242,42 @@ function consultarJurado()
             text += "<td>";
             text += "</tr>";
             document.getElementById("tjurado").innerHTML= text;
-        }       
+            }     
+            paginas += '<div align="center">'
+            for (i = 1; i <= pag; i++) {
+                init = i * 15 - 15;
+                fin = init + 14;
+                paginas += '<button id="piePag" onClick="paginadorJur(' + init + ',' + fin + ')">' + i + '</button>';
+            }
+            paginas += '</div">'
+            document.getElementById("pagJur").innerHTML = paginas;    
+        });
     });
 }
+function paginadorJur(ini, fin) {
+    this.consultarJurado(ini, fin);
+    this.consultarJuradoPanel(ini, fin);
+}
+
 
 // Consulta del Panel de Administración
 
-function consultarJuradoPanel()
+function consultarJuradoPanel(ini,fin)
 {
-    con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat", function (err, result, fields) 
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT jurado.*, categoria.nom_cat FROM jurado INNER JOIN categoria ON jurado.fky_cat=categoria.cod_cat LIMIT "+init+","+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
                        
         var tam = result.length;
-        var text;
+        var text, paginas="";
         text = "<tr>";
 
         for (i = 0; i < tam; i++) 
@@ -296,6 +326,15 @@ function consultarJuradoPanel()
             text += "</tr>";
             document.getElementById("tjurado").innerHTML= text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorJur(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagJur").innerHTML = paginas;   
+        });
     });
 }
 
@@ -345,7 +384,25 @@ function borrarJurado()
 					if(err){
 						console.log(err);
 					}else{
-						window.location.reload();
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
+
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id)-1;
+
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+
+                                }
+                                else {
+
+                                    window.location.reload();
+                                }
+                            });
+                        });
 					}
 				});
             });

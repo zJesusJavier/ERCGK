@@ -143,6 +143,7 @@
                                                 <i class="material-icons">vpn_key</i> Cambio de Clave
                                             </a>
 										</li>
+										
                                     </ul>
                                 </div>
                             </div>
@@ -167,7 +168,8 @@
 													<td><b>Nivel de Acceso</b></td>
 													<td><b>IP</b></td>
 													<td><b>MAC</b></td>
-		                                            <td><b>Fecha y Hora</b></td>
+													<td><b>Fecha y Hora</b></td>
+													<td><b>Estatus</b></td>
 		                                        </thead>
 		                                        <tbody id="tsesion">
 												</tbody>
@@ -181,7 +183,7 @@
 		                                <div class="card-content table-responsive">
 											<div align="center">
 												<form role="search" class="form-inline">
-													<input type="text" class="form-control" placeholder="Filtrar" id="busquedaRegistro" onkeyup="filtroRegistro()" onkeypress="return enter(event)">
+													<input type="text" class="form-control" placeholder="Filtrar" id="busquedaRegistro" onkeyup="consultarRegistro()" onkeypress="return enter(event)">
 													<a type="submit" class="btn btn-white btn-round btn-just-icon">
 														<i class="material-icons">search</i>
 													</a>

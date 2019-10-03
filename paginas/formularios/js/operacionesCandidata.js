@@ -445,18 +445,51 @@ function buscarC()
 
 // Consulta de Candidatas
 
-function consultarCandidata()
+function consultarCandidata(ini, fin)
 {
-    var text;
+    var text, paginas = "";
+    var busqueda = document.getElementById('busquedaCandidata').value;
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
 
-    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat", function (err, result, fields) 
-    {
-        if (err) console.log(err);
+    if (busqueda) {
+        sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata " +
+            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat"+
+            " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
+            " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
+            " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
+            " OR candidata.ci_can LIKE '%" + busqueda + "%'"
+        sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
+            " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
+            " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
+            " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
+            " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
+            " OR candidata.ci_can LIKE '%" + busqueda + "%'" +
+            " LIMIT " + init + ", " + fin;
+    } else { 
+        sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat";
+        sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
+            " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
+            " LIMIT " + init + ", " + fin;
+    }
 
-        var tam = result.length;
-       
-        var a, b;
-        text = "<tr>";
+    con.query(sqlInit, function (err, result1, fields) 
+    {       
+        var pag = Math.ceil(result1.length / 15);
+        con.query(sql, function (err, result, fields) {
+                
+            if (err) console.log(err);
+            var tam = result.length;
+            var paginas="";
+            text = "<tr>";
+            if (result.length == 0) { 
+                text += "<td colspan='15'><b> No existe la consulta solicitada </b></td>";
+                text += "</tr>";
+                document.getElementById("tcandidata").innerHTML = text;
+            }
 
         for (i = 0; i < tam; i++) 
         {
@@ -485,8 +518,23 @@ function consultarCandidata()
             text += "</td>";
             text += "</tr>";
             document.getElementById("tcandidata").innerHTML= text;
-        }       
+            }     
+            paginas += '<td>'
+            for (i = 1; i <= pag; i++) {
+                init = i * 15 - 15;
+                fin = init + 14;
+                paginas += '<button id="piePag" onClick="paginadorCand(' + init + ',' + fin + ')">' + i + '</button>';
+
+            }
+            paginas += '</td>'
+            document.getElementById("pagCan").innerHTML = paginas;    
+        });
     });
+}
+
+function paginadorCand(ini, fin) {
+    this.consultarCandidata(ini, fin);
+    this.consultarCandidataPanel(ini, fin);
 }
 
 // Consulta de Candidatas de la Categoria 1 (Niñas)
@@ -580,10 +628,42 @@ function consultarCandidataC2()
 
 // Consulta del Panel de Administración
 
-function consultarCandidataPanel()
+function consultarCandidataPanel(ini,fin)
 {
-    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat", function (err, result, fields) 
+    var text, paginas;
+    var busqueda = document.getElementById('busqueda').value;
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+
+    if (busqueda) {
+        sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata " +
+            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat"+
+            " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
+            " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
+            " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
+            " OR candidata.ci_can LIKE '%" + busqueda + "%'"
+        sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
+            " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
+            " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
+            " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
+            " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
+            " OR candidata.ci_can LIKE '%" + busqueda + "%'" +
+            " LIMIT " + init + ", " + fin;
+    } else { 
+        sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat";
+        sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
+            " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
+            " LIMIT " + init + ", " + fin;
+    }
+    con.query(sqlInit, function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+
+        con.query(sql, function (err, result, fields) 
+        {
         if (err) console.log(err);
 
         var tam = result.length;
@@ -639,6 +719,17 @@ function consultarCandidataPanel()
             text += "</tr>";
             document.getElementById("tcandidata").innerHTML = text;
         }
+        paginas = "";
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorCand(' + init + ',' + fin + ')">' + i + '</button>';
+
+        }
+        paginas += '</div">'
+        document.getElementById("pagCan").innerHTML = paginas;
+        });
     });
 }
 
@@ -680,17 +771,36 @@ function borrarCandidata()
 	            timer: 3000
 	        }).then(function() 
 	        {   
-                date_log = new Date();
-	            nameUser = localStorage.getItem('name');
-				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-				var values = [[nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']];
+                nameUser = localStorage.getItem('name');
+                    date_log = new Date();
 
-				con.query(sql2, [values], function (err, result) {
-					if(err){
-						console.log(err);
-					}else{
-						window.location.reload();
-					}
+                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                    var values = [[nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']];
+
+                    con.query(sql2, [values], function (err, result) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            nameUser = localStorage.getItem('name');
+                            date_log = new Date();
+
+                            con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                                if (err) console.log(err);
+                                else idMax = (result1[0].id)-1;
+
+                                updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                                con.query(updateUser, function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+
+                                    }
+                                    else {
+
+                                        window.location.reload();
+                                    }
+                                });
+                            });
+                        }
 				});
 	        });
 	    };

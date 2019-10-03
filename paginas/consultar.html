@@ -148,7 +148,7 @@
 		                                <div class="card-content table-responsive">
 												<div align="center">
 													<form role="search" class="form-inline">
-														<input type="text" class="form-control" placeholder="Filtrar" id="busquedaCandidata" onkeyup="filtroCategoriaCandidata()" onkeypress="return enter(event)">
+														<input type="text" class="form-control" placeholder="Filtrar" id="busquedaCandidata" onkeyup="consultarCandidata()" onkeypress="return enter(event)">
 														<a type="submit" class="btn btn-white btn-round btn-just-icon">
 															<i class="material-icons">search</i>
 														</a>
@@ -165,6 +165,8 @@
 		                                        </thead>
 		                                        <tbody id="tcandidata">
 												</tbody>
+												<tfoot id="pagCan">
+												</tfoot>
 		                                    </table>
 		                                </div>
 			                        </div>
@@ -182,7 +184,9 @@
 		                                            <td><b>Teléfono</b></td>
 		                                        </thead>
 		                                        <tbody id="tjurado">
-		                                        </tbody>
+												</tbody>
+												<tfoot id="pagJur">
+												</tfoot>
 		                                    </table>
 		                                </div>
 			                        </div>
@@ -201,7 +205,9 @@
 		                                            <td><b>Clase</b></td>
 		                                        </thead>
 		                                        <tbody id="tdocente">
-		                                        </tbody>
+												</tbody>
+												<tfoot id="pagDoc">
+												</tfoot>
 		                                    </table>
 		                                </div>
 			                        </div>
@@ -217,7 +223,9 @@
 		                                            <td><b>Fecha de Finalización</b></td>
 		                                        </thead>
 		                                        <tbody id="tcertamen">
-		                                        </tbody>
+												</tbody>
+												<tfoot id="pagCer">
+												</tfoot>
 		                                    </table>
 		                                </div>
 			                        </div>

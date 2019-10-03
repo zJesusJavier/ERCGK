@@ -23,12 +23,18 @@ function consultarSesion(ini, fin)
         if (err) console.log(err);
                        
         var tam = result.length;
-        var text;
+        var text, estatus;
 
         text = "<tr>";
 
         for (i = 0; i < tam; i++) 
         {
+            if (result[i].est_ses == "A") {
+                estatus = "Inicio Sesion";
+            } else { 
+                estatus = "Cierre de Sesion";
+            }
+            
             text += "<td>";
             text += result[i].cod_ses;
             text += "</td>";
@@ -53,6 +59,10 @@ function consultarSesion(ini, fin)
             text += result[i].date_ses.toLocaleString();
             text += "</td>";
             text += "\t\t";
+            text += "<td>";
+            text += estatus;
+            text += "</td>";
+            text += "\t\t";
             text += "</tr>";
             document.getElementById("tsesion").innerHTML= text;
         }
@@ -72,22 +82,41 @@ function consultarSesion(ini, fin)
 
 function consultarRegistro(ini,fin)
 {
+    var busqueda = document.getElementById('busquedaRegistro').value;
     var init = ini, paginas = "";
     if (!init) {
         init = 0;
         fin = 15;
     }
-    con.query("SELECT * FROM log WHERE acc_log='Registro'", function (err, result1, fields) 
+    if (busqueda) {
+        sqlInit = "SELECT * FROM log WHERE acc_log LIKE '%Registro%' " +
+            " AND usu_log LIKE '%" + busqueda + "%'" +
+            " OR tab_log LIKE '%" + busqueda + "%'" ;
+        sql = "SELECT * FROM log WHERE acc_log LIKE '%Registro%' " +
+            " AND usu_log LIKE '%" + busqueda + "%'" +
+            " OR tab_log LIKE '%" + busqueda + "%'" +
+            " LIMIT " + init + ", " + fin;
+    } else { 
+        sqlInit = "SELECT * FROM log WHERE acc_log LIKE '%Registro%'";
+        sql = "SELECT * FROM log WHERE acc_log LIKE '%Registro%' LIMIT "+init+","+fin;
+    }
+
+    con.query(sqlInit, function (err, result1, fields) 
     {
         var pag = Math.ceil(result1.length / 15);
 
-        con.query("SELECT * FROM log WHERE acc_log='Registro' LIMIT "+init+","+fin, function (err, result, fields) 
+        con.query(sql, function (err, result, fields) 
     {
         if (err) console.log(err);
                        
         var tam = result.length;
         var text;
-        text = "<tr>";
+            text = "<tr>";
+            if (result.length == 0) { 
+                text += "<td colspan='15'><b> No existe la consulta solicitada </b></td>";
+                text += "</tr>";
+                document.getElementById("tregistro").innerHTML = text;
+            }
 
         for (i = 0; i < tam; i++) 
         {
@@ -147,10 +176,10 @@ function consultarEdiciones(ini, fin)
         init = 0;
         fin = 15;
     }
-    con.query("SELECT * FROM log WHERE acc_log='Modificar'", function (err, result1, fields) 
+    con.query("SELECT * FROM log WHERE acc_log LIKE '%Modificar%'", function (err, result1, fields) 
     {
         var pag = Math.ceil(result1.length / 15);
-        con.query("SELECT * FROM log WHERE acc_log='Modificar' LIMIT "+init+","+fin, function (err, result, fields) 
+        con.query("SELECT * FROM log WHERE acc_log LIKE '%Modificar%' LIMIT "+init+","+fin, function (err, result, fields) 
     {
         if (err) console.log(err);
                        

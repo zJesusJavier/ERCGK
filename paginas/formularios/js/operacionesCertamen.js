@@ -115,14 +115,23 @@ function guardarCertamen()
 }
 
 
-function consultarCertamen()
+function consultarCertamen(ini,fin)
 {
-    con.query("SELECT * FROM certamen WHERE est_cer='A'", function (err, result, fields) 
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM certamen WHERE est_cer='A'", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+        
+        con.query("SELECT cod_cer, des_cer, DATE(feci_cer) As dateI, DATE(feci_cer) As dateF FROM certamen WHERE est_cer='A' LIMIT "+init+','+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
 
         var tam = result.length;
-        var text;
+        var text, paginas="";
         text = "<tr>";
 
         for (i = 0; i < tam; i++) 
@@ -136,27 +145,48 @@ function consultarCertamen()
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].feci_cer.toLocaleDateString('en-GB');
+            text += result[i].dateI.toLocaleDateString("en-GB");
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].fecf_cer.toLocaleDateString('en-GB');
+            text += result[i].dateF.toLocaleDateString("en-GB");
             text += "</td>";
             text += "\t\t";
             text += "</tr>";
             document.getElementById("tcertamen").innerHTML= text;
-        }       
+            }       
+            paginas += '<div align="center">'
+            for (i = 1; i <= pag; i++) {
+                init = i * 15 - 15;
+                fin = init + 14;
+                paginas += '<button id="piePag" onClick="paginadorCer(' + init + ',' + fin + ')">' + i + '</button>';
+            }
+            paginas += '</div">'
+            document.getElementById("pagCer").innerHTML = paginas;    
+        });
     });
 }
+function paginadorCer(ini, fin) {
+    this.consultarCertamen(ini, fin);
+    this.consultarCertamenPanel(ini, fin);
+}
 
-function consultarCertamenPanel()
+function consultarCertamenPanel(ini, pag)
 {
-    con.query("SELECT * FROM certamen", function (err, result, fields) 
+    var init = ini;
+    if (!init) {
+        init = 0;
+        fin = 15;
+    }
+    con.query("SELECT * FROM certamen", function (err, result1, fields) 
     {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT * FROM certamen LIMIT "+init+","+fin, function (err, result, fields) 
+        {
         if (err) console.log(err);
 
         var tam = result.length;
-        var text;
+        var text, paginas="";
         text = "<tr>";
 
         for (i = 0; i < tam; i++) 
@@ -170,11 +200,11 @@ function consultarCertamenPanel()
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].feci_cer.toLocaleDateString('en-GB');
+            text += result[i].feci_cer.toLocaleDateString("en-GB");
             text += "</td>";
             text += "\t\t";
             text += "<td>";
-            text += result[i].fecf_cer.toLocaleDateString('en-GB');
+            text += result[i].fecf_cer.toLocaleDateString("en-GB");
             text += "</td>";
             text += "\t\t";
             text += "<td>";
@@ -183,6 +213,15 @@ function consultarCertamenPanel()
             text += "</tr>";
             document.getElementById("tcertamen").innerHTML = text;
         }
+        paginas += '<div align="center">'
+        for (i = 1; i <= pag; i++) {
+            init = i * 15 - 15;
+            fin = init + 14;
+            paginas += '<button id="piePag" onClick="paginadorCer(' + init + ',' + fin + ')">' + i + '</button>';
+        }
+        paginas += '</div">'
+        document.getElementById("pagCer").innerHTML = paginas;   
+        });
     });
 }
 
@@ -232,8 +271,26 @@ function borrarCertamen()
 					if(err){
 						console.log(err);
 					}else{
-						window.location.reload();
-					}
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
+    
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id) - 1;
+                    
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                            
+                                }
+                                else {
+                            
+                                    window.location.reload();
+                                }
+                            });
+                        });
+                    }
 				});
 	        });
 	    };
