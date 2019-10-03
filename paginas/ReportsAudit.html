@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-	    <meta charset="utf-8">
-	    <link rel="icon" type="image/png" href="../img/favicon.png">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	    <title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
-	    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
-	    <meta name="viewport" content="width=device-width">
-	    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	    <link href="../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
-        <link href='../css/roboto.css' rel='stylesheet' type='text/css'>
-		<script src="formularios/js/cerrarSesion.js" type="text/javascript"></script>
-		<script src="formularios/js/reportConv.js" type="text/javascript"></script>
-		<script src="formularios/js/audit.js" type="text/javascript"></script>
-	</head>
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="../img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+	<meta name="viewport" content="width=device-width">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
+	<link href='../css/roboto.css' rel='stylesheet' type='text/css'>
+	<script src="formularios/js/cerrarSesion.js" type="text/javascript"></script>
+	<script src="formularios/js/reportConv.js" type="text/javascript"></script>
+	<script src="formularios/js/audit.js" type="text/javascript"></script>
+</head>
 
-	<body onload="audit();">
+<body onload="audit();">
 
 	<!-- Panel -->
 	<div class="wrapper">
@@ -94,8 +94,10 @@
 			</nav>
 			<div class="content">
 				<div class="col-md-12" align="center">
-					<input type="button" class="btn btn-success" value="Reporte de Historial" onclick="SelectReportAudit();">
-					<input type="button" class="btn btn-success" value="Reporte de Sesiones" onclick="reportSesiones();">
+					<input type="button" class="btn btn-success" value="Reporte de Historial"
+						onclick="SelectReportAudit();">
+					<input type="button" class="btn btn-success" value="Reporte de Sesiones"
+						onclick="reportSesiones();">
 				</div>
 				<div class="col-md-12" align="center" id="SelectC"></div>
 				<div class="col-md-12" align="center" id="filtroD"></div>
@@ -108,43 +110,45 @@
 				<br>
 				<div class="col-md-12" align="center">
 					<a href="reportes.html" type="submit" class="btn btn-danger pull-center">Regresar</a>
-				</div>	            
+				</div>
 			</div>
 		</div>
 	</div>
-	        
-		<!-- Modal -->
 
-		<div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
-		            </div>
-		            <div class="modal-body">
-		                <p>La modificación indebida de los datos encontrados en el <strong>Panel de Administración</strong> puede afectar 
-		                el desempeño y/o funcionamiento del Sistema, no agregue, modifique o elimine datos sin saber
-		            	lo que hace.</p> 
+	<!-- Modal -->
 
-		                <p>Si necesita ayuda contacte con el Administrador.</p>
-		            </div>
-		            <div class="modal-footer">
-		                <a href="panel_administrador.html" type="button" class="btn btn-success">Continuar</a>
-		                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-		            </div>
-		        </div>
-		    </div>
+	<div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
+				</div>
+				<div class="modal-body">
+					<p>La modificación indebida de los datos encontrados en el <strong>Panel de Administración</strong>
+						puede afectar
+						el desempeño y/o funcionamiento del Sistema, no agregue, modifique o elimine datos sin saber
+						lo que hace.</p>
+
+					<p>Si necesita ayuda contacte con el Administrador.</p>
+				</div>
+				<div class="modal-footer">
+					<a href="panel_administrador.html" type="button" class="btn btn-success">Continuar</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
 		</div>
+	</div>
 
-	</body>
+</body>
 
-	<!-- Scripts -->
+<!-- Scripts -->
 
-	<script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/material.min.js"></script>
-	<script src="../js/arrive.min.js"></script>
-	<script src="../js/perfect-scrollbar.jquery.min.js"></script>
-	<script src="../js/material-dashboard.js?v=1.2.0"></script>
-	
+<script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/material.min.js"></script>
+<script src="../js/arrive.min.js"></script>
+<script src="../js/perfect-scrollbar.jquery.min.js"></script>
+<script src="../js/material-dashboard.js?v=1.2.0"></script>
+
 </html>

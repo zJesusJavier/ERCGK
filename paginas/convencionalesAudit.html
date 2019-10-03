@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-	    <meta charset="utf-8">
-	    <link rel="icon" type="image/png" href="../img/favicon.png">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	    <title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
-	    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
-	    <meta name="viewport" content="width=device-width">
-	    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	    <link href="../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
-        <link href='../css/roboto.css' rel='stylesheet' type='text/css'>
-		<script src="formularios/js/cerrarSesion.js"></script>
-		<script src="formularios/js/reportConv.js"></script>
-        <script src="formularios/js/audit.js"></script>
-        <script src='../js/Chart.min.js'></script>
-		<script src='../js/graficos.js'></script>
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="../img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+	<meta name="viewport" content="width=device-width">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/material-dashboard.css?v=1.2.0" rel="stylesheet">
+	<link href='../css/roboto.css' rel='stylesheet' type='text/css'>
+	<script src="formularios/js/cerrarSesion.js"></script>
+	<script src="formularios/js/reportConv.js"></script>
+	<script src="formularios/js/audit.js"></script>
+	<script src='../js/Chart.min.js'></script>
+	<script src='../js/graficos.js'></script>
+</head>
 
-
-	</head>
-
-	<body onload="audit();">
+<body onload="audit();">
 
 	<!-- Panel -->
 
@@ -73,7 +71,6 @@
 				</ul>
 			</div>
 		</div>
-	
 
 		<div class="main-panel">
 			<nav class="navbar navbar-transparent navbar-absolute ">
@@ -103,74 +100,81 @@
 					<div class="col-md-3">
 						<div class="card">
 							<div class="card-header card-chart" data-background-color="purple">
-								<canvas id="pie" width="600" height="420" style="position: absolute; z-index: 100;"></canvas>
+								<canvas id="pie" width="600" height="420"
+									style="position: absolute; z-index: 100;"></canvas>
 							</div>
 							<div class="card-content">
 								<h4 class="title">Graficos</h4>
 							</div>
 							<div class="card-footer">
 								<div class="stats">
-									<a href="graficosAuditoria.html" type="button" class="btn btn-xs" data-background-color="red" style="z-index: 100;"><h4>Generar</h4></a>
+									<a href="graficosAuditoria.html" type="button" class="btn btn-xs"
+										data-background-color="red" style="z-index: 100;">
+										<h4>Generar</h4>
+									</a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-                        <div class="card">
-                            <div class="card-header carda-stats card-chart" data-background-color="purple">
-                                <i class="material-icons icono" style="font-size:88px;">picture_as_pdf</i>
-                            </div>
-                            <div class="card-content">
-                                <h4 class="title">Reportes PDF</h4>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <a href="ReportsAudit.html" type="button" class="btn btn-xs" data-background-color="red"><h4>Generar</h4></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+						<div class="card">
+							<div class="card-header carda-stats card-chart" data-background-color="purple">
+								<i class="material-icons icono" style="font-size:88px;">picture_as_pdf</i>
+							</div>
+							<div class="card-content">
+								<h4 class="title">Reportes PDF</h4>
+							</div>
+							<div class="card-footer">
+								<div class="stats">
+									<a href="ReportsAudit.html" type="button" class="btn btn-xs"
+										data-background-color="red">
+										<h4>Generar</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-                <a href="reportes.html" type="submit" class="btn btn-success pull-center">Regresar</a>
-			</div>
+				<a href="reportes.html" type="submit" class="btn btn-success pull-center">Regresar</a>
 			</div>
 		</div>
+	</div>
 
-	        
-		<!-- Modal -->
+	<!-- Modal -->
 
-		<div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
-		            </div>
-		            <div class="modal-body">
-		                <p>La modificación indebida de los datos encontrados en el <strong>Panel de Administración</strong> puede afectar 
-		                el desempeño y/o funcionamiento del Sistema, no agregue, modifique o elimine datos sin saber
-		            	lo que hace.</p> 
+	<div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
+				</div>
+				<div class="modal-body">
+					<p>La modificación indebida de los datos encontrados en el <strong>Panel de Administración</strong>
+						puede afectar
+						el desempeño y/o funcionamiento del Sistema, no agregue, modifique o elimine datos sin saber
+						lo que hace.</p>
 
-		                <p>Si necesita ayuda contacte con el Administrador.</p>
-		            </div>
-		            <div class="modal-footer">
-		                <a href="panel_administrador.html" type="button" class="btn btn-success">Continuar</a>
-		                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-		            </div>
-		        </div>
-		    </div>
+					<p>Si necesita ayuda contacte con el Administrador.</p>
+				</div>
+				<div class="modal-footer">
+					<a href="panel_administrador.html" type="button" class="btn btn-success">Continuar</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
 		</div>
+	</div>
 
-	</body>
+</body>
 
-	<!-- Scripts -->
+<!-- Scripts -->
 
-	
-	<script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/graficos.js"></script>
-	<script src="../js/material.min.js"></script>
-	<script src="../js/arrive.min.js"></script>
-	<script src="../js/perfect-scrollbar.jquery.min.js"></script>
-	<script src="../js/material-dashboard.js?v=1.2.0"></script>
-	
+<script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/graficos.js"></script>
+<script src="../js/material.min.js"></script>
+<script src="../js/arrive.min.js"></script>
+<script src="../js/perfect-scrollbar.jquery.min.js"></script>
+<script src="../js/material-dashboard.js?v=1.2.0"></script>
+
 </html>

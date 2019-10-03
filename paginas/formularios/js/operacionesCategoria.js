@@ -19,16 +19,14 @@ function guardarCategoria() {
     // Validación de que los Inputs no estan vacios
 
     if (!nombre) {
-        swal("", "Debe llenar el campo de Nombre.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Nombre.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("nom_cat").focus();
         inputNombre.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputNombre.className = "form-group label-floating";
     }
 
@@ -41,37 +39,37 @@ function guardarCategoria() {
 
     sql = "INSERT INTO categoria (nom_cat, est_cat) VALUES ?";
     var values = [
-        [nombre, estado]];
+        [nombre, estado]
+    ];
 
     con.query(sql, [values], function (err, result) {
         if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-                {
-                    button: false,
-                    timer: 3000
-                });
-        }
-        else {
-            swal("", "Categoria registrada correctamente.", "success",
-                {
-                    button: false,
-                    timer: 3000
-                }).then(function () {
-                    nameUser = localStorage.getItem('name');
-                    date_log = new Date();
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Categoria registrada correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                    var values2 = [[nameUser, 'categoria', 'Registro', sql + "(" + values + ")", date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [
+                    [nameUser, 'categoria', 'Registro', sql + "(" + values + ")", date_log, 'A']
+                ];
 
-                    con.query(sql2, [values2], function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            window.location.reload();
-                        }
-                    });
+                con.query(sql2, [values2], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        window.location.reload();
+                    }
                 });
+            });
         };
     });
 }
@@ -126,6 +124,7 @@ function consultarCategoriaPanel(ini, fin) {
         });
     });
 }
+
 function paginadorCat(ini, fin) {
     this.consultarCategoriaPanel(ini, fin);
 }
@@ -149,50 +148,48 @@ function borrarCategoria() {
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-                {
-                    button: false,
-                    timer: 3000
-                });
-        }
-        else {
-            swal("", "Categoria eliminada correctamente.", "success",
-                {
-                    button: false,
-                    timer: 3000
-                }).then(function () {
-                    nameUser = localStorage.getItem('name');
-                    date_log = new Date();
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Categoria eliminada correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                    var values = [[nameUser, 'categoria', 'Borrado Logico', sql, date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [
+                    [nameUser, 'categoria', 'Borrado Logico', sql, date_log, 'A']
+                ];
 
-                    con.query(sql2, [values], function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            nameUser = localStorage.getItem('name');
-                            date_log = new Date();
+                con.query(sql2, [values], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
 
-                            con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
-                                if (err) console.log(err);
-                                else idMax = (result1[0].id)-1;
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id) - 1;
 
-                                updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
-                                con.query(updateUser, function (err, result) {
-                                    if (err) {
-                                        console.log(err);
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
 
-                                    }
-                                    else {
+                                } else {
 
-                                        window.location.reload();
-                                    }
-                                });
+                                    window.location.reload();
+                                }
                             });
-                        }
-                    });
+                        });
+                    }
                 });
+            });
         };
     });
 }

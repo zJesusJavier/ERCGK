@@ -14,8 +14,7 @@
 	<script src="formularios/js/cerrarSesion.js"></script>
 	<script src="formularios/js/reportAudit.js"></script>
 	<script src="formularios/js/audit.js"></script>
-    <script src='../js/Chart.min.js'></script>
-    
+	<script src='../js/Chart.min.js'></script>
 </head>
 
 <body onload="audit();">
@@ -96,35 +95,39 @@
 				</div>
 			</nav>
 			<div class="content">
-                <div class="col-md-3">
-                    <table>
-                        <tr>
-                            <td> 
-                                <input type="button" class="btn btn-success" value="Sesiones de Usuarios" onclick="auditUser();">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="button" class="btn btn-success" value="Niveles de Usuarios" onclick="nivelUser();">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="button" class="btn btn-success" value="Acciones realizadas" onclick="accLogs();">
-                            </td>
+				<div class="col-md-3">
+					<table>
+						<tr>
+							<td>
+								<input type="button" class="btn btn-success" value="Sesiones de Usuarios"
+									onclick="auditUser();">
+							</td>
 						</tr>
 						<tr>
-							<td> 
-								<input type="button" class="btn btn-success" value="Tablas utilizadas" onclick="tabLogs();">
+							<td>
+								<input type="button" class="btn btn-success" value="Niveles de Usuarios"
+									onclick="nivelUser();">
 							</td>
 						</tr>
-                        <tr>
-                            <td> 
+						<tr>
+							<td>
+								<input type="button" class="btn btn-success" value="Acciones realizadas"
+									onclick="accLogs();">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="button" class="btn btn-success" value="Tablas utilizadas"
+									onclick="tabLogs();">
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<a href="reportes.html" type="submit" class="btn btn-danger pull-center">Regresar</a>
 							</td>
-                        </tr>
-                    </table>
-                </div>
+						</tr>
+					</table>
+				</div>
 				<br>
 
 				<div class="col-md-9">
@@ -156,8 +159,6 @@
 	</div>
 	</div>
 
-
-
 	<!-- Modal -->
 
 	<div class="modal fade" id="panelAdministrador" tabindex="-1" role="dialog" style="display: none;"
@@ -187,7 +188,6 @@
 
 <!-- Scripts -->
 
-
 <script src="../js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/material.min.js"></script>
@@ -195,8 +195,9 @@
 <script src="../js/perfect-scrollbar.jquery.min.js"></script>
 <script src="../js/material-dashboard.js?v=1.2.0"></script>
 <style>
-   .highcharts-background {
-        fill: transparent;
-    }
+	.highcharts-background {
+		fill: transparent;
+	}
 </style>
+
 </html>

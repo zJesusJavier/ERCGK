@@ -32,114 +32,98 @@ function guardarDocente() {
     // Validación de que los Inputs no estan vacios
 
     if (!cedula) {
-        swal("", "Debe llenar el campo de Cédula.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Cédula.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("ci_pro").focus();
         inputCedula.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputCedula.className = "form-group label-floating";
     }
 
     if (!nombre) {
-        swal("", "Debe llenar el campo de Nombre.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Nombre.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("nom_pro").focus();
         inputNombre.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputNombre.className = "form-group label-floating";
     }
 
     if (!apellido) {
-        swal("", "Debe llenar el campo de Apellido.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Apellido.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("ape_pro").focus();
         inputApellido.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputApellido.className = "form-group label-floating";
     }
 
     if (!categoriafk) {
-        swal("", "Debe seleccionar una opción en Categoria.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe seleccionar una opción en Categoria.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("fky_cat").focus();
         inputCategoria.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputCategoria.className = "form-group label-floating";
     }
 
     if (!direccion) {
-        swal("", "Debe llenar el campo de Dirección.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Dirección.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("dir_pro").focus();
         inputDireccion.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputDireccion.className = "form-group label-floating";
     }
 
     if (!clasefk) {
-        swal("", "Debe seleccionar una opción en Clase.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe seleccionar una opción en Clase.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("fky_cla").focus();
         inputClase.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputClase.className = "form-group label-floating";
     }
 
     if (!telefono) {
-        swal("", "Debe llenar el campo de Teléfono.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Teléfono.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("tel_pro").focus();
         inputTelefono.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputTelefono.className = "form-group label-floating";
     }
 
     if (!email) {
-        swal("", "Debe llenar el campo de Correo Electrónico.", "error",
-            {
-                button: false,
-                timer: 1500
-            });
+        swal("", "Debe llenar el campo de Correo Electrónico.", "error", {
+            button: false,
+            timer: 1500
+        });
         document.getElementById("email_pro").focus();
         inputEmail.className = "form-group label-floating has-error";
         return
-    }
-    else {
+    } else {
         inputEmail.className = "form-group label-floating";
     }
 
@@ -152,37 +136,37 @@ function guardarDocente() {
 
     sql = "INSERT INTO profesor (ci_pro, nom_pro, ape_pro, fky_cat, fky_cla, dir_pro, tel_pro, email_pro, est_pro) VALUES ?";
     var values = [
-        [cedula, nombre, apellido, categoriafk, clasefk, direccion, telefono, email, estado]];
+        [cedula, nombre, apellido, categoriafk, clasefk, direccion, telefono, email, estado]
+    ];
 
     con.query(sql, [values], function (err, result) {
         if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-                {
-                    button: false,
-                    timer: 3000
-                });
-        }
-        else {
-            swal("", "Docente registrado correctamente.", "success",
-                {
-                    button: false,
-                    timer: 3000
-                }).then(function () {
-                    nameUser = localStorage.getItem('name');
-                    date_log = new Date();
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Docente registrado correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                    var values2 = [[nameUser, 'profesor', 'Registro', sql + "(" + values + ")", date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [
+                    [nameUser, 'profesor', 'Registro', sql + "(" + values + ")", date_log, 'A']
+                ];
 
-                    con.query(sql2, [values2], function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            window.location.reload();
-                        }
-                    });
+                con.query(sql2, [values2], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        window.location.reload();
+                    }
                 });
+            });
         };
     });
 }
@@ -268,7 +252,7 @@ function consultarDocentePanel(ini, fin) {
             if (err) console.log(err);
 
             var tam = result.length;
-            var text, paginas="";
+            var text, paginas = "";
             text = "<tr>";
 
             for (i = 0; i < tam; i++) {
@@ -351,48 +335,46 @@ function borrarDocente() {
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-                {
-                    button: false,
-                    timer: 3000
-                });
-        }
-        else {
-            swal("", "Docente eliminado correctamente.", "success",
-                {
-                    button: false,
-                    timer: 3000
-                }).then(function () {
-                    nameUser = localStorage.getItem('name');
-                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                    var values = [[nameUser, 'profesor', 'Borrado Logico', sql, date_log, 'A']];
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Docente eliminado correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [
+                    [nameUser, 'profesor', 'Borrado Logico', sql, date_log, 'A']
+                ];
 
-                    con.query(sql2, [values], function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            nameUser = localStorage.getItem('name');
-                            date_log = new Date();
+                con.query(sql2, [values], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
 
-                            con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
-                                if (err) console.log(err);
-                                else idMax = (result1[0].id) - 1;
-                        
-                                updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
-                                con.query(updateUser, function (err, result) {
-                                    if (err) {
-                                        console.log(err);
-                                
-                                    }
-                                    else {
-                                
-                                        window.location.reload();
-                                    }
-                                });
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id) - 1;
+
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+
+                                } else {
+
+                                    window.location.reload();
+                                }
                             });
-                        }
-                    });
+                        });
+                    }
                 });
+            });
         };
     });
 }

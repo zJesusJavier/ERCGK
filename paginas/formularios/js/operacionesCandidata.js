@@ -6,8 +6,7 @@ var sql, captionid;
 
 // Funcion de Agregar Candidatas
 
-function guardarCandidata()
-{
+function guardarCandidata() {
     // Aqui se cargan las variables con los datos del Formulario
 
     var estado = document.getElementById("est_can").value;
@@ -47,406 +46,329 @@ function guardarCandidata()
 
     // Validación de que los Inputs no estan vacios
 
-    if((estatura>167)&&(categoriafk=="1")){
-        swal("", "La Categoria no es acorde a la estatura", "error", 
-        {
-            button:false,
+    if ((estatura > 167) && (categoriafk == "1")) {
+        swal("", "La Categoria no es acorde a la estatura", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_cat").focus();
-        inputCategoria.className="form-group label-floating has-error";
+        inputCategoria.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputCategoria.className="form-group label-floating";
+    } else {
+        inputCategoria.className = "form-group label-floating";
     }
 
-    if((estatura<167)&&(categoriafk=="2")){
-        swal("", "La Categoria no es acorde a la estatura", "error", 
-        {
-            button:false,
+    if ((estatura < 167) && (categoriafk == "2")) {
+        swal("", "La Categoria no es acorde a la estatura", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_cat").focus();
-        inputCategoria.className="form-group label-floating has-error";
+        inputCategoria.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputCategoria.className="form-group label-floating";
+    } else {
+        inputCategoria.className = "form-group label-floating";
     }
 
-    if(!cedula)
-    {
-        swal("", "Debe llenar el campo de Cédula.", "error", 
-        {
-            button:false,
+    if (!cedula) {
+        swal("", "Debe llenar el campo de Cédula.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("ci_can").focus();
-        inputCedula.className="form-group label-floating has-error";
+        inputCedula.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputCedula.className="form-group label-floating";
+    } else {
+        inputCedula.className = "form-group label-floating";
     }
 
-    if(!nombre)
-    {
-        swal("", "Debe llenar el campo de Nombre.", "error", 
-        {
-            button:false,
+    if (!nombre) {
+        swal("", "Debe llenar el campo de Nombre.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("nom_can").focus();
-        inputNombre.className="form-group label-floating has-error";
+        inputNombre.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputNombre.className="form-group label-floating";
+    } else {
+        inputNombre.className = "form-group label-floating";
     }
 
-    if(!apellido)
-    {
-        swal("", "Debe llenar el campo de Apellido.", "error", 
-        {
-            button:false,
+    if (!apellido) {
+        swal("", "Debe llenar el campo de Apellido.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("ape_can").focus();
-        inputApellido.className="form-group label-floating has-error";
+        inputApellido.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputApellido.className="form-group label-floating";
+    } else {
+        inputApellido.className = "form-group label-floating";
     }
 
-    if(!edad)
-    {
-        swal("", "Debe llenar el campo de Edad.", "error", 
-        {
-            button:false,
+    if (!edad) {
+        swal("", "Debe llenar el campo de Edad.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("edad_can").focus();
-        inputEdad.className="form-group label-floating has-error";
+        inputEdad.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputEdad.className="form-group label-floating";
+    } else {
+        inputEdad.className = "form-group label-floating";
     }
 
-    if(!peso)
-    {
-        swal("", "Debe llenar el campo de Peso.", "error", 
-        {
-            button:false,
+    if (!peso) {
+        swal("", "Debe llenar el campo de Peso.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("peso_can").focus();
-        inputPeso.className="form-group label-floating has-error";
+        inputPeso.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputPeso.className="form-group label-floating";
+    } else {
+        inputPeso.className = "form-group label-floating";
     }
 
-    if(!estatura)
-    {
-        swal("", "Debe llenar el campo de Estatura.", "error", 
-        {
-            button:false,
+    if (!estatura) {
+        swal("", "Debe llenar el campo de Estatura.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("esta_can").focus();
-        inputEstatura.className="form-group label-floating has-error";
+        inputEstatura.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputEstatura.className="form-group label-floating";
+    } else {
+        inputEstatura.className = "form-group label-floating";
     }
 
-    if(!ocupacion)
-    {
-        swal("", "Debe llenar el campo de Ocupación.", "error", 
-        {
-            button:false,
+    if (!ocupacion) {
+        swal("", "Debe llenar el campo de Ocupación.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("ocu_can").focus();
-        inputOcupacion.className="form-group label-floating has-error";
+        inputOcupacion.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputOcupacion.className="form-group label-floating";
+    } else {
+        inputOcupacion.className = "form-group label-floating";
     }
 
-    if(!civil)
-    {
-        swal("", "Debe seleccionar una opción en Estado Civil.", "error", 
-        {
-            button:false,
+    if (!civil) {
+        swal("", "Debe seleccionar una opción en Estado Civil.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_civ").focus();
-        inputEstadoCivil.className="form-group label-floating has-error";
+        inputEstadoCivil.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputEstadoCivil.className="form-group label-floating";
+    } else {
+        inputEstadoCivil.className = "form-group label-floating";
     }
 
-    if(!categoriafk)
-    {
-        swal("", "Debe seleccionar una opción en Categoria.", "error", 
-        {
-            button:false,
+    if (!categoriafk) {
+        swal("", "Debe seleccionar una opción en Categoria.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_cat").focus();
-        inputCategoria.className="form-group label-floating has-error";
+        inputCategoria.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputCategoria.className="form-group label-floating";
+    } else {
+        inputCategoria.className = "form-group label-floating";
     }
 
-    if(!direccion)
-    {
-        swal("", "Debe llenar el campo de Dirección.", "error", 
-        {
-            button:false,
+    if (!direccion) {
+        swal("", "Debe llenar el campo de Dirección.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("dir_can").focus();
-        inputDireccion.className="form-group label-floating has-error";
+        inputDireccion.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputDireccion.className="form-group label-floating";
+    } else {
+        inputDireccion.className = "form-group label-floating";
     }
 
-    if(!certamenfk)
-    {
-        swal("", "Debe seleccionar una opción en Certamen.", "error", 
-        {
-            button:false,
+    if (!certamenfk) {
+        swal("", "Debe seleccionar una opción en Certamen.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_cer").focus();
-        inputCategoria.className="form-group label-floating has-error";
+        inputCategoria.className = "form-group label-floating has-error";
         return
+    } else {
+        inputCategoria.className = "form-group label-floating";
     }
-    else
-    {
-        inputCategoria.className="form-group label-floating";
-    }
-    if(!municipio)
-    {
-        swal("", "Debe llenar el campo de Municipio.", "error", 
-        {
-            button:false,
+    if (!municipio) {
+        swal("", "Debe llenar el campo de Municipio.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fky_mun").focus();
-        inputMunicipio.className="form-group label-floating has-error";
+        inputMunicipio.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputMunicipio.className="form-group label-floating";
+    } else {
+        inputMunicipio.className = "form-group label-floating";
     }
 
-    if(!telefono)
-    {
-        swal("", "Debe llenar el campo de Teléfono.", "error", 
-        {
-            button:false,
+    if (!telefono) {
+        swal("", "Debe llenar el campo de Teléfono.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("tel_can").focus();
-        inputTelefono.className="form-group label-floating has-error";
+        inputTelefono.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputTelefono.className="form-group label-floating";
+    } else {
+        inputTelefono.className = "form-group label-floating";
     }
 
-    if(!email)
-    {
-        swal("", "Debe llenar el campo de Correo Electrónico.", "error", 
-        {
-            button:false,
+    if (!email) {
+        swal("", "Debe llenar el campo de Correo Electrónico.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("email_can").focus();
-        inputEmail.className="form-group label-floating has-error";
+        inputEmail.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputEmail.className="form-group label-floating";
+    } else {
+        inputEmail.className = "form-group label-floating";
     }
 
-    if(!fecha)
-    {
-        swal("", "Debe llenar el campo de Fecha.", "error", 
-        {
-            button:false,
+    if (!fecha) {
+        swal("", "Debe llenar el campo de Fecha.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("fec_can").focus();
-        inputFecha.className="form-group label-floating has-error";
+        inputFecha.className = "form-group label-floating has-error";
         return
-    }
-    else
-    {
-        inputFecha.className="form-group label-floating";
+    } else {
+        inputFecha.className = "form-group label-floating";
     }
 
     // Guardado en la Base de Datos
 
     sql = "SELECT * FROM candidata";
-    con.query(sql, function (err, result) 
-        {
-            if (err) console.log(err);
-        });
+    con.query(sql, function (err, result) {
+        if (err) console.log(err);
+    });
 
     sql = "INSERT INTO candidata (ci_can, nom_can, ape_can, peso_can, esta_can, fky_civ, ocu_can, fky_cat, edad_can, fky_mun, fky_cer, dir_can, tel_can, email_can, fec_can, est_can) VALUES ?";
-            var values = [
-               [cedula, nombre, apellido, peso, estatura, civil, ocupacion, categoriafk, edad, municipio, certamenfk, direccion, telefono, email, fecha, estado]];
-    con.query(sql, [values], function (err, result) 
-    {
-        if (err)
-        { 
+    var values = [
+        [cedula, nombre, apellido, peso, estatura, civil, ocupacion, categoriafk, edad, municipio, certamenfk, direccion, telefono, email, fecha, estado]
+    ];
+    con.query(sql, [values], function (err, result) {
+        if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-            {
-                button:false,
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
                 timer: 3000
             });
-        }
-        else 
-        {
-            swal("", "Candidata registrada correctamente.", "success",
-            {
-                button:false,
+        } else {
+            swal("", "Candidata registrada correctamente.", "success", {
+                button: false,
                 timer: 3000
-            }).then(function() 
-            {   
+            }).then(function () {
                 date_log = new Date();
                 nameUser = localStorage.getItem('name');
-				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-				var values2 = [[nameUser, 'candidata', 'Registro', sql+"("+values+")", date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [
+                    [nameUser, 'candidata', 'Registro', sql + "(" + values + ")", date_log, 'A']
+                ];
 
-				con.query(sql2, [values2], function (err, result) {
-					if(err){
-						console.log(err);
-					}else{
-						window.location.reload();
-					}
-				});
+                con.query(sql2, [values2], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        window.location.reload();
+                    }
+                });
             });
         };
     });
 }
 
-function enter(e)
-{
+function enter(e) {
     var tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla==13) buscarC();
-    return (tecla!=13); 
+    if (tecla == 13) buscarC();
+    return (tecla != 13);
 }
 
-function buscarC()
-{
+function buscarC() {
     var aux = document.getElementById("busqueda").value;
     var busqueda = aux.toLowerCase();
 
-    con.query("SELECT candidata.*, municipio.nom_mun, categoria.nom_cat, certamen.des_cer FROM candidata INNER JOIN municipio ON candidata.fky_mun=municipio.cod_mun INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat INNER JOIN certamen ON candidata.fky_cer=certamen.cod_cer", function (err, result, fields)
-    {
+    con.query("SELECT candidata.*, municipio.nom_mun, categoria.nom_cat, certamen.des_cer FROM candidata INNER JOIN municipio ON candidata.fky_mun=municipio.cod_mun INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat INNER JOIN certamen ON candidata.fky_cer=certamen.cod_cer", function (err, result, fields) {
         if (err) console.log(err);
-     
+
         var tam = result.length;
         var text;
 
-        for (i = 0; i < tam; i++)
-        {
-            if ((busqueda == result[i].nom_can.toLowerCase()) 
-                || (busqueda == result[i].ci_can) 
-                || (busqueda == result[i].ape_can.toLowerCase()) 
-                || (busqueda == result[i].ocu_can.toLowerCase()) 
-                || (busqueda == result[i].email_can.toLowerCase()) 
-                || (busqueda == result[i].des_cer.toLowerCase()) 
-                || (busqueda == result[i].nom_can.toLowerCase()+" "+result[i].ape_can.toLowerCase()))
-            {
-            text = "<td>";
-            text += result[i].cod_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ci_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ape_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_cat;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].edad_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].dir_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].tel_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].email_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].est_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarCandidata('+result[i].cod_can+')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
-            text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCandidata('+result[i].cod_can+')"><i class="material-icons text-danger">delete_forever</i></a>';
-            text += "</td>";
-            text += "</tr>";
-            document.getElementById("tcandidata").innerHTML = text;
-            }   
+        for (i = 0; i < tam; i++) {
+            if ((busqueda == result[i].nom_can.toLowerCase()) ||
+                (busqueda == result[i].ci_can) ||
+                (busqueda == result[i].ape_can.toLowerCase()) ||
+                (busqueda == result[i].ocu_can.toLowerCase()) ||
+                (busqueda == result[i].email_can.toLowerCase()) ||
+                (busqueda == result[i].des_cer.toLowerCase()) ||
+                (busqueda == result[i].nom_can.toLowerCase() + " " + result[i].ape_can.toLowerCase())) {
+                text = "<td>";
+                text += result[i].cod_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ci_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ape_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_cat;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].edad_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].dir_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].tel_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].email_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].est_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarCandidata(' + result[i].cod_can + ')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
+                text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCandidata(' + result[i].cod_can + ')"><i class="material-icons text-danger">delete_forever</i></a>';
+                text += "</td>";
+                text += "</tr>";
+                document.getElementById("tcandidata").innerHTML = text;
+            }
         }
     });
 }
 
 // Consulta de Candidatas
 
-function consultarCandidata(ini, fin)
-{
+function consultarCandidata(ini, fin) {
     var text, paginas = "";
     var busqueda = document.getElementById('busquedaCandidata').value;
     var init = ini;
@@ -457,7 +379,7 @@ function consultarCandidata(ini, fin)
 
     if (busqueda) {
         sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata " +
-            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat"+
+            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat" +
             " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
             " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
             " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
@@ -469,56 +391,54 @@ function consultarCandidata(ini, fin)
             " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
             " OR candidata.ci_can LIKE '%" + busqueda + "%'" +
             " LIMIT " + init + ", " + fin;
-    } else { 
+    } else {
         sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat";
         sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
             " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
             " LIMIT " + init + ", " + fin;
     }
 
-    con.query(sqlInit, function (err, result1, fields) 
-    {       
+    con.query(sqlInit, function (err, result1, fields) {
         var pag = Math.ceil(result1.length / 15);
         con.query(sql, function (err, result, fields) {
-                
+
             if (err) console.log(err);
             var tam = result.length;
-            var paginas="";
+            var paginas = "";
             text = "<tr>";
-            if (result.length == 0) { 
+            if (result.length == 0) {
                 text += "<td colspan='15'><b> No existe la consulta solicitada </b></td>";
                 text += "</tr>";
                 document.getElementById("tcandidata").innerHTML = text;
             }
 
-        for (i = 0; i < tam; i++) 
-        {
-            text += "<td>";
-            text += result[i].cod_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ci_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ape_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].edad_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_cat;
-            text += "</td>";
-            text += "</tr>";
-            document.getElementById("tcandidata").innerHTML= text;
-            }     
+            for (i = 0; i < tam; i++) {
+                text += "<td>";
+                text += result[i].cod_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ci_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ape_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].edad_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_cat;
+                text += "</td>";
+                text += "</tr>";
+                document.getElementById("tcandidata").innerHTML = text;
+            }
             paginas += '<td>'
             for (i = 1; i <= pag; i++) {
                 init = i * 15 - 15;
@@ -527,7 +447,7 @@ function consultarCandidata(ini, fin)
 
             }
             paginas += '</td>'
-            document.getElementById("pagCan").innerHTML = paginas;    
+            document.getElementById("pagCan").innerHTML = paginas;
         });
     });
 }
@@ -539,64 +459,18 @@ function paginadorCand(ini, fin) {
 
 // Consulta de Candidatas de la Categoria 1 (Niñas)
 
-function consultarCandidataC1()
-{
+function consultarCandidataC1() {
     var text;
 
-    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat WHERE est_can='A' AND fky_cat='1'", function (err, result, fields) 
-    {
+    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat WHERE est_can='A' AND fky_cat='1'", function (err, result, fields) {
         if (err) console.log(err);
 
         var tam = result.length;
-       
+
         var a, b;
         text = "<tr>";
 
-        for (i = 0; i < tam; i++) 
-        {
-            text += "<td>";
-            text += result[i].cod_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ci_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ape_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].edad_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_cat;
-            text += "</td>";
-            text += "</tr>";
-            document.getElementById("tcandidata").innerHTML= text;
-        }       
-    });
-}
-
-// Consulta de Candidatas de la Categoria 2 (Adultas)
-
-function consultarCandidataC2()
-{
-    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat WHERE est_can='A' AND fky_cat='2'", function (err, result, fields) 
-    {
-        if (err) console.log(err);
-
-        var tam = result.length;
-        var text;
-        text = "<tr>"; 
-
-        for (i = 0; i < tam; i++) 
-        {
+        for (i = 0; i < tam; i++) {
             text += "<td>";
             text += result[i].cod_can;
             text += "</td>";
@@ -622,14 +496,53 @@ function consultarCandidataC2()
             text += "</td>";
             text += "</tr>";
             document.getElementById("tcandidata").innerHTML = text;
-        }       
+        }
+    });
+}
+
+// Consulta de Candidatas de la Categoria 2 (Adultas)
+
+function consultarCandidataC2() {
+    con.query("SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat WHERE est_can='A' AND fky_cat='2'", function (err, result, fields) {
+        if (err) console.log(err);
+
+        var tam = result.length;
+        var text;
+        text = "<tr>";
+
+        for (i = 0; i < tam; i++) {
+            text += "<td>";
+            text += result[i].cod_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].ci_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].nom_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].ape_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].edad_can;
+            text += "</td>";
+            text += "\t\t";
+            text += "<td>";
+            text += result[i].nom_cat;
+            text += "</td>";
+            text += "</tr>";
+            document.getElementById("tcandidata").innerHTML = text;
+        }
     });
 }
 
 // Consulta del Panel de Administración
 
-function consultarCandidataPanel(ini,fin)
-{
+function consultarCandidataPanel(ini, fin) {
     var text, paginas;
     var busqueda = document.getElementById('busqueda').value;
     var init = ini;
@@ -640,7 +553,7 @@ function consultarCandidataPanel(ini,fin)
 
     if (busqueda) {
         sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata " +
-            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat"+
+            " INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat" +
             " WHERE candidata.nom_can LIKE '%" + busqueda + "%'" +
             " OR categoria.nom_cat LIKE '%" + busqueda + "%'" +
             " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
@@ -652,157 +565,145 @@ function consultarCandidataPanel(ini,fin)
             " OR candidata.ape_can LIKE '%" + busqueda + "%'" +
             " OR candidata.ci_can LIKE '%" + busqueda + "%'" +
             " LIMIT " + init + ", " + fin;
-    } else { 
+    } else {
         sqlInit = "SELECT candidata.*, categoria.nom_cat FROM candidata INNER JOIN categoria ON candidata.fky_cat=categoria.cod_cat";
         sql = "SELECT candidata.*, categoria.nom_cat FROM candidata" +
             " INNER JOIN categoria ON candidata.fky_cat = categoria.cod_cat" +
             " LIMIT " + init + ", " + fin;
     }
-    con.query(sqlInit, function (err, result1, fields) 
-    {
+    con.query(sqlInit, function (err, result1, fields) {
         var pag = Math.ceil(result1.length / 15);
 
-        con.query(sql, function (err, result, fields) 
-        {
-        if (err) console.log(err);
+        con.query(sql, function (err, result, fields) {
+            if (err) console.log(err);
 
-        var tam = result.length;
-        var text;
-        text = "<tr>";
+            var tam = result.length;
+            var text;
+            text = "<tr>";
 
-        for (i = 0; i < tam; i++) 
-        {
-            text += "<td>";
-            text += result[i].cod_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ci_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].ape_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].nom_cat;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].edad_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].dir_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].tel_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].email_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += result[i].est_can;
-            text += "</td>";
-            text += "\t\t";
-            text += "<td>";
-            text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarCandidata('+result[i].cod_can+')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
-            text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCandidata('+result[i].cod_can+')"><i class="material-icons text-danger">delete_forever</i></a>';
-            text += "</td>";
-            text += "</tr>";
-            document.getElementById("tcandidata").innerHTML = text;
-        }
-        paginas = "";
-        paginas += '<div align="center">'
-        for (i = 1; i <= pag; i++) {
-            init = i * 15 - 15;
-            fin = init + 14;
-            paginas += '<button id="piePag" onClick="paginadorCand(' + init + ',' + fin + ')">' + i + '</button>';
+            for (i = 0; i < tam; i++) {
+                text += "<td>";
+                text += result[i].cod_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ci_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].ape_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].nom_cat;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].edad_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].dir_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].tel_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].email_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += result[i].est_can;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
+                text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarCandidata(' + result[i].cod_can + ')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
+                text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCandidata(' + result[i].cod_can + ')"><i class="material-icons text-danger">delete_forever</i></a>';
+                text += "</td>";
+                text += "</tr>";
+                document.getElementById("tcandidata").innerHTML = text;
+            }
+            paginas = "";
+            paginas += '<div align="center">'
+            for (i = 1; i <= pag; i++) {
+                init = i * 15 - 15;
+                fin = init + 14;
+                paginas += '<button id="piePag" onClick="paginadorCand(' + init + ',' + fin + ')">' + i + '</button>';
 
-        }
-        paginas += '</div">'
-        document.getElementById("pagCan").innerHTML = paginas;
+            }
+            paginas += '</div">'
+            document.getElementById("pagCan").innerHTML = paginas;
         });
     });
 }
 
 //  Modal para confirmar Eliminación de la Candidata
 
-function avisoBorrarCandidata(capb)
-{
+function avisoBorrarCandidata(capb) {
     $("#borradoCandidatas").modal("show")
     captionid = capb;
 }
 
 // Borrado Lógico
 
-function borrarCandidata()
-{
+function borrarCandidata() {
     sql = "SELECT * FROM candidata";
-    con.query(sql, function (err, result) 
-    {
+    con.query(sql, function (err, result) {
         if (err) console.log(err);
     });
 
-	sql = "UPDATE candidata SET est_can='I' WHERE cod_can = " + captionid;
-	con.query(sql, function (err, result)
-	{
-	    if (err)
-	    { 
-	        console.log(err);
-	        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-	        {
-	            button: false,
-	            timer: 3000
-	        });
-	    }
-	    else 
-	    {
-	        swal("", "Candidata eliminada correctamente.", "success",
-	        {
-	            button: false,
-	            timer: 3000
-	        }).then(function() 
-	        {   
+    sql = "UPDATE candidata SET est_can='I' WHERE cod_can = " + captionid;
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Candidata eliminada correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
                 nameUser = localStorage.getItem('name');
-                    date_log = new Date();
+                date_log = new Date();
 
-                    sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                    var values = [[nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [
+                    [nameUser, 'candidata', 'Borrado Logico', sql, date_log, 'A']
+                ];
 
-                    con.query(sql2, [values], function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            nameUser = localStorage.getItem('name');
-                            date_log = new Date();
+                con.query(sql2, [values], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
 
-                            con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
-                                if (err) console.log(err);
-                                else idMax = (result1[0].id)-1;
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id) - 1;
 
-                                updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
-                                con.query(updateUser, function (err, result) {
-                                    if (err) {
-                                        console.log(err);
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
 
-                                    }
-                                    else {
+                                } else {
 
-                                        window.location.reload();
-                                    }
-                                });
+                                    window.location.reload();
+                                }
                             });
-                        }
-				});
-	        });
-	    };
+                        });
+                    }
+                });
+            });
+        };
     });
 }

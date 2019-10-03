@@ -1,169 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-	    <meta charset="utf-8">
-	    <link rel="icon" type="image/png" href="frontend/img/favicon.png">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	    <title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
-	    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
-	    <meta name="viewport" content="width=device-width">
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
-	    <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet">
-		<link href='css/roboto.css' rel='stylesheet' type='text/css'>
-		<script src="paginas/formularios/js/validarLogin.js"></script>
-		<script src="paginas/formularios/js/selects.js"></script>
-	</head>
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="frontend/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Escuela de Reinas Celebrity Gipsy's Kingdom</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+	<meta name="viewport" content="width=device-width">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet">
+	<link href='css/roboto.css' rel='stylesheet' type='text/css'>
+	<script src="paginas/formularios/js/validarLogin.js"></script>
+	<script src="paginas/formularios/js/selects.js"></script>
+</head>
 
-	<body id="particles-login" onload="selectPregunta1(); selectPregunta2();">
-		<script src="js/particles.js"></script>
-		<script src="js/particulasIndex.js"></script>
+<body id="particles-login" onload="selectPregunta1(); selectPregunta2();">
+	<script src="js/particles.js"></script>
+	<script src="js/particulasIndex.js"></script>
 
-		<!-- Formulario de Iniciar Sesión -->
+	<!-- Formulario de Iniciar Sesión -->
 
-		<div class="main-panel">
-        	<div class="login">
-				<div class="col-md-6">
-				    <div class="card">
-				        <form method="POST">
-				            <div class="card-header card-header-icon" data-background-color="red">
-				                <h5><p>Iniciar Sesión</p></h5>
-				            </div>
-				            <div class="card-content">
-					            <div class="form-group label-floating">
-					                <label class="control-label">Usuario</label>
-					                <input class="form-control"  type="text" id ="nom_usu" autocomplete="off">
-					                <span class="material-input"></span>
-					            </div>
-					            <div class="form-group label-floating">
-					                <label class="control-label">Contraseña</label>
-					                <input class="form-control" type="password" id ="cla_usu" autocomplete="off">
-					                <span class="material-input"></span>
-					            </div>
-					            <div class="category form-category">
-					                <div class="text-center">
-										<input type="button" class="btn btn-success" value="Ingresar" onclick="verificar();">
-									</div>
-									<div class ="text-center">
-										<a data-toggle="modal" href="#olvidologin">¿Ha olvidado su contraseña?</a>
-									</div>
-					            </div>
-				        	</div>
-				        </form>
-				    </div>
-				</div>
-				<div class="col-md-4">
-                    <div class="card card-profile">
-                        <div class="card-avatar">
-                            <a>
-                                <img class="img" src="img/login.png">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h6 class="category text-gray">Escuela de Reinas</h6>
-                            <h6 class="category text-gray">Celebrity Gipsy's Kingdom</h6>
-                            <p class="card-content">
-                                Si tienes problemas para ingresar por favor contacta con el Administrador.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        	</div>
-		</div>
-
-		<!-- olvidoContraseña -->
-
-		<div class="modal fade" id="olvidologin" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="card">
-		                <div class="card-header" data-background-color="purple">
-		                    <h4 class="title" align="center">Olvido de Contraseña</h4>
-		                </div>
-		                <div class="card-content">
-		                    <form autocomplete="off">
-		                     	<div class="row">
-		                            <div class="col-md-12">
-		                                <div class="form-group label-floating" id="inputUsuario">
-		                                    <label class="control-label">Ingrese su Usuario</label>
-		                                    <input type="text" class="form-control" id="usuario">
-		                                </div>
-	 								</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group label-floating" id="inputPreg1">
-											<label class="control-label">Pregunta de seguridad 1</label>
-											<select class="form-control" id="fky_pre_1">
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<input type="text" class="form-control" id="res_pre_1">
-									</div>
-								</div>
-								<div class= "row">
-									<div class="col-md-6">
-										<div class="form-group label-floating" id="inputPreg2">
-											<label class="control-label">Pregunta de Seguridad 2</label>
-											<select class="form-control" id="fky_pre_2">
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<input type="text" class="form-control" id="res_pre_2">
-									</div>
-								</div>	
-								<div class="row">
-									<div class="text-center">
-										<input type="button" class="btn btn-success" value="Continuar" onclick="olvidoContraseña();">
-										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-									</div>
-								</div>
-								</div>
-		                        <div class="clearfix"></div>
-		                    </form>
-		                </div>
-		            </div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modificar Clave -->
-
-		<div class="modal fade" id="modifkey" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="card">
-						<div class="card-header" data-background-color="red">
-							<h4 class="title" align="center">Ingrese la nueva contraseña</h4>
+	<div class="main-panel">
+		<div class="login">
+			<div class="col-md-6">
+				<div class="card">
+					<form method="POST">
+						<div class="card-header card-header-icon" data-background-color="red">
+							<h5>
+								<p>Iniciar Sesión</p>
+							</h5>
 						</div>
 						<div class="card-content">
-							<form autocomplete="off">
-								<div class="row">
-									<div class="text-center">
-										<input type="password"  align="center" id="clave_new">
-									</div>
-									<div class="text-center">
-										<input type="button" class="btn btn-success" value="Continuar" onclick="cambioClave();">
-										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-									</div>
+							<div class="form-group label-floating">
+								<label class="control-label">Usuario</label>
+								<input class="form-control" type="text" id="nom_usu" autocomplete="off">
+								<span class="material-input"></span>
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label">Contraseña</label>
+								<input class="form-control" type="password" id="cla_usu" autocomplete="off">
+								<span class="material-input"></span>
+							</div>
+							<div class="category form-category">
+								<div class="text-center">
+									<input type="button" class="btn btn-success" value="Ingresar"
+										onclick="verificar();">
 								</div>
-							</form>
+								<div class="text-center">
+									<a data-toggle="modal" href="#olvidologin">¿Ha olvidado su contraseña?</a>
+								</div>
+							</div>
 						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card card-profile">
+					<div class="card-avatar">
+						<a>
+							<img class="img" src="img/login.png">
+						</a>
+					</div>
+					<div class="content">
+						<h6 class="category text-gray">Escuela de Reinas</h6>
+						<h6 class="category text-gray">Celebrity Gipsy's Kingdom</h6>
+						<p class="card-content">
+							Si tienes problemas para ingresar por favor contacta con el Administrador.
+						</p>
 					</div>
 				</div>
 			</div>
-		</div>	
-	</body>
+		</div>
+	</div>
 
-	<!-- Scripts -->
+	<!-- olvidoContraseña -->
 
-	<script src="js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/material.min.js" type="text/javascript"></script>
-	<script src="js/arrive.min.js"></script>
-	<script src="js/perfect-scrollbar.jquery.min.js"></script>
-	<script src="js/material-dashboard.js?v=1.2.0"></script>
+	<div class="modal fade" id="olvidologin" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title" align="center">Olvido de Contraseña</h4>
+					</div>
+					<div class="card-content">
+						<form autocomplete="off">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group label-floating" id="inputUsuario">
+										<label class="control-label">Ingrese su Usuario</label>
+										<input type="text" class="form-control" id="usuario">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group label-floating" id="inputPreg1">
+										<label class="control-label">Pregunta de seguridad 1</label>
+										<select class="form-control" id="fky_pre_1">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<input type="text" class="form-control" id="res_pre_1">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group label-floating" id="inputPreg2">
+										<label class="control-label">Pregunta de Seguridad 2</label>
+										<select class="form-control" id="fky_pre_2">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<input type="text" class="form-control" id="res_pre_2">
+								</div>
+							</div>
+							<div class="row">
+								<div class="text-center">
+									<input type="button" class="btn btn-success" value="Continuar"
+										onclick="olvidoContraseña();">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								</div>
+							</div>
+					</div>
+					<div class="clearfix"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!-- Modificar Clave -->
+
+	<div class="modal fade" id="modifkey" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="card">
+					<div class="card-header" data-background-color="red">
+						<h4 class="title" align="center">Ingrese la nueva contraseña</h4>
+					</div>
+					<div class="card-content">
+						<form autocomplete="off">
+							<div class="row">
+								<div class="text-center">
+									<input type="password" align="center" id="clave_new">
+								</div>
+								<div class="text-center">
+									<input type="button" class="btn btn-success" value="Continuar"
+										onclick="cambioClave();">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!-- Scripts -->
+
+<script src="js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js" type="text/javascript"></script>
+<script src="js/arrive.min.js"></script>
+<script src="js/perfect-scrollbar.jquery.min.js"></script>
+<script src="js/material-dashboard.js?v=1.2.0"></script>
 
 </html>

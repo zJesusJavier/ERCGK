@@ -11,41 +11,35 @@ const url = require('url')
 
 let mainWindow
 
-function createWindow() 
-{
-    mainWindow = new BrowserWindow(
-	{
+function createWindow() {
+    mainWindow = new BrowserWindow({
         icon: path.join(__dirname, 'img/favicon.png'),
-        webPreferences: 
-        {
+        webPreferences: {
             nodeIntegration: true
         }
-	})
+    })
 
     mainWindow.maximize()
     mainWindow.show()
     mainWindow.loadURL(`file://${__dirname}/load.html`)
-    mainWindow.webContents.openDevTools({mode: 'detach'});
-	mainWindow.on('closed', function() 
-	{
+    mainWindow.webContents.openDevTools({
+        mode: 'detach'
+    });
+    mainWindow.on('closed', function () {
         mainWindow = null
     })
 }
 
 app.on('ready', createWindow)
 
-app.on('window-all-closed', function() 
-{
-	if (process.platform !== 'darwin') 
-	{
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
         app.quit()
     }
 })
 
-app.on('activate', function() 
-{
-	if (mainWindow === null) 
-	{
+app.on('activate', function () {
+    if (mainWindow === null) {
         createWindow()
     }
 })
@@ -63,7 +57,7 @@ function handleSquirrelEvent(application) {
     const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
     const exeName = path.basename(process.execPath);
 
-    const spawn = function(command, args) {
+    const spawn = function (command, args) {
         let spawnedProcess, error;
 
         try {
@@ -75,7 +69,7 @@ function handleSquirrelEvent(application) {
         return spawnedProcess;
     };
 
-    const spawnUpdate = function(args) {
+    const spawnUpdate = function (args) {
         return spawn(updateDotExe, args);
     };
 

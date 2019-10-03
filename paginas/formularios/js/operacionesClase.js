@@ -7,9 +7,8 @@ var consulta;
 
 // Funcion de Agregar Clase
 
-function guardarClase()
-{
-	// Aqui se cargan las variables con los datos del Formulario
+function guardarClase() {
+    // Aqui se cargan las variables con los datos del Formulario
 
     var estado = document.getElementById("est_cla").value;
     var nombre = document.getElementById("nom_cla").value;
@@ -18,67 +17,59 @@ function guardarClase()
 
     var inputNombre = document.getElementById("inputNombreClase");
 
-	// Validación de que los Inputs no estan vacios
+    // Validación de que los Inputs no estan vacios
 
-    if(!nombre)
-	{
-		swal("", "Debe llenar el campo de Nombre.", "error", 
-        {
-            button:false,
+    if (!nombre) {
+        swal("", "Debe llenar el campo de Nombre.", "error", {
+            button: false,
             timer: 1500
         });
         document.getElementById("nom_cla").focus();
-		inputNombre.className="form-group label-floating has-error";
-		return
-	}
-	else
-	{
-		inputNombre.className="form-group label-floating";
-	}
+        inputNombre.className = "form-group label-floating has-error";
+        return
+    } else {
+        inputNombre.className = "form-group label-floating";
+    }
 
-	// Guardado en la Base de Datos
+    // Guardado en la Base de Datos
 
-	sql = "SELECT * FROM clase";
-   	con.query(sql, function (err, result) 
-    	{
-            if (err) console.log(err);
-        });
-                            
+    sql = "SELECT * FROM clase";
+    con.query(sql, function (err, result) {
+        if (err) console.log(err);
+    });
+
     sql = "INSERT INTO clase (nom_cla, est_cla) VALUES ?";
-    var values = [[nombre, estado]];
-                          
-    con.query(sql, [values], function (err, result) 
-    {
-        if (err)
-        { 
+    var values = [
+        [nombre, estado]
+    ];
+
+    con.query(sql, [values], function (err, result) {
+        if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", 
-            {
-                button:false,
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
                 timer: 3000
             });
-        }
-        else 
-        {
-            swal("", "Clase registrada correctamente.", "success",
-            {
-                button:false,
+        } else {
+            swal("", "Clase registrada correctamente.", "success", {
+                button: false,
                 timer: 3000
-            }).then(function() 
-            {
+            }).then(function () {
                 nameUser = localStorage.getItem('name');
                 date_log = new Date();
 
-				sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-				var values2 = [[nameUser, 'clase', 'Registro', sql+"("+values+")", date_log, 'A']];
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values2 = [
+                    [nameUser, 'clase', 'Registro', sql + "(" + values + ")", date_log, 'A']
+                ];
 
-				con.query(sql2, [values2], function (err, result) {
-					if(err){
-						console.log(err);
-					}else{
-						window.location.reload();
-					}
-				});
+                con.query(sql2, [values2], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        window.location.reload();
+                    }
+                });
             });
         };
     });
@@ -86,24 +77,22 @@ function guardarClase()
 
 // Consulta del Panel de Administración
 
-function consultarClasePanel(ini,fin)
-{
+function consultarClasePanel(ini, fin) {
     var init = ini;
-    if (!init) { 
+    if (!init) {
         init = 0;
         fin = 15;
     }
-    con.query("SELECT * FROM clase ", function (err, result1, fields) { 
-    var pag = Math.ceil(result1.length / 15);
-    con.query("SELECT * FROM clase LIMIT "+init+","+fin, function (err, result, fields) 
-    {
-        if (err) console.log(err);
-                       
-        var tam = result.length;
-        var text, paginas="";
-        text = "<tr>";
-        
-           for (i = 0; i < tam; i++) {
+    con.query("SELECT * FROM clase ", function (err, result1, fields) {
+        var pag = Math.ceil(result1.length / 15);
+        con.query("SELECT * FROM clase LIMIT " + init + "," + fin, function (err, result, fields) {
+            if (err) console.log(err);
+
+            var tam = result.length;
+            var text, paginas = "";
+            text = "<tr>";
+
+            for (i = 0; i < tam; i++) {
                 text += "<td>";
                 text += result[i].cod_cla;
                 text += "</td>";
@@ -123,55 +112,52 @@ function consultarClasePanel(ini,fin)
                 text += "</tr>";
                 document.getElementById("tclase").innerHTML = text;
             }
-        paginas += '<div align="center">'
-        for (i = 1; i <= pag; i++) { 
-            var ini = i * 15 - 15;
-            var fin = ini + 14;
-            paginas += '<button id="piePag" onClick="paginadorCla('+ini+','+fin+')">' + i + '</button>';
-           
-        }
-        paginas += '</div">'
-        document.getElementById("pagCla").innerHTML= paginas;
+            paginas += '<div align="center">'
+            for (i = 1; i <= pag; i++) {
+                var ini = i * 15 - 15;
+                var fin = ini + 14;
+                paginas += '<button id="piePag" onClick="paginadorCla(' + ini + ',' + fin + ')">' + i + '</button>';
+
+            }
+            paginas += '</div">'
+            document.getElementById("pagCla").innerHTML = paginas;
+        });
     });
-});
 }
 
 
 function paginadorCla(ini, fin) {
     this.consultarClasePanel(ini, fin);
-    this.scrollPaginador(500,'pag')
+    this.scrollPaginador(500, 'pag')
     console.log(ini, fin);
 }
 
 //scroll paginador numeradores
 function scrollPaginador(time, elemento) {
-    console.log('prueba',elemento);
+    console.log('prueba', elemento);
     setTimeout(() => {
-      let top = document.getElementById(elemento);
-      if (!top) {
-        top.scrollIntoView({
-          behavior: "smooth",
-          block: "end"
-        });
-        top = null;
-      }
+        let top = document.getElementById(elemento);
+        if (!top) {
+            top.scrollIntoView({
+                behavior: "smooth",
+                block: "end"
+            });
+            top = null;
+        }
     }, time ? time : 500);
-  }
+}
 //  Modal para confirmar Eliminación de la Clase
 
-function avisoBorrarClase(capb)
-{
+function avisoBorrarClase(capb) {
     $("#borradoClases").modal("show")
     captionid = capb;
 }
 
 // Borrado Lógico
 
-function borrarClase()
-{
+function borrarClase() {
     sql = "SELECT * FROM clase";
-    con.query(sql, function (err, result) 
-    {
+    con.query(sql, function (err, result) {
         if (err) console.log(err);
     });
 
@@ -179,38 +165,34 @@ function borrarClase()
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
-            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error",
-                {
-                    button: false,
-                    timer: 3000
-                });
-        }
-        else {
-            swal("", "Clase eliminada correctamente.", "success",
-                {
-                    button: false,
-                    timer: 3000
-                }).then(function () {
-                    nameUser = localStorage.getItem('name');
-                    date_log = new Date();
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Clase eliminada correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                date_log = new Date();
 
-                    con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
-                        if (err) console.log(err);
-                        else idMax = result1[0].id;
-				
-                        updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
-                        con.query(updateUser, function (err, result) {
-                            if (err) {
-                                console.log(err);
-						
-                            }
-                            else {
-						
-                                window.location.reload();
-                            }
-                        });
+                con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                    if (err) console.log(err);
+                    else idMax = result1[0].id;
+
+                    updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                    con.query(updateUser, function (err, result) {
+                        if (err) {
+                            console.log(err);
+
+                        } else {
+
+                            window.location.reload();
+                        }
                     });
                 });
+            });
         }
     });
 }
