@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2019 a las 04:01:59
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.0.27
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 03, 2019 at 11:30 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,17 +19,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `academia`
+-- Database: `academia`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `calificacion`
+-- Table structure for table `calificacion`
 --
 
-CREATE TABLE `calificacion` (
-  `cod_cal` int(11) NOT NULL,
+DROP TABLE IF EXISTS `calificacion`;
+CREATE TABLE IF NOT EXISTS `calificacion` (
+  `cod_cal` int(11) NOT NULL AUTO_INCREMENT,
   `sem_cal` int(11) NOT NULL,
   `fec_cal` date NOT NULL,
   `cal_cal` char(2) COLLATE utf8_spanish_ci NOT NULL,
@@ -37,22 +38,17 @@ CREATE TABLE `calificacion` (
   `est_cal` char(1) COLLATE utf8_spanish_ci NOT NULL,
   `fky_can` int(11) NOT NULL,
   `fky_cla` int(11) NOT NULL,
-  `fky_pro` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_pro` int(11) NOT NULL,
+  PRIMARY KEY (`cod_cal`),
+  KEY `fky_can` (`fky_can`),
+  KEY `fky_pro` (`fky_pro`),
+  KEY `fky_cla` (`fky_cla`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `calificacion`
+-- Triggers `calificacion`
 --
-
-INSERT INTO `calificacion` (`cod_cal`, `sem_cal`, `fec_cal`, `cal_cal`, `obs_cal`, `est_cal`, `fky_can`, `fky_cla`, `fky_pro`) VALUES
-(1, 1, '2019-07-05', '20', '', 'A', 1, 1, 1),
-(2, 3, '2019-07-07', '20', '', 'A', 5, 2, 1),
-(3, 3, '2019-07-11', '20', '', 'A', 13, 2, 1),
-(4, 2, '2019-07-11', '10', '', 'A', 13, 2, 1);
-
---
--- Disparadores `calificacion`
---
+DROP TRIGGER IF EXISTS `update_calificacion`;
 DELIMITER $$
 CREATE TRIGGER `update_calificacion` BEFORE UPDATE ON `calificacion` FOR EACH ROW BEGIN
 
@@ -66,11 +62,12 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `candidata`
+-- Table structure for table `candidata`
 --
 
-CREATE TABLE `candidata` (
-  `cod_can` int(11) NOT NULL,
+DROP TABLE IF EXISTS `candidata`;
+CREATE TABLE IF NOT EXISTS `candidata` (
+  `cod_can` int(11) NOT NULL AUTO_INCREMENT,
   `ci_can` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -86,29 +83,19 @@ CREATE TABLE `candidata` (
   `fky_cat` int(11) NOT NULL,
   `fky_mun` int(11) NOT NULL,
   `fky_civ` int(11) NOT NULL,
-  `fky_cer` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cer` int(11) NOT NULL,
+  PRIMARY KEY (`cod_can`),
+  UNIQUE KEY `ci_can` (`ci_can`),
+  KEY `fky_cat` (`fky_cat`),
+  KEY `fky_mun` (`fky_mun`),
+  KEY `fky_civ` (`fky_civ`),
+  KEY `fky_cer` (`fky_cer`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `candidata`
+-- Triggers `candidata`
 --
-
-INSERT INTO `candidata` (`cod_can`, `ci_can`, `nom_can`, `ape_can`, `peso_can`, `esta_can`, `ocu_can`, `edad_can`, `dir_can`, `tel_can`, `email_can`, `fec_can`, `est_can`, `fky_cat`, `fky_mun`, `fky_civ`, `fky_cer`) VALUES
-(1, '24743016', 'Paoñaaaaassssaaa', 'Pabon', 55, 156, 'TSU', 23, 'Tariba', '02763958784', 'joharap_22@hotmail.com', '2019-03-04', 'A', 1, 5, 1, 1),
-(2, '24780688', 'Laurinha', 'Mora', 57, 169, 'Lic', 25, 'Tariba', '04268971235', 'laura@gmail.com', '2019-03-12', 'A', 2, 1, 1, 1),
-(5, '25879116', 'Johana', 'Padron', 55, 158, 'Ing', 20, 'Cordero', '027698564545', 'joh@hotmail.com', '2018-07-07', 'A', 1, 16, 3, 1),
-(6, '24743567', 'Paol', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
-(8, '5897455', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
-(9, '89825456', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
-(10, '58975894', 'Paola', 'Paron', 56, 158, 'Ing', 25, 'Palo Gordo', '027639589452', 'kol@gmail.com', '2019-07-13', 'A', 1, 8, 1, 1),
-(11, '58969526', 'Pedrasss', 'Prere', 52, 189, 'TSSU', 26, 'Palmas', '042587695262', 'a@hotmail.com', '2017-12-15', 'A', 2, 1, 1, 1),
-(12, '8555555', 'Petronila', 'Puera', 58, 178, 'Linda', 25, 'Alla', '042587496856', 'j@hotmail.com', '2019-05-13', 'A', 2, 7, 1, 3),
-(13, '88562656', 'aaaaaaaaaa', 'Pol', 52, 148, 'TSU', 15, 'lA BONITRA', '042984129865', 'JOHARAP@hotmail.com', '2019-08-15', 'A', 1, 2, 1, 1),
-(14, '25459851', 'eeeeeeeeeee', 'aopkod', 12, 153, 'JSALKS', 12, 'COLA', '04265145', 'KLA@HOTMAIL.COM', '2019-12-15', 'A', 1, 1, 1, 1);
-
---
--- Disparadores `candidata`
---
+DROP TRIGGER IF EXISTS `update_candidata`;
 DELIMITER $$
 CREATE TRIGGER `update_candidata` BEFORE UPDATE ON `candidata` FOR EACH ROW BEGIN
 
@@ -122,17 +109,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
-CREATE TABLE `categoria` (
-  `cod_cat` int(11) NOT NULL,
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `cod_cat` int(11) NOT NULL AUTO_INCREMENT,
   `nom_cat` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cat` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cat` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_cat`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
@@ -140,8 +129,9 @@ INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
 (2, 'Miss', 'A');
 
 --
--- Disparadores `categoria`
+-- Triggers `categoria`
 --
+DROP TRIGGER IF EXISTS `update_categoria`;
 DELIMITER $$
 CREATE TRIGGER `update_categoria` BEFORE UPDATE ON `categoria` FOR EACH ROW BEGIN
 
@@ -155,31 +145,23 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `certamen`
+-- Table structure for table `certamen`
 --
 
-CREATE TABLE `certamen` (
-  `cod_cer` int(11) NOT NULL,
+DROP TABLE IF EXISTS `certamen`;
+CREATE TABLE IF NOT EXISTS `certamen` (
+  `cod_cer` int(11) NOT NULL AUTO_INCREMENT,
   `des_cer` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `feci_cer` date NOT NULL,
   `fecf_cer` date NOT NULL,
-  `est_cer` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cer` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_cer`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `certamen`
+-- Triggers `certamen`
 --
-
-INSERT INTO `certamen` (`cod_cer`, `des_cer`, `feci_cer`, `fecf_cer`, `est_cer`) VALUES
-(1, 'Chica Gipsy', '2018-01-16', '2018-04-11', 'A'),
-(2, 'Sra Bella', '2019-02-01', '2019-02-02', 'I'),
-(3, 'Srita Hermosa', '2019-02-01', '2019-02-04', 'A'),
-(4, 'Sra bella', '2019-07-12', '2020-01-12', 'A'),
-(5, 'Lo mas lindo', '2019-02-18', '2020-10-20', 'A');
-
---
--- Disparadores `certamen`
---
+DROP TRIGGER IF EXISTS `update_certamen`;
 DELIMITER $$
 CREATE TRIGGER `update_certamen` BEFORE UPDATE ON `certamen` FOR EACH ROW BEGIN
 
@@ -193,17 +175,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `civil`
+-- Table structure for table `civil`
 --
 
-CREATE TABLE `civil` (
-  `cod_civ` int(11) NOT NULL,
+DROP TABLE IF EXISTS `civil`;
+CREATE TABLE IF NOT EXISTS `civil` (
+  `cod_civ` int(11) NOT NULL AUTO_INCREMENT,
   `nom_civ` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `est_civ` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_civ` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_civ`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `civil`
+-- Dumping data for table `civil`
 --
 
 INSERT INTO `civil` (`cod_civ`, `nom_civ`, `est_civ`) VALUES
@@ -216,17 +200,19 @@ INSERT INTO `civil` (`cod_civ`, `nom_civ`, `est_civ`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clase`
+-- Table structure for table `clase`
 --
 
-CREATE TABLE `clase` (
-  `cod_cla` int(11) NOT NULL,
+DROP TABLE IF EXISTS `clase`;
+CREATE TABLE IF NOT EXISTS `clase` (
+  `cod_cla` int(11) NOT NULL AUTO_INCREMENT,
   `nom_cla` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cla` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cla` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_cla`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `clase`
+-- Dumping data for table `clase`
 --
 
 INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
@@ -246,8 +232,9 @@ INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
 (14, 'Protocolo', 'A');
 
 --
--- Disparadores `clase`
+-- Triggers `clase`
 --
+DROP TRIGGER IF EXISTS `update_clase`;
 DELIMITER $$
 CREATE TRIGGER `update_clase` BEFORE UPDATE ON `clase` FOR EACH ROW BEGIN
 
@@ -261,22 +248,25 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `elementos`
+-- Table structure for table `elementos`
 --
 
-CREATE TABLE `elementos` (
-  `id_elem` int(11) NOT NULL,
+DROP TABLE IF EXISTS `elementos`;
+CREATE TABLE IF NOT EXISTS `elementos` (
+  `id_elem` int(11) NOT NULL AUTO_INCREMENT,
   `fky_usuario` int(11) NOT NULL,
   `elemento_rep` tinyint(1) NOT NULL,
   `elem_cons` tinyint(1) NOT NULL,
   `elem_reg` tinyint(1) NOT NULL,
   `elem_audit` tinyint(1) NOT NULL,
   `elem_panelAd` tinyint(1) NOT NULL,
-  `status` varchar(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `status` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_elem`),
+  KEY `fky_usuario` (`fky_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `elementos`
+-- Dumping data for table `elementos`
 --
 
 INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, `elem_reg`, `elem_audit`, `elem_panelAd`, `status`) VALUES
@@ -289,11 +279,12 @@ INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `jurado`
+-- Table structure for table `jurado`
 --
 
-CREATE TABLE `jurado` (
-  `cod_jur` int(11) NOT NULL,
+DROP TABLE IF EXISTS `jurado`;
+CREATE TABLE IF NOT EXISTS `jurado` (
+  `cod_jur` int(11) NOT NULL AUTO_INCREMENT,
   `ci_jur` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -301,20 +292,16 @@ CREATE TABLE `jurado` (
   `tel_jur` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `email_jur` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `est_jur` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  `fky_cat` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cat` int(11) NOT NULL,
+  PRIMARY KEY (`cod_jur`),
+  UNIQUE KEY `ci_jur` (`ci_jur`),
+  KEY `fky_cat` (`fky_cat`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `jurado`
+-- Triggers `jurado`
 --
-
-INSERT INTO `jurado` (`cod_jur`, `ci_jur`, `nom_jur`, `ape_jur`, `dir_jur`, `tel_jur`, `email_jur`, `est_jur`, `fky_cat`) VALUES
-(1, '24746048', 'Maria', 'Mejia', 'Cordero', '027697853103', 'kla@hgmail.com', 'A', 1),
-(2, '87486954', 'Jula', 'Jaaa', 'kmdkalsmdls', '32204394', 'mfñds@hotmail.com', 'A', 1);
-
---
--- Disparadores `jurado`
---
+DROP TRIGGER IF EXISTS `update_jurado`;
 DELIMITER $$
 CREATE TRIGGER `update_jurado` BEFORE UPDATE ON `jurado` FOR EACH ROW BEGIN
 
@@ -328,41 +315,37 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `log`
+-- Table structure for table `log`
 --
 
-CREATE TABLE `log` (
-  `cod_log` int(11) NOT NULL,
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `cod_log` int(11) NOT NULL AUTO_INCREMENT,
   `usu_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `tab_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `acc_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `reg_log` blob NOT NULL,
   `date_log` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `log`
---
-
-INSERT INTO `log` (`cod_log`, `usu_log`, `tab_log`, `acc_log`, `reg_log`, `date_log`, `est_log`) VALUES
-(48, 'admin', 'categoria', 'Modificar - Data Anterior', 0x4e6f6d6272652043617465676f7269613a204d69737361612045737461646f2043617465676f7269613a2041, '2019-07-13 17:06:16', 'A'),
-(49, 'admin', 'categoria', 'Modificar - Data Nueva', 0x5550444154452063617465676f72696120534554206e6f6d5f6361743d274d697373272c206573745f6361743d27412720574845524520636f645f636174203d2032, '2019-07-13 17:06:20', 'A');
+  `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_log`)
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `municipio`
+-- Table structure for table `municipio`
 --
 
-CREATE TABLE `municipio` (
-  `cod_mun` int(11) NOT NULL,
+DROP TABLE IF EXISTS `municipio`;
+CREATE TABLE IF NOT EXISTS `municipio` (
+  `cod_mun` int(11) NOT NULL AUTO_INCREMENT,
   `nom_mun` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_mun` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_mun` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_mun`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `municipio`
+-- Dumping data for table `municipio`
 --
 
 INSERT INTO `municipio` (`cod_mun`, `nom_mun`, `est_mun`) VALUES
@@ -399,17 +382,19 @@ INSERT INTO `municipio` (`cod_mun`, `nom_mun`, `est_mun`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pregunta`
+-- Table structure for table `pregunta`
 --
 
-CREATE TABLE `pregunta` (
-  `cod_pre` int(11) NOT NULL,
+DROP TABLE IF EXISTS `pregunta`;
+CREATE TABLE IF NOT EXISTS `pregunta` (
+  `cod_pre` int(11) NOT NULL AUTO_INCREMENT,
   `pre_pre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `est_pre` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_pre` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_pre`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `pregunta`
+-- Dumping data for table `pregunta`
 --
 
 INSERT INTO `pregunta` (`cod_pre`, `pre_pre`, `est_pre`) VALUES
@@ -425,11 +410,12 @@ INSERT INTO `pregunta` (`cod_pre`, `pre_pre`, `est_pre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `profesor`
+-- Table structure for table `profesor`
 --
 
-CREATE TABLE `profesor` (
-  `cod_pro` int(11) NOT NULL,
+DROP TABLE IF EXISTS `profesor`;
+CREATE TABLE IF NOT EXISTS `profesor` (
+  `cod_pro` int(11) NOT NULL AUTO_INCREMENT,
   `ci_pro` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -438,21 +424,17 @@ CREATE TABLE `profesor` (
   `email_pro` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `est_pro` char(1) COLLATE utf8_spanish_ci NOT NULL,
   `fky_cla` int(11) NOT NULL,
-  `fky_cat` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cat` int(11) NOT NULL,
+  PRIMARY KEY (`cod_pro`),
+  UNIQUE KEY `ci_pro` (`ci_pro`),
+  KEY `fky_cat` (`fky_cat`),
+  KEY `fky_cla` (`fky_cla`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `profesor`
+-- Triggers `profesor`
 --
-
-INSERT INTO `profesor` (`cod_pro`, `ci_pro`, `nom_pro`, `ape_pro`, `dir_pro`, `tel_pro`, `email_pro`, `est_pro`, `fky_cla`, `fky_cat`) VALUES
-(1, '24743016', 'Paula', 'Mola', 'Cordero', '042618725464', 'johara@hotmail.com', 'A', 1, 1),
-(3, '58956216', 'Jonas', 'Joel', 'Cordero', '019874854148', 'jona@hotmail.com', 'A', 1, 1),
-(4, '37493284', 'KMSLKAMD', 'LMSALKDMASÑ', 'DKM,ÑSFKMSA', '3203103610', 'JSM@hotmail.com', 'A', 7, 2);
-
---
--- Disparadores `profesor`
---
+DROP TRIGGER IF EXISTS `update_profesor`;
 DELIMITER $$
 CREATE TRIGGER `update_profesor` BEFORE UPDATE ON `profesor` FOR EACH ROW BEGIN
 
@@ -466,17 +448,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `semana`
+-- Table structure for table `semana`
 --
 
-CREATE TABLE `semana` (
-  `cod_sem` int(11) NOT NULL,
+DROP TABLE IF EXISTS `semana`;
+CREATE TABLE IF NOT EXISTS `semana` (
+  `cod_sem` int(11) NOT NULL AUTO_INCREMENT,
   `num_sem` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
-  `est_sem` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_sem` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_sem`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `semana`
+-- Dumping data for table `semana`
 --
 
 INSERT INTO `semana` (`cod_sem`, `num_sem`, `est_sem`) VALUES
@@ -507,41 +491,30 @@ INSERT INTO `semana` (`cod_sem`, `num_sem`, `est_sem`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sesion`
+-- Table structure for table `sesion`
 --
 
-CREATE TABLE `sesion` (
-  `cod_ses` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sesion`;
+CREATE TABLE IF NOT EXISTS `sesion` (
+  `cod_ses` int(11) NOT NULL AUTO_INCREMENT,
   `usu_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `niv_ses` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `ip_ses` int(20) NOT NULL,
-  `mac_ses` int(18) NOT NULL,
+  `ip_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `mac_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `date_ses` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `sesion`
---
-
-INSERT INTO `sesion` (`cod_ses`, `usu_ses`, `niv_ses`, `ip_ses`, `mac_ses`, `date_ses`, `est_ses`) VALUES
-(83, 'admin', 'Administrador', 0, 0, '2019-07-11 10:00:06', 'A'),
-(84, 'admin', 'Administrador', 0, 0, '2019-07-11 19:54:56', 'A'),
-(85, 'admin', 'Administrador', 0, 0, '2019-07-13 15:36:09', 'A'),
-(86, 'admin', 'Administrador', 192168, 70, '2019-07-13 20:52:28', 'A'),
-(87, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:19:19', 'A'),
-(88, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:19:41', 'A'),
-(89, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:21:17', 'A'),
-(90, 'admin', 'Administrador', 192168, 70, '2019-07-13 21:23:24', 'A');
+  `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cod_ses`)
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
-CREATE TABLE `usuario` (
-  `id_usu` int(11) NOT NULL,
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id_usu` int(11) NOT NULL AUTO_INCREMENT,
   `nom_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cla_usu` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `email_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -552,15 +525,19 @@ CREATE TABLE `usuario` (
   `niv_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ip_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `mac_usu` varchar(18) COLLATE utf8_spanish_ci NOT NULL,
-  `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_usu`),
+  UNIQUE KEY `nom_usu` (`nom_usu`),
+  KEY `fky_pre_1` (`fky_pre_1`),
+  KEY `fky_pre_2` (`fky_pre_2`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`, `res_pre_1`, `fky_pre_2`, `res_pre_2`, `niv_usu`, `ip_usu`, `mac_usu`, `est_usu`) VALUES
-(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', '192.168.1.104', '70:f1:a1:87:75:50', 'A'),
+(1, 'admin', '1234', 'admin@gmail.com', 1, 'Dolar', 6, 'Coldplay', 'Administrador', '127.0.0.1', '00:00:00:00:00:00', 'A'),
 (2, 'user', '4321', 'user@gmail.com', 1, 'Dolar', 2, 'Azul', 'Usuario', '', '', 'A'),
 (3, 'mayel', 'mayel', 'mayel@gmail.com', 1, '1', 2, '2', 'Administrador', '', '', 'A'),
 (4, 'test', 'test', 'test@gmail.com', 1, 'test', 2, 'test', 'Auditor', '', '', 'A'),
@@ -568,8 +545,9 @@ INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`,
 (6, 'yes', 'yes', 'yes@hotmail.com', 1, 'yes', 2, 'yes', 'Administrador', '', '', 'A');
 
 --
--- Disparadores `usuario`
+-- Triggers `usuario`
 --
+DROP TRIGGER IF EXISTS `update_usuario`;
 DELIMITER $$
 CREATE TRIGGER `update_usuario` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN
 
@@ -581,216 +559,11 @@ $$
 DELIMITER ;
 
 --
--- Índices para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Indices de la tabla `calificacion`
---
-ALTER TABLE `calificacion`
-  ADD PRIMARY KEY (`cod_cal`),
-  ADD KEY `fky_can` (`fky_can`),
-  ADD KEY `fky_pro` (`fky_pro`),
-  ADD KEY `fky_cla` (`fky_cla`);
-
---
--- Indices de la tabla `candidata`
---
-ALTER TABLE `candidata`
-  ADD PRIMARY KEY (`cod_can`),
-  ADD UNIQUE KEY `ci_can` (`ci_can`),
-  ADD KEY `fky_cat` (`fky_cat`),
-  ADD KEY `fky_mun` (`fky_mun`),
-  ADD KEY `fky_civ` (`fky_civ`),
-  ADD KEY `fky_cer` (`fky_cer`);
-
---
--- Indices de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`cod_cat`);
-
---
--- Indices de la tabla `certamen`
---
-ALTER TABLE `certamen`
-  ADD PRIMARY KEY (`cod_cer`);
-
---
--- Indices de la tabla `civil`
---
-ALTER TABLE `civil`
-  ADD PRIMARY KEY (`cod_civ`);
-
---
--- Indices de la tabla `clase`
---
-ALTER TABLE `clase`
-  ADD PRIMARY KEY (`cod_cla`);
-
---
--- Indices de la tabla `elementos`
---
-ALTER TABLE `elementos`
-  ADD PRIMARY KEY (`id_elem`),
-  ADD KEY `fky_usuario` (`fky_usuario`);
-
---
--- Indices de la tabla `jurado`
---
-ALTER TABLE `jurado`
-  ADD PRIMARY KEY (`cod_jur`),
-  ADD UNIQUE KEY `ci_jur` (`ci_jur`),
-  ADD KEY `fky_cat` (`fky_cat`);
-
---
--- Indices de la tabla `log`
---
-ALTER TABLE `log`
-  ADD PRIMARY KEY (`cod_log`);
-
---
--- Indices de la tabla `municipio`
---
-ALTER TABLE `municipio`
-  ADD PRIMARY KEY (`cod_mun`);
-
---
--- Indices de la tabla `pregunta`
---
-ALTER TABLE `pregunta`
-  ADD PRIMARY KEY (`cod_pre`);
-
---
--- Indices de la tabla `profesor`
---
-ALTER TABLE `profesor`
-  ADD PRIMARY KEY (`cod_pro`),
-  ADD UNIQUE KEY `ci_pro` (`ci_pro`),
-  ADD KEY `fky_cat` (`fky_cat`),
-  ADD KEY `fky_cla` (`fky_cla`);
-
---
--- Indices de la tabla `semana`
---
-ALTER TABLE `semana`
-  ADD PRIMARY KEY (`cod_sem`);
-
---
--- Indices de la tabla `sesion`
---
-ALTER TABLE `sesion`
-  ADD PRIMARY KEY (`cod_ses`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usu`),
-  ADD UNIQUE KEY `nom_usu` (`nom_usu`),
-  ADD KEY `fky_pre_1` (`fky_pre_1`),
-  ADD KEY `fky_pre_2` (`fky_pre_2`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `calificacion`
---
-ALTER TABLE `calificacion`
-  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `candidata`
---
-ALTER TABLE `candidata`
-  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `cod_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `certamen`
---
-ALTER TABLE `certamen`
-  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `civil`
---
-ALTER TABLE `civil`
-  MODIFY `cod_civ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `clase`
---
-ALTER TABLE `clase`
-  MODIFY `cod_cla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `elementos`
---
-ALTER TABLE `elementos`
-  MODIFY `id_elem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `jurado`
---
-ALTER TABLE `jurado`
-  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `log`
---
-ALTER TABLE `log`
-  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
-
---
--- AUTO_INCREMENT de la tabla `municipio`
---
-ALTER TABLE `municipio`
-  MODIFY `cod_mun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT de la tabla `pregunta`
---
-ALTER TABLE `pregunta`
-  MODIFY `cod_pre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `profesor`
---
-ALTER TABLE `profesor`
-  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `semana`
---
-ALTER TABLE `semana`
-  MODIFY `cod_sem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT de la tabla `sesion`
---
-ALTER TABLE `sesion`
-  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `calificacion`
+-- Constraints for table `calificacion`
 --
 ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`fky_can`) REFERENCES `candidata` (`cod_can`),
@@ -798,7 +571,7 @@ ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_3` FOREIGN KEY (`fky_cla`) REFERENCES `clase` (`cod_cla`);
 
 --
--- Filtros para la tabla `candidata`
+-- Constraints for table `candidata`
 --
 ALTER TABLE `candidata`
   ADD CONSTRAINT `candidata_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`),
@@ -807,26 +580,26 @@ ALTER TABLE `candidata`
   ADD CONSTRAINT `candidata_ibfk_4` FOREIGN KEY (`fky_cer`) REFERENCES `certamen` (`cod_cer`);
 
 --
--- Filtros para la tabla `elementos`
+-- Constraints for table `elementos`
 --
 ALTER TABLE `elementos`
   ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`fky_usuario`) REFERENCES `usuario` (`id_usu`);
 
 --
--- Filtros para la tabla `jurado`
+-- Constraints for table `jurado`
 --
 ALTER TABLE `jurado`
   ADD CONSTRAINT `jurado_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`);
 
 --
--- Filtros para la tabla `profesor`
+-- Constraints for table `profesor`
 --
 ALTER TABLE `profesor`
   ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`),
   ADD CONSTRAINT `profesor_ibfk_2` FOREIGN KEY (`fky_cla`) REFERENCES `clase` (`cod_cla`);
 
 --
--- Filtros para la tabla `usuario`
+-- Constraints for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`fky_pre_1`) REFERENCES `pregunta` (`cod_pre`),
