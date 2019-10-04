@@ -74,7 +74,6 @@ function formularioEditarUsuario(capb) {
         document.getElementById("editUsuario").innerHTML = text;
         $("#editarUsuario").modal("show")
     });
-
 }
 
 function editarUsuario(user) {
@@ -89,7 +88,6 @@ function editarUsuario(user) {
     elemento_rep = $("#find").find("#ListCheck")[0].children[5].checked;
     elem_audit = $("#find").find("#ListCheck")[0].children[7].checked;
     elem_panelAd = $("#find").find("#ListCheck")[0].children[9].checked;
-
 
     sql = "SELECT * FROM usuario";
     con.query(sql, function (err, result) {
@@ -154,10 +152,7 @@ function editarUsuario(user) {
                         });
                     };
                 });
-
             });
         }
     });
-
-
 }

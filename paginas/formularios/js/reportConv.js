@@ -1,9 +1,11 @@
 require('module-alias/register');
+const path = require('path');
 var con = require('@models/db');
 var swal = require('sweetalert');
 var pdfkit = require('pdfkit');
 var PdfTable = require('voilab-pdf-table'),
     PdfDocument = require('pdfkit');
+var d = new Date();
 
 var text, i;
 var fechai, fechaf;
@@ -165,7 +167,7 @@ function reportC() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Candidatas Activas', 100, 230)
@@ -208,7 +210,7 @@ function reportC() {
                     text += blanco4;
                     text += result[i].esta_can;
 
-                    myDoc.pipe(fs.createWriteStream('reportes/ReporteCandidatas.pdf'));
+                    myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteCandidatas-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
                     myDoc.moveDown()
                     myDoc.font('Times-Roman').fontSize(12).text('' + text);
                     var band = 1;
@@ -231,7 +233,7 @@ function reportJ() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Jurados Activos', 100, 230)
@@ -266,7 +268,7 @@ function reportJ() {
             text += result[i].fky_cat;
             text += blanco4;
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteJurados.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteJurados-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -285,7 +287,7 @@ function reportSesiones() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Sesiones', 100, 230)
@@ -322,7 +324,7 @@ function reportSesiones() {
             text += result[i].date_ses.toLocaleDateString("en-GB");
             text += blanco4;
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteSesiones.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteSesiones-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -341,7 +343,7 @@ function reporteRegistro() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Registros', 100, 230)
@@ -377,7 +379,7 @@ function reporteRegistro() {
             text += blanco4;
             text += result[i].date_log.toLocaleDateString("en-GB");
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteRegistros.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteRegistros-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -396,7 +398,7 @@ function reporteModificar() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Ediciones', 100, 230)
@@ -433,7 +435,7 @@ function reporteModificar() {
             text += result[i].acc_log;
 
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteEdiciones.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteEdiciones-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -452,7 +454,7 @@ function reporteEliminar() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Borrado', 100, 230)
@@ -489,7 +491,7 @@ function reporteEliminar() {
             text += result[i].acc_log;
 
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteBorrados.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteBorrados-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -508,7 +510,7 @@ function reportD() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Docentes Activos', 100, 230)
@@ -543,7 +545,7 @@ function reportD() {
             text += result[i].fky_cla;
             text += blanco4;
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteDocentes.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteDocentes-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -562,7 +564,7 @@ function reportJ() {
         var fs = require('fs');
         var myDoc = new pdf();
 
-        myDoc.image('./img/head.png');
+        myDoc.image(path.join(__dirname, '../img/head.png'));
 
         myDoc.fontSize(18)
             .text('Reporte de Jurados Activos', 100, 230)
@@ -597,7 +599,7 @@ function reportJ() {
             text += result[i].fky_cat;
             text += blanco4;
 
-            myDoc.pipe(fs.createWriteStream('reportes/ReporteJurados.pdf'));
+            myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteJurados-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
             myDoc.moveDown()
             myDoc.font('Times-Roman').fontSize(12).text('' + text);
         }
@@ -622,7 +624,7 @@ function reportE() {
             var fs = require('fs');
             var myDoc = new pdf();
 
-            myDoc.image('./img/head.png');
+            myDoc.image(path.join(__dirname, '../img/head.png'));
 
             myDoc.fontSize(15)
                 .text('Reporte Detallado del Desempeño de ' + c, 100, 230)
@@ -659,7 +661,7 @@ function reportE() {
                 text += result[i].obs_cal;
 
 
-                myDoc.pipe(fs.createWriteStream('reportes/ReporteDesempeño.pdf'));
+                myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteDesempeño-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
                 myDoc.moveDown()
                 myDoc.font('Times-Roman').fontSize(12).text('' + text);
             }
