@@ -5,13 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package-win32": "electron-packager . ERCGK --overwrite --asar=true --platform=win32 --arch=ia32 --icon=img/icon.ico",
-    "package-win64": "electron-packager . ERCGK --overwrite --asar=true --platform=win32 --arch=x64 --icon=img/icon.ico"
+    "package-win32": "electron-packager . ERCGK --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon.ico",
+    "package-win64": "electron-packager . ERCGK --overwrite --asar --platform=win32 --arch=x64 --icon=img/icon.ico"
   },
   "author": "Pabón Klaifer & Ramírez Jesús | IUT - SID4A | 2019",
   "license": "ISC",
   "dependencies": {
     "audit": "0.0.6",
+    "debug": "^4.1.1",
     "electron-squirrel-startup": "^1.0.0",
     "fix": "0.0.6",
     "highcharts": "^7.2.0",
