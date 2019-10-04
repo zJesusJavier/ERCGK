@@ -6,46 +6,6 @@ if (handleSquirrelEvent(app)) {
     return;
 }
 
-const BrowserWindow = electron.BrowserWindow
-const path = require('path')
-const url = require('url')
-
-let mainWindow
-
-function createWindow() {
-    mainWindow = new BrowserWindow({
-        icon: path.join(__dirname, 'img/favicon.png'),
-        webPreferences: {
-            nodeIntegration: true
-        }
-    })
-
-    mainWindow.removeMenu()
-    mainWindow.maximize()
-    mainWindow.show()
-    mainWindow.loadURL(`file://${__dirname}/load.html`)
-    //mainWindow.webContents.openDevTools({
-    //    mode: 'detach'
-    //});
-    mainWindow.on('closed', function () {
-        mainWindow = null
-    })
-}
-
-app.on('ready', createWindow)
-
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
-})
-
-app.on('activate', function () {
-    if (mainWindow === null) {
-        createWindow()
-    }
-})
-
 function handleSquirrelEvent() {
     if (process.argv.length === 1) {
       return false;
@@ -107,3 +67,43 @@ function handleSquirrelEvent() {
         return true;
     }
   };
+
+const BrowserWindow = electron.BrowserWindow
+const path = require('path')
+const url = require('url')
+
+let mainWindow
+
+function createWindow() {
+    mainWindow = new BrowserWindow({
+        icon: path.join(__dirname, 'img/favicon.png'),
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+
+    mainWindow.removeMenu()
+    mainWindow.maximize()
+    mainWindow.show()
+    mainWindow.loadURL(`file://${__dirname}/load.html`)
+    //mainWindow.webContents.openDevTools({
+    //    mode: 'detach'
+    //});
+    mainWindow.on('closed', function () {
+        mainWindow = null
+    })
+}
+
+app.on('ready', createWindow)
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+})
+
+app.on('activate', function () {
+    if (mainWindow === null) {
+        createWindow()
+    }
+})

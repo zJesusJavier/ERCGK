@@ -4,7 +4,7 @@ var settings =
 {
     appDirectory: './ERCGK-win32-ia32',
     outputDirectory: './ERCGK_Installers',
-    authors: 'ERCGK',
+    authors: 'Pabón Klaifer & Ramírez Jesús | IPTAI - SID4A | 2019',
     exe: './ERCGK.exe',
     noMsi: true,
     setupExe: 'ercgk-installer-x32.exe',
