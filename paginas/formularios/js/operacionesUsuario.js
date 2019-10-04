@@ -141,9 +141,9 @@ function guardarUsuario() {
         if (err) console.log(err);
     });
 
-    sql = "INSERT INTO usuario (nom_usu, cla_usu, email_usu, fky_pre_1, res_pre_1, fky_pre_2, res_pre_2, niv_usu, est_usu) VALUES ?";
+    sql = "INSERT INTO usuario (nom_usu, cla_usu, email_usu, fky_pre_1, res_pre_1, fky_pre_2, res_pre_2, niv_usu, ip_usu, mac_usu, est_usu) VALUES ?";
     var values = [
-        [nombre, clave, email, pregunta1, respuesta1, pregunta2, respuesta2, rol, estado]
+        [nombre, clave, email, pregunta1, respuesta1, pregunta2, respuesta2, rol, '', '', estado]
     ];
 
     con.query(sql, [values], function (err, result) {
