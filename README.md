@@ -25,4 +25,4 @@ Profesor Tutor: **Ing. Vidermid Sánchez**.
 
 ## Licencia
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/zJesusJavier/ERCGK/blob/master/LICENSE)
