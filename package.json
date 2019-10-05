@@ -1,14 +1,14 @@
 {
   "name": "ercgk",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Escuela de Reinas Celebrity Gipsy's Kingdom",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
     "package-win32": "electron-packager . ERCGK --overwrite --platform=win32 --arch=ia32 --icon=img/icon.ico",
-    "package-win64": "electron-packager . ERCGK --overwrite --asar --platform=win32 --arch=x64 --icon=img/icon.ico"
+    "package-win64": "electron-packager . ERCGK --overwrite --platform=win32 --arch=x64 --icon=img/icon.ico"
   },
-  "author": "Pabón Klaifer & Ramírez Jesús | IPTAI - SID4A | 2019",
+  "author": "Pabón Klaifer & Ramírez Jesús | IUTAI - SID4A | 2019",
   "license": "ISC",
   "dependencies": {
     "audit": "0.0.6",
