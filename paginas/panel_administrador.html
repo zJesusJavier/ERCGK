@@ -220,6 +220,7 @@
 												<td><b>Descripción</b></td>
 												<td><b>Fecha de Inicio</b></td>
 												<td><b>Fecha de Finalización</b></td>
+												<td><b>Estatus</b></td>
 												<td><b>Opciones</b></td>
 											</thead>
 											<tbody id="tcertamen">
@@ -733,6 +734,24 @@
 				</div>
 				<div class="modal-footer">
 					<a type="button" class="btn btn-success" onclick="borrarDocente();">Continuar</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Borrado Usuario -->
+
+	<div class="modal fade" id="borradoUsuario" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" align="center"><b>¡ATENCIÓN!</b></h5>
+				</div>
+				<div class="modal-body">
+					<p>¿Está seguro que desea eliminar el Usuario?</p>
+				</div>
+				<div class="modal-footer">
+					<a type="button" class="btn btn-success" onclick="borrarUsuario();">Continuar</a>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>

@@ -183,6 +183,10 @@ function consultarCertamenPanel(ini, pag) {
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";
+                text += result[i].est_cer;
+                text += "</td>";
+                text += "\t\t";
+                text += "<td>";
                 text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarCertamen(' + result[i].cod_cer + ')"><i class="material-icons text-danger">delete_forever</i></a>';
                 text += "</td>";
                 text += "</tr>";
