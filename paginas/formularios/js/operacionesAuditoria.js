@@ -131,7 +131,7 @@ function consultarRegistro(ini, fin) {
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";
-                text += result[i].reg_log;
+                text += "<pre style='white-space:pre-line;text-align:justify;'>" + result[i].reg_log + "</pre>";
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";
@@ -151,7 +151,6 @@ function consultarRegistro(ini, fin) {
             document.getElementById("pagReg").innerHTML = paginas;
         });
     });
-
 }
 
 function paginadorAudit(ini, fin) {
@@ -197,8 +196,8 @@ function consultarEdiciones(ini, fin) {
                 text += result[i].tab_log;
                 text += "</td>";
                 text += "\t\t";
-                text += "<td>";
-                text += result[i].reg_log;
+                text += "<td> ";
+                text += "<pre style='white-space:pre-line;text-align:justify;'>" + result[i].reg_log + "</pre>";
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";
@@ -257,7 +256,7 @@ function consultarEliminacion(ini, fin) {
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";
-                text += result[i].reg_log;
+                text += "<pre style='white-space:pre-line;text-align:justify;'>" + result[i].reg_log + "</pre>";
                 text += "</td>";
                 text += "\t\t";
                 text += "<td>";

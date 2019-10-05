@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Oct 03, 2019 at 11:30 PM
--- Server version: 5.7.26
--- PHP Version: 7.2.18
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-10-2019 a las 07:44:41
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 7.0.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,18 +19,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `academia`
+-- Base de datos: `academia1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calificacion`
+-- Estructura de tabla para la tabla `calificacion`
 --
 
-DROP TABLE IF EXISTS `calificacion`;
-CREATE TABLE IF NOT EXISTS `calificacion` (
-  `cod_cal` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `calificacion` (
+  `cod_cal` int(11) NOT NULL,
   `sem_cal` int(11) NOT NULL,
   `fec_cal` date NOT NULL,
   `cal_cal` char(2) COLLATE utf8_spanish_ci NOT NULL,
@@ -38,22 +37,17 @@ CREATE TABLE IF NOT EXISTS `calificacion` (
   `est_cal` char(1) COLLATE utf8_spanish_ci NOT NULL,
   `fky_can` int(11) NOT NULL,
   `fky_cla` int(11) NOT NULL,
-  `fky_pro` int(11) NOT NULL,
-  PRIMARY KEY (`cod_cal`),
-  KEY `fky_can` (`fky_can`),
-  KEY `fky_pro` (`fky_pro`),
-  KEY `fky_cla` (`fky_cla`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_pro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Triggers `calificacion`
+-- Disparadores `calificacion`
 --
-DROP TRIGGER IF EXISTS `update_calificacion`;
 DELIMITER $$
 CREATE TRIGGER `update_calificacion` BEFORE UPDATE ON `calificacion` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'calificacion','Modificar - Data Anterior',NOW(),CONCAT('Codigo Calificacion: ',OLD.cod_Cal,' Semana Calificacion : ', OLD.sem_cal,' Fecha Calificacion : ', OLD.fec_cal,' Calificacion : ', OLD.cal_cal,' Observacion Calificacion : ', OLD.obs_cal,' Estado Calificacion : ', OLD.est_cal,' Candidata Calificacion : ', OLD.fky_can,' Clase Calificacion : ', OLD.fky_cla,' Profesor Calificacion : ', OLD.fky_pro),'A');
+ VALUES (CURRENT_USER,'calificacion','Modificar - Data Anterior',NOW(),CONCAT('Codigo Calificacion: ',OLD.cod_Cal,'<br/> Semana Calificacion : ', OLD.sem_cal,'<br/> Fecha Calificacion : ', OLD.fec_cal,'<br/> Calificacion : ', OLD.cal_cal,'<br/> Observacion Calificacion : ', OLD.obs_cal,'<br/> Estado Calificacion : ', OLD.est_cal,'<br/> Candidata Calificacion : ', OLD.fky_can,'<br/> Clase Calificacion : ', OLD.fky_cla,'<br/> Profesor Calificacion : ', OLD.fky_pro),'A');
 
 END
 $$
@@ -62,12 +56,11 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `candidata`
+-- Estructura de tabla para la tabla `candidata`
 --
 
-DROP TABLE IF EXISTS `candidata`;
-CREATE TABLE IF NOT EXISTS `candidata` (
-  `cod_can` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `candidata` (
+  `cod_can` int(11) NOT NULL,
   `ci_can` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_can` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -83,24 +76,17 @@ CREATE TABLE IF NOT EXISTS `candidata` (
   `fky_cat` int(11) NOT NULL,
   `fky_mun` int(11) NOT NULL,
   `fky_civ` int(11) NOT NULL,
-  `fky_cer` int(11) NOT NULL,
-  PRIMARY KEY (`cod_can`),
-  UNIQUE KEY `ci_can` (`ci_can`),
-  KEY `fky_cat` (`fky_cat`),
-  KEY `fky_mun` (`fky_mun`),
-  KEY `fky_civ` (`fky_civ`),
-  KEY `fky_cer` (`fky_cer`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Triggers `candidata`
+-- Disparadores `candidata`
 --
-DROP TRIGGER IF EXISTS `update_candidata`;
 DELIMITER $$
 CREATE TRIGGER `update_candidata` BEFORE UPDATE ON `candidata` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'candidata','Modificar - Data Anterior',NOW(),CONCAT('codigo: ',OLD.cod_can,' cedula: ', OLD.ci_can, " Nombre: ", OLD.nom_can, " Apellido: ",OLD.ape_can, " Peso: ",OLD.peso_can, " Estatura: ",OLD.esta_can, " Estado Civil: ", OLD.fky_civ, " Ocupacion: ",OLD.ocu_can, " Categoria: ", OLD.fky_cat, " Edad: ", OLD.edad_can, " Municipio: ", OLD.fky_mun, " Certamen: ",OLD.fky_cer, " Direccion: ",OLD.dir_can, " Telefono: ",OLD.tel_can, " Email: ",OLD.email_can," Estado: ", OLD.est_can),'A');
+ VALUES (CURRENT_USER,'Candidata','Modificar - Data Anterior',NOW(),CONCAT('Codigo: ',OLD.cod_can,' <br/>Cedula: ', OLD.ci_can, " <br/>Nombre: ", OLD.nom_can, "<br/> Apellido: ",OLD.ape_can, " <br/>Peso: ",OLD.peso_can, " <br/>Estatura: ",OLD.esta_can, "<br/> Estado Civil: ", OLD.fky_civ, "<br/> Ocupacion: ",OLD.ocu_can, "<br/> Categoria: ", OLD.fky_cat, " <br/> Edad: ", OLD.edad_can, "<br/> Municipio: ", OLD.fky_mun, "<br/> Certamen: ",OLD.fky_cer, "<br/> Direccion: ",OLD.dir_can, "<br/> Telefono: ",OLD.tel_can, "<br/> Email: ",OLD.email_can," <br/> Estado: ", OLD.est_can),'A');
 
 END
 $$
@@ -109,19 +95,17 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `cod_cat` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categoria` (
+  `cod_cat` int(11) NOT NULL,
   `nom_cat` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cat` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cat` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
@@ -129,15 +113,13 @@ INSERT INTO `categoria` (`cod_cat`, `nom_cat`, `est_cat`) VALUES
 (2, 'Miss', 'A');
 
 --
--- Triggers `categoria`
+-- Disparadores `categoria`
 --
-DROP TRIGGER IF EXISTS `update_categoria`;
 DELIMITER $$
 CREATE TRIGGER `update_categoria` BEFORE UPDATE ON `categoria` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'categoria','Modificar - Data Anterior',NOW(),CONCAT('Nombre Categoria: ',OLD.nom_cat,' Estado Categoria: ', OLD.est_cat),'A');
-
+ VALUES (CURRENT_USER,'categoria','Modificar - Data Anterior',NOW(),CONCAT('Nombre Categoria: ',OLD.nom_cat,'<br/> Estado Categoria: ', OLD.est_cat),'A');
 END
 $$
 DELIMITER ;
@@ -145,28 +127,25 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `certamen`
+-- Estructura de tabla para la tabla `certamen`
 --
 
-DROP TABLE IF EXISTS `certamen`;
-CREATE TABLE IF NOT EXISTS `certamen` (
-  `cod_cer` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `certamen` (
+  `cod_cer` int(11) NOT NULL,
   `des_cer` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `feci_cer` date NOT NULL,
   `fecf_cer` date NOT NULL,
-  `est_cer` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_cer`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cer` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Triggers `certamen`
+-- Disparadores `certamen`
 --
-DROP TRIGGER IF EXISTS `update_certamen`;
 DELIMITER $$
 CREATE TRIGGER `update_certamen` BEFORE UPDATE ON `certamen` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'certamen','Modificar - Data Anterior',NOW(),CONCAT('codigo Certamen: ',OLD.cod_cer,' Descripcion Certamen: ', OLD.des_cer, " Fecha Inicio: ", OLD.feci_cer, " Fecha Fin: ",OLD.fecf_cer, " Estado Certamen: ",OLD.est_cer),'A');
+ VALUES (CURRENT_USER,'certamen','Modificar - Data Anterior',NOW(),CONCAT('codigo Certamen: ',OLD.cod_cer,'<br/> Descripcion Certamen: ', OLD.des_cer, "<br/> Fecha Inicio: ", OLD.feci_cer, " <br/> Fecha Fin: ",OLD.fecf_cer, " <br/> Estado Certamen: ",OLD.est_cer),'A');
 
 END
 $$
@@ -175,19 +154,17 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `civil`
+-- Estructura de tabla para la tabla `civil`
 --
 
-DROP TABLE IF EXISTS `civil`;
-CREATE TABLE IF NOT EXISTS `civil` (
-  `cod_civ` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `civil` (
+  `cod_civ` int(11) NOT NULL,
   `nom_civ` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `est_civ` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_civ`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_civ` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `civil`
+-- Volcado de datos para la tabla `civil`
 --
 
 INSERT INTO `civil` (`cod_civ`, `nom_civ`, `est_civ`) VALUES
@@ -200,19 +177,17 @@ INSERT INTO `civil` (`cod_civ`, `nom_civ`, `est_civ`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clase`
+-- Estructura de tabla para la tabla `clase`
 --
 
-DROP TABLE IF EXISTS `clase`;
-CREATE TABLE IF NOT EXISTS `clase` (
-  `cod_cla` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `clase` (
+  `cod_cla` int(11) NOT NULL,
   `nom_cla` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_cla` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_cla`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_cla` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `clase`
+-- Volcado de datos para la tabla `clase`
 --
 
 INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
@@ -232,14 +207,13 @@ INSERT INTO `clase` (`cod_cla`, `nom_cla`, `est_cla`) VALUES
 (14, 'Protocolo', 'A');
 
 --
--- Triggers `clase`
+-- Disparadores `clase`
 --
-DROP TRIGGER IF EXISTS `update_clase`;
 DELIMITER $$
 CREATE TRIGGER `update_clase` BEFORE UPDATE ON `clase` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'clase','Modificar - Data Anterior',NOW(),CONCAT('Codigo Clase: ',OLD.cod_cla,' Nombre Clase: ', OLD.nom_cla, " Estado Clase: ", OLD.est_cla),'A');
+ VALUES (CURRENT_USER,'clase','Modificar - Data Anterior',NOW(),CONCAT('Codigo Clase: ',OLD.cod_cla,'<br/> Nombre Clase: ', OLD.nom_cla, "<br/> Estado Clase: ", OLD.est_cla),'A');
 
 END
 $$
@@ -248,25 +222,22 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `elementos`
+-- Estructura de tabla para la tabla `elementos`
 --
 
-DROP TABLE IF EXISTS `elementos`;
-CREATE TABLE IF NOT EXISTS `elementos` (
-  `id_elem` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `elementos` (
+  `id_elem` int(11) NOT NULL,
   `fky_usuario` int(11) NOT NULL,
   `elemento_rep` tinyint(1) NOT NULL,
   `elem_cons` tinyint(1) NOT NULL,
   `elem_reg` tinyint(1) NOT NULL,
   `elem_audit` tinyint(1) NOT NULL,
   `elem_panelAd` tinyint(1) NOT NULL,
-  `status` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id_elem`),
-  KEY `fky_usuario` (`fky_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `status` varchar(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `elementos`
+-- Volcado de datos para la tabla `elementos`
 --
 
 INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, `elem_reg`, `elem_audit`, `elem_panelAd`, `status`) VALUES
@@ -279,12 +250,11 @@ INSERT INTO `elementos` (`id_elem`, `fky_usuario`, `elemento_rep`, `elem_cons`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jurado`
+-- Estructura de tabla para la tabla `jurado`
 --
 
-DROP TABLE IF EXISTS `jurado`;
-CREATE TABLE IF NOT EXISTS `jurado` (
-  `cod_jur` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jurado` (
+  `cod_jur` int(11) NOT NULL,
   `ci_jur` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_jur` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -292,21 +262,17 @@ CREATE TABLE IF NOT EXISTS `jurado` (
   `tel_jur` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `email_jur` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `est_jur` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  `fky_cat` int(11) NOT NULL,
-  PRIMARY KEY (`cod_jur`),
-  UNIQUE KEY `ci_jur` (`ci_jur`),
-  KEY `fky_cat` (`fky_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Triggers `jurado`
+-- Disparadores `jurado`
 --
-DROP TRIGGER IF EXISTS `update_jurado`;
 DELIMITER $$
 CREATE TRIGGER `update_jurado` BEFORE UPDATE ON `jurado` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'jurado','Modificar - Data Anterior',NOW(),CONCAT('Codigo Jurado: ',OLD.cod_jur,' Cedula Jurado: ', OLD.ci_jur, " Nombre Jurado: ", OLD.nom_jur, " Apellido Jurado: ",OLD.ape_jur, " Direccion: ",OLD.dir_jur," Telefono Jurado: ",OLD.tel_jur, " Email Jurado: ", OLD.email_jur, " Ocupacion: ",OLD.est_jur, " Categoria Jurado: ", OLD.fky_cat),'A');
+ VALUES (CURRENT_USER,'jurado','Modificar - Data Anterior',NOW(),CONCAT('Codigo Jurado: ',OLD.cod_jur,'<br/> Cedula Jurado: ', OLD.ci_jur, "<br/> Nombre Jurado: ", OLD.nom_jur, " <br/> Apellido Jurado: ",OLD.ape_jur, "<br/> Direccion: ",OLD.dir_jur,"<br/> Telefono Jurado: ",OLD.tel_jur, "<br/> Email Jurado: ", OLD.email_jur, " <br/>Ocupacion: ",OLD.est_jur, "<br/> Categoria Jurado: ", OLD.fky_cat),'A');
 
 END
 $$
@@ -315,37 +281,33 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `log`
+-- Estructura de tabla para la tabla `log`
 --
 
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE IF NOT EXISTS `log` (
-  `cod_log` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `log` (
+  `cod_log` int(11) NOT NULL,
   `usu_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `tab_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `acc_log` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `reg_log` blob NOT NULL,
   `date_log` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_log` varchar(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `municipio`
+-- Estructura de tabla para la tabla `municipio`
 --
 
-DROP TABLE IF EXISTS `municipio`;
-CREATE TABLE IF NOT EXISTS `municipio` (
-  `cod_mun` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `municipio` (
+  `cod_mun` int(11) NOT NULL,
   `nom_mun` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `est_mun` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_mun`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_mun` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `municipio`
+-- Volcado de datos para la tabla `municipio`
 --
 
 INSERT INTO `municipio` (`cod_mun`, `nom_mun`, `est_mun`) VALUES
@@ -382,19 +344,17 @@ INSERT INTO `municipio` (`cod_mun`, `nom_mun`, `est_mun`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pregunta`
+-- Estructura de tabla para la tabla `pregunta`
 --
 
-DROP TABLE IF EXISTS `pregunta`;
-CREATE TABLE IF NOT EXISTS `pregunta` (
-  `cod_pre` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pregunta` (
+  `cod_pre` int(11) NOT NULL,
   `pre_pre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `est_pre` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_pre`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_pre` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `pregunta`
+-- Volcado de datos para la tabla `pregunta`
 --
 
 INSERT INTO `pregunta` (`cod_pre`, `pre_pre`, `est_pre`) VALUES
@@ -410,12 +370,11 @@ INSERT INTO `pregunta` (`cod_pre`, `pre_pre`, `est_pre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profesor`
+-- Estructura de tabla para la tabla `profesor`
 --
 
-DROP TABLE IF EXISTS `profesor`;
-CREATE TABLE IF NOT EXISTS `profesor` (
-  `cod_pro` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `profesor` (
+  `cod_pro` int(11) NOT NULL,
   `ci_pro` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
   `nom_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `ape_pro` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -424,22 +383,17 @@ CREATE TABLE IF NOT EXISTS `profesor` (
   `email_pro` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `est_pro` char(1) COLLATE utf8_spanish_ci NOT NULL,
   `fky_cla` int(11) NOT NULL,
-  `fky_cat` int(11) NOT NULL,
-  PRIMARY KEY (`cod_pro`),
-  UNIQUE KEY `ci_pro` (`ci_pro`),
-  KEY `fky_cat` (`fky_cat`),
-  KEY `fky_cla` (`fky_cla`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fky_cat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Triggers `profesor`
+-- Disparadores `profesor`
 --
-DROP TRIGGER IF EXISTS `update_profesor`;
 DELIMITER $$
 CREATE TRIGGER `update_profesor` BEFORE UPDATE ON `profesor` FOR EACH ROW BEGIN
-
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'profesor','Modificar - Data Anterior',NOW(),CONCAT('Codigo Profesor: ',OLD.cod_pro,' Cedula Profesor: ', OLD.ci_pro, " Nombre Profesor: ", OLD.nom_pro, " Apellido Profesor: ",OLD.ape_pro, " Direccion Profesor: ",OLD.dir_pro, " Telefono Profesor: ",OLD.tel_pro, " Email Profesor: ", OLD.email_pro, " Estado Profesor: ",OLD.est_pro, " Clase Profesor: ", OLD.fky_cla, " Categoria Profesor: ", OLD.fky_cat),'A');
+ VALUES (CURRENT_USER,'profesor','Modificar - Data Anterior',NOW(),CONCAT('Codigo Profesor: ',OLD.cod_pro,'<br/> Cedula Profesor: ', OLD.ci_pro, " <br/>Nombre Profesor: ", OLD.nom_pro, " <br/>Apellido Profesor: ",OLD.ape_pro, "<br/> Direccion Profesor: ",OLD.dir_pro, "<br/> Telefono Profesor: ",OLD.tel_pro, "<br/> Email Profesor: ", OLD.email_pro, "<br/> Estado Profesor: ",OLD.est_pro, "<br/> Clase Profesor: ", OLD.fky_cla, "<br/> Categoria Profesor: ", OLD.fky_cat),'A');
+
 
 END
 $$
@@ -448,19 +402,17 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `semana`
+-- Estructura de tabla para la tabla `semana`
 --
 
-DROP TABLE IF EXISTS `semana`;
-CREATE TABLE IF NOT EXISTS `semana` (
-  `cod_sem` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `semana` (
+  `cod_sem` int(11) NOT NULL,
   `num_sem` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
-  `est_sem` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_sem`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_sem` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `semana`
+-- Volcado de datos para la tabla `semana`
 --
 
 INSERT INTO `semana` (`cod_sem`, `num_sem`, `est_sem`) VALUES
@@ -491,30 +443,27 @@ INSERT INTO `semana` (`cod_sem`, `num_sem`, `est_sem`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sesion`
+-- Estructura de tabla para la tabla `sesion`
 --
 
-DROP TABLE IF EXISTS `sesion`;
-CREATE TABLE IF NOT EXISTS `sesion` (
-  `cod_ses` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sesion` (
+  `cod_ses` int(11) NOT NULL,
   `usu_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `niv_ses` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ip_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `mac_ses` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `date_ses` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`cod_ses`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_ses` varchar(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usu` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `id_usu` int(11) NOT NULL,
   `nom_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cla_usu` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `email_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -525,15 +474,11 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `niv_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ip_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `mac_usu` varchar(18) COLLATE utf8_spanish_ci NOT NULL,
-  `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id_usu`),
-  UNIQUE KEY `nom_usu` (`nom_usu`),
-  KEY `fky_pre_1` (`fky_pre_1`),
-  KEY `fky_pre_2` (`fky_pre_2`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `est_usu` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`, `res_pre_1`, `fky_pre_2`, `res_pre_2`, `niv_usu`, `ip_usu`, `mac_usu`, `est_usu`) VALUES
@@ -545,25 +490,229 @@ INSERT INTO `usuario` (`id_usu`, `nom_usu`, `cla_usu`, `email_usu`, `fky_pre_1`,
 (6, 'yes', 'yes', 'yes@hotmail.com', 1, 'yes', 2, 'yes', 'Administrador', '', '', 'A');
 
 --
--- Triggers `usuario`
+-- Disparadores `usuario`
 --
-DROP TRIGGER IF EXISTS `update_usuario`;
 DELIMITER $$
 CREATE TRIGGER `update_usuario` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN
 
  INSERT INTO log (usu_log,tab_log,acc_log,date_log,reg_log,est_log)
- VALUES (CURRENT_USER,'usuario','Modificar - Data Anterior',NOW(),CONCAT('Cosido Usuario: ',OLD.id_usu," Nombre Usuario: ", OLD.nom_usu, " Clave Usuario: ",OLD.cla_usu, " Email Usuario: ",OLD.email_usu, " Pregunta 1: ",OLD.fky_pre_1, " Respuesta 1: ", OLD.res_pre_1, " Pregunta 2 : ",OLD.fky_pre_2, " Respuesta 2: ", OLD.res_pre_2, " Nivel Usuario: ", OLD.niv_usu, " Ip Usuario: ", OLD.ip_usu, " Mac Usuario: ",OLD.mac_usu, " Estado Usuario: ",OLD.est_usu),'A');
+ VALUES (CURRENT_USER,'usuario','Modificar - Data Anterior',NOW(),CONCAT('Codigo Usuario: ',OLD.id_usu,"<br/> Nombre Usuario: ", OLD.nom_usu, "<br/> Email Usuario: ",OLD.email_usu, " <br/>Pregunta 1: ",OLD.fky_pre_1, "<br/> Pregunta 2 : ",OLD.fky_pre_2, "<br/> Nivel Usuario: ", OLD.niv_usu, "<br/> Ip Usuario: ", OLD.ip_usu, "<br/> Mac Usuario: ",OLD.mac_usu, " <br/>Estado Usuario: ",OLD.est_usu),'A');
 
 END
 $$
 DELIMITER ;
 
 --
--- Constraints for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Constraints for table `calificacion`
+-- Indices de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD PRIMARY KEY (`cod_cal`),
+  ADD KEY `fky_can` (`fky_can`),
+  ADD KEY `fky_pro` (`fky_pro`),
+  ADD KEY `fky_cla` (`fky_cla`);
+
+--
+-- Indices de la tabla `candidata`
+--
+ALTER TABLE `candidata`
+  ADD PRIMARY KEY (`cod_can`),
+  ADD UNIQUE KEY `ci_can` (`ci_can`),
+  ADD KEY `fky_cat` (`fky_cat`),
+  ADD KEY `fky_mun` (`fky_mun`),
+  ADD KEY `fky_civ` (`fky_civ`),
+  ADD KEY `fky_cer` (`fky_cer`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`cod_cat`);
+
+--
+-- Indices de la tabla `certamen`
+--
+ALTER TABLE `certamen`
+  ADD PRIMARY KEY (`cod_cer`);
+
+--
+-- Indices de la tabla `civil`
+--
+ALTER TABLE `civil`
+  ADD PRIMARY KEY (`cod_civ`);
+
+--
+-- Indices de la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`cod_cla`);
+
+--
+-- Indices de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD PRIMARY KEY (`id_elem`),
+  ADD KEY `fky_usuario` (`fky_usuario`);
+
+--
+-- Indices de la tabla `jurado`
+--
+ALTER TABLE `jurado`
+  ADD PRIMARY KEY (`cod_jur`),
+  ADD UNIQUE KEY `ci_jur` (`ci_jur`),
+  ADD KEY `fky_cat` (`fky_cat`);
+
+--
+-- Indices de la tabla `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`cod_log`);
+
+--
+-- Indices de la tabla `municipio`
+--
+ALTER TABLE `municipio`
+  ADD PRIMARY KEY (`cod_mun`);
+
+--
+-- Indices de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`cod_pre`);
+
+--
+-- Indices de la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD PRIMARY KEY (`cod_pro`),
+  ADD UNIQUE KEY `ci_pro` (`ci_pro`),
+  ADD KEY `fky_cat` (`fky_cat`),
+  ADD KEY `fky_cla` (`fky_cla`);
+
+--
+-- Indices de la tabla `semana`
+--
+ALTER TABLE `semana`
+  ADD PRIMARY KEY (`cod_sem`);
+
+--
+-- Indices de la tabla `sesion`
+--
+ALTER TABLE `sesion`
+  ADD PRIMARY KEY (`cod_ses`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usu`),
+  ADD UNIQUE KEY `nom_usu` (`nom_usu`),
+  ADD KEY `fky_pre_1` (`fky_pre_1`),
+  ADD KEY `fky_pre_2` (`fky_pre_2`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  MODIFY `cod_cal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `candidata`
+--
+ALTER TABLE `candidata`
+  MODIFY `cod_can` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `cod_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `certamen`
+--
+ALTER TABLE `certamen`
+  MODIFY `cod_cer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `civil`
+--
+ALTER TABLE `civil`
+  MODIFY `cod_civ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `clase`
+--
+ALTER TABLE `clase`
+  MODIFY `cod_cla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  MODIFY `id_elem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `jurado`
+--
+ALTER TABLE `jurado`
+  MODIFY `cod_jur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `log`
+--
+ALTER TABLE `log`
+  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT de la tabla `municipio`
+--
+ALTER TABLE `municipio`
+  MODIFY `cod_mun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  MODIFY `cod_pre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  MODIFY `cod_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `semana`
+--
+ALTER TABLE `semana`
+  MODIFY `cod_sem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT de la tabla `sesion`
+--
+ALTER TABLE `sesion`
+  MODIFY `cod_ses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`fky_can`) REFERENCES `candidata` (`cod_can`),
@@ -571,7 +720,7 @@ ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_3` FOREIGN KEY (`fky_cla`) REFERENCES `clase` (`cod_cla`);
 
 --
--- Constraints for table `candidata`
+-- Filtros para la tabla `candidata`
 --
 ALTER TABLE `candidata`
   ADD CONSTRAINT `candidata_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`),
@@ -580,26 +729,26 @@ ALTER TABLE `candidata`
   ADD CONSTRAINT `candidata_ibfk_4` FOREIGN KEY (`fky_cer`) REFERENCES `certamen` (`cod_cer`);
 
 --
--- Constraints for table `elementos`
+-- Filtros para la tabla `elementos`
 --
 ALTER TABLE `elementos`
   ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`fky_usuario`) REFERENCES `usuario` (`id_usu`);
 
 --
--- Constraints for table `jurado`
+-- Filtros para la tabla `jurado`
 --
 ALTER TABLE `jurado`
   ADD CONSTRAINT `jurado_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`);
 
 --
--- Constraints for table `profesor`
+-- Filtros para la tabla `profesor`
 --
 ALTER TABLE `profesor`
   ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`fky_cat`) REFERENCES `categoria` (`cod_cat`),
   ADD CONSTRAINT `profesor_ibfk_2` FOREIGN KEY (`fky_cla`) REFERENCES `clase` (`cod_cla`);
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`fky_pre_1`) REFERENCES `pregunta` (`cod_pre`),

@@ -108,7 +108,6 @@ function carga() {
 
 		if (err) console.log(err);
 
-
 		val = "SELECT * FROM candidata WHERE cod_can='" + candidatafk + "'";
 		con.query(val, function (err, result1) {
 			if (err) console.log(err);

@@ -417,7 +417,5 @@ function graficoBar() {
                 data: oilData
             });
         }
-
     });
-
 }

@@ -201,7 +201,6 @@ function nivelUser() {
                 colorByPoint: true,
                 data: pie_data,
             }],
-
         });
     });
 }
@@ -273,7 +272,6 @@ function FiltroNivelUser() {
                 data: pie_data,
             }],
         });
-
     });
 }
 
@@ -349,7 +347,6 @@ function accLogs() {
                 name: '',
                 data: pie_data,
             }],
-
         });
     });
 }
@@ -428,7 +425,6 @@ function FiltroAccLogs() {
                 name: '',
                 data: pie_data,
             }],
-
         });
     });
 }
@@ -505,7 +501,6 @@ function tabLogs() {
                 name: '',
                 data: pie_data,
             }],
-
         });
     });
 }
@@ -584,7 +579,6 @@ function FiltroTabLogs() {
                 name: '',
                 data: pie_data,
             }],
-
         });
     });
 }

@@ -86,8 +86,8 @@ function editarUsuario(user) {
     elem_reg = $("#find").find("#ListCheck")[0].children[1].checked;
     elem_cons = $("#find").find("#ListCheck")[0].children[3].checked;
     elemento_rep = $("#find").find("#ListCheck")[0].children[5].checked;
-    elem_audit = $("#find").find("#ListCheck")[0].children[7].checked;
-    elem_panelAd = $("#find").find("#ListCheck")[0].children[9].checked;
+    elem_panelAd = $("#find").find("#ListCheck")[0].children[7].checked;
+    elem_audit = $("#find").find("#ListCheck")[0].children[9].checked;
 
     sql = "SELECT * FROM usuario";
     con.query(sql, function (err, result) {
@@ -114,43 +114,60 @@ function editarUsuario(user) {
 
                 nameUser = localStorage.getItem('name');
                 date_log = new Date();
+                con.query("SELECT MAX(cod_log) as id FROM log", function (err, resulto, fields) {
+                    if (err) console.log(err);
+                    else idMax = resulto[0].id;
 
-                sq = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                var val = [
-                    [nameUser, 'usuario', 'Modificar', sql, date_log, 'A']
-                ];
+                    updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                    con.query(updateUser, function (err, result5) {
+                        if (err) {
+                            console.log(err);
+                            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                                button: false,
+                                timer: 3000
+                            });
+                        } else {
 
-                con.query(sq, [val], function (err, result) {
-                    if (err) {
-                        console.log(err);
-                    } else {}
-                });
-                sql1 = "UPDATE elementos SET elemento_rep=" + elemento_rep + "," + " elem_cons=" + elem_cons + "," + " elem_reg=" + elem_reg + "," +
-                    " elem_audit=" + elem_audit + "," + " elem_panelAd=" + elem_panelAd + " WHERE fky_usuario = " + user;
-                con.query(sql1, function (err, result) {
-                    if (err) {
-                        console.log(err);
-                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
-                            button: false,
-                            timer: 3000
-                        });
-                    } else {
-                        nameUser = localStorage.getItem('name');
-                        date_log = new Date();
+                            sq = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                            var val = [
+                                [nameUser, 'usuario', 'Modificar', sql, date_log, 'A']
+                            ];
 
-                        sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
-                        var values = [
-                            [nameUser, 'permisos', 'Modificar', sql1, date_log, 'A']
-                        ];
+                            con.query(sq, [val], function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {}
+                            });
+                        }
 
-                        con.query(sql2, [values], function (err, result) {
+                        sql1 = "UPDATE elementos SET elemento_rep=" + elemento_rep + "," + " elem_cons=" + elem_cons + "," + " elem_reg=" + elem_reg + "," +
+                            " elem_audit=" + elem_audit + "," + " elem_panelAd=" + elem_panelAd + " WHERE fky_usuario = " + user;
+                        con.query(sql1, function (err, result) {
                             if (err) {
                                 console.log(err);
+                                swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                                    button: false,
+                                    timer: 3000
+                                });
                             } else {
-                                window.location.reload();
-                            }
+                                nameUser = localStorage.getItem('name');
+                                date_log = new Date();
+
+                                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                                var values = [
+                                    [nameUser, 'permisos', 'Modificar', sql1, date_log, 'A']
+                                ];
+
+                                con.query(sql2, [values], function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        window.location.reload();
+                                    }
+                                });
+                            };
                         });
-                    };
+                    });
                 });
             });
         }

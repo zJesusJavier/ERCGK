@@ -660,7 +660,6 @@ function reportE() {
                 text += blanco4;
                 text += result[i].obs_cal;
 
-
                 myDoc.pipe(fs.createWriteStream((path.join(__dirname, '../reportes/ReporteDesempeño-' + d.getDate() + '-' + ((d.getMonth() + 1).toString()) + '-' + ((d.getFullYear()).toString()) + '.pdf'))));
                 myDoc.moveDown()
                 myDoc.font('Times-Roman').fontSize(12).text('' + text);
@@ -677,6 +676,5 @@ function reportE() {
             button: false,
             timer: 3000
         })
-
     }
 }

@@ -129,11 +129,13 @@ function guardarUsuario() {
         inputResPre2.className = "form-group label-floating";
     }
 
-    elemento_rep = Checkbox.children[1].checked;
+    elemento_rep = Checkbox.children[5].checked;
     elem_cons = Checkbox.children[3].checked;
-    elem_reg = Checkbox.children[5].checked;
-    elem_audit = Checkbox.children[7].checked;
-    elem_panelAd = Checkbox.children[9].checked;
+    elem_reg = Checkbox.children[1].checked;
+    elem_audit = Checkbox.children[9].checked;
+    elem_panelAd = Checkbox.children[7].checked;
+    var ip = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].address;
+    var mac = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].mac;
     // Guardado en la Base de Datos
 
     sql = "SELECT * FROM usuario";
@@ -143,7 +145,7 @@ function guardarUsuario() {
 
     sql = "INSERT INTO usuario (nom_usu, cla_usu, email_usu, fky_pre_1, res_pre_1, fky_pre_2, res_pre_2, niv_usu, ip_usu, mac_usu, est_usu) VALUES ?";
     var values = [
-        [nombre, clave, email, pregunta1, respuesta1, pregunta2, respuesta2, rol, '', '', estado]
+        [nombre, clave, email, pregunta1, respuesta1, pregunta2, respuesta2, rol, ip, mac, estado]
     ];
 
     con.query(sql, [values], function (err, result) {
@@ -173,14 +175,16 @@ function guardarUsuario() {
                     }
                 });
 
-                sql = "SELECT * FROM log";
-                con.query(sql, function (err, result) {
+                sql5 = "SELECT * FROM log";
+                con.query(sql5, function (err, result) {
                     if (err) console.log(err);
                 });
 
                 var date_log = new Date();
                 var usu_log = 'admin';
-
+                values = [
+                    [nombre, window.btoa(clave), email, pregunta1, window.btoa(respuesta1), pregunta2, window.btoa(respuesta2), rol, ip, mac, estado]
+                ];
                 sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
                 var values2 = [
                     [usu_log, 'usuario', 'Registro', sql + "(" + values + ")", date_log, 'A']
@@ -255,7 +259,6 @@ function guardarUsuario() {
             });
         };
     });
-
 }
 
 function paginadorUsu(ini, fin) {
@@ -296,6 +299,7 @@ function consultarUsuarioPanel(ini, fin) {
                 text += "\t\t";
                 text += "<td>";
                 text += '<a type="button" rel="tooltip" title="Editar" onclick="formularioEditarUsuario(' + result[i].id_usu + ')"><i class="material-icons text-info" data-toggle="modal">mode_edit</i></a>';
+                text += '<a type="button" rel="tooltip" title="Eliminar" onclick="avisoBorrarUsuario(' + result[i].id_usu + ')"><i class="material-icons text-danger">delete_forever</i></a>';
                 text += "</td>";
                 text += "</tr>";
                 document.getElementById("tusuario").innerHTML = text;
@@ -309,5 +313,66 @@ function consultarUsuarioPanel(ini, fin) {
             paginas += '</div">'
             document.getElementById("pagUsu").innerHTML = paginas;
         });
+    });
+}
+
+function avisoBorrarUsuario(capb) {
+    $("#borradoUsuario").modal("show")
+    captionid = capb;
+}
+
+// Borrado Lógico
+
+function borrarUsuario() {
+    sql = "SELECT * FROM usuario";
+    con.query(sql, function (err, result) {
+        if (err) console.log(err);
+    });
+
+    sql = "UPDATE usuario SET est_usu='I' WHERE id_usu = " + captionid;
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
+            });
+        } else {
+            swal("", "Usuario eliminado correctamente.", "success", {
+                button: false,
+                timer: 3000
+            }).then(function () {
+                nameUser = localStorage.getItem('name');
+                sql2 = "INSERT INTO log (usu_log, tab_log, acc_log, reg_log, date_log, est_log) VALUES ?";
+                var values = [
+                    [nameUser, 'Usuaurio', 'Borrado Logico', sql, date_log, 'A']
+                ];
+
+                con.query(sql2, [values], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        nameUser = localStorage.getItem('name');
+                        date_log = new Date();
+
+                        con.query("SELECT MAX(cod_log) as id FROM log", function (err, result1, fields) {
+                            if (err) console.log(err);
+                            else idMax = (result1[0].id) - 1;
+
+                            updateUser = "UPDATE log SET usu_log='" + nameUser + "' WHERE cod_log='" + idMax + "'";
+                            con.query(updateUser, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+
+                                } else {
+
+                                    window.location.reload();
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        };
     });
 }

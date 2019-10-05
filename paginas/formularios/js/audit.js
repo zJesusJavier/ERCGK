@@ -6,7 +6,6 @@ var sql, result, nameUser;
 
 $(document).ready({
 
-
 });
 
 function main() {
