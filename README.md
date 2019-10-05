@@ -1,10 +1,10 @@
 # Repositorio Sistema ERCGK
 
-Codigo fuente de la Apliación de Escritorio para la academia Escuela de Reinas Celebrity Gipsy's Kingdom.
+Codigo fuente de la Apliación de Escritorio para la academia **Escuela de Reinas Celebrity Gipsy's Kingdom**.
 
-Sistema presetando como requisito para aprobar la Unidad Curricular Proyecto IV en el Programa Nacional de Formación en Informática del Instituto Universitario de Tecnologia Agrioindustrial Region los Andes.
+Sistema presetando como requisito para aprobar la Unidad Curricular **Proyecto IV** en el Programa Nacional de Formación en Informática del **Instituto Universitario de Tecnologia Agrioindustrial Region los Andes**.
 
-Profesor Tutor: Ing. Vidermid Sánchez.
+Profesor Tutor: **Ing. Vidermid Sánchez**.
 
 ## Desarrollado con
 
@@ -20,8 +20,8 @@ Profesor Tutor: Ing. Vidermid Sánchez.
 
 ## Autores
 
-* **[Klaifer Pabón](https://github.com/JohaP22)**
-* **[Jesús Ramirez](https://github.com/zJesusJavier)**
+* [Klaifer Pabón](https://github.com/JohaP22)
+* [Jesús Ramirez](https://github.com/zJesusJavier)
 
 ## Licencia
 
