@@ -16,24 +16,29 @@ function verificar() {
         var ip = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].address;
         var mac = os.networkInterfaces()['Loopback Pseudo-Interface 1'][1].mac;
 
-        if (result[0].ip_usu != ip || result[0].mac_usu != mac) {
-            sqIP = "UPDATE usuario SET ip_usu='" + ip + "'," + "mac_usu='" + mac + "' WHERE id_usu = " + result[0].id_usu;
-            con.query(sqIP, function (err, result1) {
-                if (err) {
-                    console.log(err);
-                    swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
-                        button: false,
-                        timer: 3000
-                    });
-                } else {
-                    swal("", "Ha cambiado su IP, en su usuario", "info", {
-                        button: false,
-                        timer: 3000
-                    }).then(function () {});
-                }
+        if(result.length == 0){
+            swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                button: false,
+                timer: 3000
             });
-        }
-
+        }else{
+            if (result[0].ip_usu != ip || result[0].mac_usu != mac) {
+                sqIP = "UPDATE usuario SET ip_usu='" + ip + "'," + "mac_usu='" + mac + "' WHERE id_usu = " + result[0].id_usu;
+                con.query(sqIP, function (err, result1) {
+                    if (err) {
+                        console.log(err);
+                        swal("Error", "Por favor, verifique los datos o contacte con el Administrador.", "error", {
+                            button: false,
+                            timer: 3000
+                        });
+                    } else {
+                        swal("", "Ha cambiado su IP, en su usuario", "info", {
+                            button: false,
+                            timer: 3000
+                        }).then(function () {});
+                    }
+                });
+            }
         sql = "SELECT * FROM sesion";
         con.query(sql, function (err, result) {
             if (err) console.log(err);
@@ -65,6 +70,7 @@ function verificar() {
                 window.location.href = "home.html";
             };
         });
+        }
     });
 }
 
