@@ -86,9 +86,9 @@ function createWindow() {
     mainWindow.maximize()
     mainWindow.show()
     mainWindow.loadURL(`file://${__dirname}/load.html`)
-    mainWindow.webContents.openDevTools({
-        mode: 'detach'
-    });
+    //mainWindow.webContents.openDevTools({
+    //    mode: 'detach'
+    //});
     mainWindow.on('closed', function () {
         mainWindow = null
     })
